@@ -176,11 +176,11 @@
 
 ## Genetic
 <pre>
-    const last = <T>(x: T[]): T => {
+    const last = <T>(arr: T[]): T => {
         return arr[arr.length - 1]
     }
 
-    T đại diện cho 1 loại dữ liệu bất kì, hàm nhận vào X kiểu T[] và kết quả trả về kiểu T
+    // T đại diện cho 1 loại dữ liệu bất kì, hàm nhận vào X kiểu T[] và kết quả trả về kiểu T
 
     const makeArrayX = <T>(x: T):T[] => {
         return [x]
