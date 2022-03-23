@@ -1,0 +1,134 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;600;700&display=swap');
+
+$primary-color: green;
+
+* {
+    font-family: 'Source Code Pro', monospace;
+    box-sizing: border-box;
+    // font-size: 16px;
+}
+
+.ant-layout-header {
+    height: 7vh;
+    display: flex;
+    align-items: center;
+}
+
+.ant-layout-content {
+    height: 93vh;
+
+}
+
+@for $i from 1 to 6 {
+    h#{$i} {
+        font-weight: 600;
+    }
+}
+
+h1 {
+    text-align: center;
+}
+
+.container {
+    width: 60%;
+    padding: 20px;
+    margin: auto;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.align-items-center {
+    align-items: center;
+}
+
+.flex-col {
+    flex-direction: column;
+}
+
+.hello-component {
+    &__title {
+        font-weight: bold;
+        font-size: 1.2rem;
+    }
+
+    &__img {
+        width: 100%;
+        height: auto;
+        max-width: 200px;
+        border: 1px solid #ddd;
+    }
+
+    &__name, &__age, &__gender {
+        span {
+            font-weight: 600;
+        }
+    }
+}
+
+.btn {
+    // background-color: $primary-color;
+    // color: #fff;
+    color: #111;
+    outline: none;
+    padding: 4px 8px;
+    text-transform: uppercase;
+}
+
+.input {
+    border: 1px solid #aaa;
+    padding: 4px 8px;
+}
+
+.my-picture {
+    width: 100%;
+    height: auto;
+    padding: 20px;
+    transition: 0.5s;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+}
+
+.class-component {
+    width: 100%;
+    background-color: $primary-color;
+    color: #fff;
+    padding: 30px;
+}
+
+.function-component {
+    width: 100%;
+    background-color: blue;
+    color: #fff;
+    padding: 30px;
+}
+
+.course {
+    padding: 20px;
+    border: 1px solid #aaa;
+    margin: 5px;
+    border-radius: 4px;
+
+    &__img {
+        width: 100%;
+        // max-width: 200px;
+        height: 150px;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+    }
+
+    &__name {
+        text-align: center;
+        font-weight: bold;
+    }
+
+}
