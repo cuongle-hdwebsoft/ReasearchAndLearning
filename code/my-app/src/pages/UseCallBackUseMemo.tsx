@@ -11,8 +11,8 @@ function UseCallbackUseMemo() {
   };
 
   // const handleChangeInput = (value: string) => {
-  //     setValue(value)
-  // }
+  //   setValue(value);
+  // };
 
   const handleChangeInput = useCallback((value: string) => {
     setValue(value);
@@ -28,11 +28,9 @@ function UseCallbackUseMemo() {
         {/* <Input value={value} /> */}
 
         {/* optimize 1 */}
-        {/* {
-                    useMemo(() => {
-                        return <Input value={value} />
-                    }, [value])
-                } */}
+        {/* {useMemo(() => {
+          return <Input value={value} />;
+        }, [value])} */}
 
         {/* optimize 2 */}
         {useMemo(() => {

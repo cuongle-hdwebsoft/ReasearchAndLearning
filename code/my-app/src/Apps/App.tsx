@@ -20,8 +20,8 @@ import Dashboard from "../pages/admin/Dashboard";
 import UserDashboard from "../pages/admin/UserDashboard";
 import TodoDashboard from "../pages/admin/TodoDashboard";
 
-// import store from "./redux/index";
-import store from "./redux-toolkit/index";
+import store from "./redux/index";
+// import store from "./redux-toolkit/index";
 
 import { Provider } from "react-redux";
 import ConnectPage from "../pages/ConnectReduxPage";

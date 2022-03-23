@@ -12,30 +12,30 @@ import { getCourses } from "../Apps/redux-toolkit/todos/reducerTodo";
 import { GET_COURSES } from "../Apps/redux/todos/reducerTodo";
 
 // thunk action
-// import { getCourseAsync } from "../Apps/thunkActions";
+import { getCourseAsync } from "../Apps/thunkActions";
 
 export default function ConnectReduxFunc() {
   const courses = useAppSelector((state) => state.MODULE_TODO.courses);
   const dispatch = useDispatch();
 
   // for redux
-  useEffect(() => {
-    const getData = async () => {
-      const rs = await CourseModel.getCourses();
-      dispatch({
-        type: GET_COURSES,
-        payload: rs,
-      });
-      console.log(getCourses(rs));
-      // dispatch(getCourses(rs));
-    };
-    getData();
-  }, [dispatch]);
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     const rs = await CourseModel.getCourses();
+  //     dispatch({
+  //       type: GET_COURSES,
+  //       payload: rs,
+  //     });
+  //     console.log(getCourses(rs));
+  //     // dispatch(getCourses(rs));
+  //   };
+  //   getData();
+  // }, [dispatch]);
 
   // for redux thunk
-  // useEffect(() => {
-  //   dispatch(getCourseAsync(new Date().toISOString()));
-  // }, []);
+  useEffect(() => {
+    dispatch(getCourseAsync(new Date().toISOString()));
+  }, []);
 
   const renderListCourses = () => {
     return courses.map((course) => {
