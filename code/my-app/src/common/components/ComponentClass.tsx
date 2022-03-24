@@ -36,7 +36,7 @@ class ComponentClass extends React.Component<IProps, IState> {
   }
 
   shouldComponentUpdate(nextProps: IProps, nextState: IState) {
-    console.log("ComponentClass shouldComponentUpdate");
+    console.log("ComponentClass shouldComponentUpdate", nextProps, nextState);
     return true;
   }
 

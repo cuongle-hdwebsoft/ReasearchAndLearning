@@ -19,13 +19,14 @@ import AdminPage from "../pages/admin/AdminPage";
 import Dashboard from "../pages/admin/Dashboard";
 import UserDashboard from "../pages/admin/UserDashboard";
 import TodoDashboard from "../pages/admin/TodoDashboard";
-
-import store from "./redux/index";
-// import store from "./redux-toolkit/index";
-
-import { Provider } from "react-redux";
 import ConnectPage from "../pages/ConnectReduxPage";
 import ConnectReduxFunc from "../pages/ConnectReduxFunc";
+import SagaPage from "../pages/SagaPage";
+
+// import store from "./redux/index";
+import store from "./redux-toolkit/index";
+
+import { Provider } from "react-redux";
 
 function App() {
   const [theme, setTheme] = useState("light");
@@ -87,6 +88,9 @@ function App() {
               </Route>
               <Route path="/hook-page">
                 <ConnectReduxFunc></ConnectReduxFunc>
+              </Route>
+              <Route path="/saga-page">
+                <SagaPage></SagaPage>
               </Route>
               <Route component={NotFound} path="*" />
             </Switch>

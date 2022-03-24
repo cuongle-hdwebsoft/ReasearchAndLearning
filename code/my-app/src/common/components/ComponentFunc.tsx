@@ -8,6 +8,8 @@ interface IProps {
 export default function ComponentFunc(props: IProps) {
   const [count, setCount] = useState<number>(0);
 
+  console.log(props);
+
   useEffect(() => {
     console.log("ComponentFunc mounted");
   }, []);

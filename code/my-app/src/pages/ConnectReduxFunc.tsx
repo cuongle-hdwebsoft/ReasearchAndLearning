@@ -1,9 +1,9 @@
 import { Row } from "antd";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import { useAppSelector } from "../Apps/redux";
 import Course from "../common/components/Course";
 import { CourseModel } from "../fake-data/course";
+import { useAppSelector } from "../common/hooks";
 
 // action toolkit
 import { getCourses } from "../Apps/redux-toolkit/todos/reducerTodo";

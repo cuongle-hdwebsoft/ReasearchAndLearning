@@ -5,7 +5,10 @@ import reducerUser, { MODULE_USER } from "./users/reducerUser";
 import thunk from "redux-thunk";
 
 import { composeWithDevTools } from "redux-devtools-extension";
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+
+import createSagaMiddleware from "redux-saga";
+import rootSaga from "../saga/saga";
+const sagaMiddleware = createSagaMiddleware();
 
 const rootReducer = combineReducers({
   [MODULE_TODO]: reducerTodo,
@@ -15,9 +18,6 @@ const rootReducer = combineReducers({
 export type RootState = ReturnType<typeof rootReducer>;
 export type AppDispatch = typeof store.dispatch;
 
-export const useAppDispatch = () => useDispatch<AppDispatch>();
-export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
-
 const store = createStore(
   rootReducer,
   composeWithDevTools(
@@ -25,8 +25,13 @@ const store = createStore(
       thunk.withExtraArgument({
         rootAPI: "https://62384e090a54d2ceab73d950.mockapi.io/api/",
       }),
+      sagaMiddleware,
     ),
   ),
 );
+
+console.log("using store redux");
+
+sagaMiddleware.run(rootSaga);
 
 export default store;

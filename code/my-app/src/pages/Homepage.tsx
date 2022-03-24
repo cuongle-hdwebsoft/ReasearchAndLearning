@@ -32,6 +32,9 @@ export default function Homepage() {
         <li>
           <Link to="/hook-page">Connect redux with functional</Link>
         </li>
+        <li>
+          <Link to="/saga-page">Saga page</Link>
+        </li>
       </ol>
     </div>
   );

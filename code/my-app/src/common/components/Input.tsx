@@ -4,7 +4,7 @@ interface IInput {
 }
 
 export default function Input(props: IInput) {
-  console.log("Input render");
+  console.log("Input render", props);
 
   return <input className="input" placeholder="Type something..." />;
 }
