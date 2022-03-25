@@ -23,10 +23,11 @@ import ConnectPage from "../pages/ConnectReduxPage";
 import ConnectReduxFunc from "../pages/ConnectReduxFunc";
 import SagaPage from "../pages/SagaPage";
 
-// import store from "./redux/index";
-import store from "./redux-toolkit/index";
+import store from "./redux/index";
+// import store from "./redux-toolkit/index";
 
 import { Provider } from "react-redux";
+import ReactHookFormPage from "../pages/ReactHookFormPage";
 
 function App() {
   const [theme, setTheme] = useState("light");
@@ -91,6 +92,9 @@ function App() {
               </Route>
               <Route path="/saga-page">
                 <SagaPage></SagaPage>
+              </Route>
+              <Route path="/react-hook-form">
+                <ReactHookFormPage></ReactHookFormPage>
               </Route>
               <Route component={NotFound} path="*" />
             </Switch>

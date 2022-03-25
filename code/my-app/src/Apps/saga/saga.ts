@@ -1,11 +1,5 @@
-import { call, put, all, takeEvery, takeLatest, take, fork, actionChannel } from "redux-saga/effects";
-import { CourseModel, ICourse } from "../../fake-data/course";
-
-function* fetchCourses() {
-  const rs: Array<ICourse> = yield call(CourseModel.getCourses);
-
-  yield put({ type: "GET_COURSES", payload: rs });
-}
+import { call, put, all, takeEvery, takeLatest, take, fork, actionChannel, select } from "redux-saga/effects";
+import { RootState } from "../redux";
 
 function* clickButtonTakeEvery(action: any) {
   console.log(action);
@@ -20,6 +14,11 @@ function* clickButtonTakeLatest() {
       }, 3000);
     });
   };
+
+  const currentCountLatest: number = yield select<(state: RootState) => number>(
+    (state) => state["MODULE_TODO"].countTakeLatest,
+  );
+  console.log("current Count Latest", currentCountLatest);
 
   const rs: Date = yield call(fetchAPI, new Date());
 

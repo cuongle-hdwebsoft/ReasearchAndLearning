@@ -19,23 +19,23 @@ export default function ConnectReduxFunc() {
   const dispatch = useDispatch();
 
   // for redux
-  // useEffect(() => {
-  //   const getData = async () => {
-  //     const rs = await CourseModel.getCourses();
-  //     dispatch({
-  //       type: GET_COURSES,
-  //       payload: rs,
-  //     });
-  //     console.log(getCourses(rs));
-  //     // dispatch(getCourses(rs));
-  //   };
-  //   getData();
-  // }, [dispatch]);
+  useEffect(() => {
+    const getData = async () => {
+      const rs = await CourseModel.getCourses();
+      dispatch({
+        type: GET_COURSES,
+        payload: rs,
+      });
+      // console.log(getCourses(rs));
+      // dispatch(getCourses(rs));
+    };
+    getData();
+  }, [dispatch]);
 
   // for redux thunk
-  useEffect(() => {
-    dispatch(getCourseAsync(new Date().toISOString()));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getCourseAsync(new Date().toISOString()));
+  // }, []);
 
   const renderListCourses = () => {
     return courses.map((course) => {

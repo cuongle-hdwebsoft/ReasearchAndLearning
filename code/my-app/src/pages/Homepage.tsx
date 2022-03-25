@@ -35,6 +35,9 @@ export default function Homepage() {
         <li>
           <Link to="/saga-page">Saga page</Link>
         </li>
+        <li>
+          <Link to="/react-hook-form">React hook form</Link>
+        </li>
       </ol>
     </div>
   );

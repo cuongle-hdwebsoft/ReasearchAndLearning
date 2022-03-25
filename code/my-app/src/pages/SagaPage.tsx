@@ -51,7 +51,7 @@ export default function SagaPage() {
       </div>
 
       <div style={{ marginBottom: 5 }}>
-        <Button onClick={handleTakeAndFork}>take and fork</Button> {countTakeLatest}
+        <Button onClick={handleTakeAndFork}>take and fork</Button>
       </div>
     </div>
   );
