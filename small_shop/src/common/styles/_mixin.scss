@@ -1,0 +1,23 @@
+@mixin margin {
+  @for $i from 1 to 100 {
+    .m-#{$i} {
+      margin: #{$i}px;
+    }
+
+    .ml-#{$i} {
+      margin-left: #{$i}px;
+    }
+
+    .mr-#{$i} {
+      margin-right: #{$i}px;
+    }
+
+    .mx-#{$i} {
+      margin: 0px #{$i}px;
+    }
+
+    .my-#{$i} {
+      margin: #{$i}px 0px;
+    }
+  }
+}
