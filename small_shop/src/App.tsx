@@ -2,6 +2,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import React, { useState } from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { SnackbarProvider } from "notistack";
 
 import { AppContext } from "./common/context/app";
 import MainLayout from "./common/hocs/MainLayout";
@@ -13,7 +14,6 @@ import CategoryListPage from "./pages/CategoryListPage";
 import DashboardPage from "./pages/DashboardPage";
 import NotFound from "./pages/NotFound";
 import ProductListPage from "./pages/ProductListPage";
-
 import LoginPage from "./pages/LoginPage";
 
 const defaultTheme = (themeMode: "light" | "dark") =>
@@ -35,23 +35,41 @@ function App() {
     }
   };
 
+  // console.log("Parent rendered");
+
   return (
     <Provider store={store}>
       <AppContext.Provider value={{ theme, toggleTheme, isLogin, setIsLogin }}>
         <ThemeProvider theme={defaultTheme(theme)}>
-          <BrowserRouter>
-            <MainLayout>
+          <SnackbarProvider maxSnack={5}>
+            <BrowserRouter>
               <Switch>
-                <Route path="/login" component={LoginPage} exact={true} />
+                <Route path="/login" exact={true}>
+                  <LoginPage></LoginPage>
+                </Route>
                 <AuthRoutes path="/">
-                  <Route path="/" component={DashboardPage} exact={true} />
-                  <Route path="/category" component={CategoryListPage} exact={true} />
-                  <Route path="/products" component={ProductListPage} exact={true} />
-                  <Route path="*" component={NotFound} />
+                  <Route path="/" exact={true}>
+                    <MainLayout>
+                      <DashboardPage></DashboardPage>
+                    </MainLayout>
+                  </Route>
+                  <Route path="/category" exact={true}>
+                    <MainLayout>
+                      <CategoryListPage></CategoryListPage>
+                    </MainLayout>
+                  </Route>
+                  <Route path="/products" exact={true}>
+                    <MainLayout>
+                      <ProductListPage></ProductListPage>
+                    </MainLayout>
+                  </Route>
+                  <Route path="*">
+                    <NotFound></NotFound>
+                  </Route>
                 </AuthRoutes>
               </Switch>
-            </MainLayout>
-          </BrowserRouter>
+            </BrowserRouter>
+          </SnackbarProvider>
         </ThemeProvider>
       </AppContext.Provider>
     </Provider>

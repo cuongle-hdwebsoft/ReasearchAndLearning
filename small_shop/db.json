@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "firstName": "John",
+      "lastName": "Weekend",
+      "age": "23",
+      "gender": "male",
+      "username": "admin",
+      "password": "12345678"
+    },
+    {
+      "id": 2,
+      "firstName": "John",
+      "lastName": "Annie",
+      "age": "23",
+      "gender": "female",
+      "username": "user1",
+      "password": "12345678"
+    }
+  ]
+}
