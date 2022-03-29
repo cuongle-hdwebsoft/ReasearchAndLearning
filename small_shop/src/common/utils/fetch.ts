@@ -1,8 +1,8 @@
-import Axios, { Method } from "axios";
+import Axios, { AxiosRequestConfig, Method } from "axios";
 
-const baseUrl = "json-server";
+const baseUrl = "http://localhost:3001";
 
-export const fetchAuth = (method: Method | undefined, endpoint: string, data: any) => {
+export const fetchAuth = (method: Method | undefined, endpoint: string, data?: any, config?: AxiosRequestConfig) => {
   const accessToken = localStorage.getItem("accessToken");
   return Axios({
     method,
@@ -11,13 +11,15 @@ export const fetchAuth = (method: Method | undefined, endpoint: string, data: an
     headers: {
       authorization: `Bearer ${accessToken}`,
     },
+    ...config,
   });
 };
 
-export const fetch = (method: Method | undefined, endpoint: string, data: any) => {
+export const fetch = (method: Method | undefined, endpoint: string, data?: any, config?: AxiosRequestConfig) => {
   return Axios({
     method,
     data,
     url: baseUrl.concat(endpoint),
+    ...config,
   });
 };

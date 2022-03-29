@@ -21,3 +21,19 @@
     }
   }
 }
+
+@mixin positionCenter($dir) {
+  position: absolute;
+
+  @if ($dir == "center") {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+  } @else if($dir == "top") {
+    left: 50%;
+    transform: translateX(-50%);
+  } @else {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
