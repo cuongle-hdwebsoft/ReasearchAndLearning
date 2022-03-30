@@ -25,25 +25,33 @@ import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CardHeaderPage from "../common/components/CardHeaderPage";
-import { generateProducts } from "../apis/product";
 import { Link, useHistory } from "react-router-dom";
+import { useProductReducerHook } from "../modules/products/hook";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { loadProducts } from "../modules/products/actions";
 
 export default function ProductListPage() {
   const history = useHistory();
   const theme = useTheme();
+  const { products } = useProductReducerHook();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(loadProducts());
+  }, []);
 
   return (
     <Box>
       <CardHeaderPage>
-        <Stack direction={"row"} alignItems="center">
-          <Typography
-            css={css`
-              margin-bottom: 10px;
-            `}
-            variant="h4"
-          >
-            Product page
-          </Typography>
+        <Stack
+          css={css`
+            margin-bottom: 30px;
+          `}
+          direction={"row"}
+          alignItems="center"
+        >
+          <Typography variant="h4">Product page</Typography>
           <Breadcrumbs
             separator="›"
             css={css`
@@ -98,30 +106,31 @@ export default function ProductListPage() {
               </TableRow>
             </TableHead>
             <TableBody>
-              {generateProducts().map((item) => {
-                return (
-                  <TableRow key={item.id}>
-                    <TableCell>{item.id}</TableCell>
-                    <TableCell>
-                      <Avatar src={item.imageUrl} variant="square"></Avatar>
-                    </TableCell>
-                    <TableCell>{item.productName}</TableCell>
-                    <TableCell>{item.price}</TableCell>
-                    <TableCell>{item.inStock}</TableCell>
-                    <TableCell>{item.categoryName}</TableCell>
-                    <TableCell align="right">
-                      <Stack direction={"row"} spacing={2} justifyContent="right">
-                        <Button size="small" variant="outlined" startIcon={<EditIcon></EditIcon>}>
-                          Edit
-                        </Button>
-                        <Button size="small" variant="outlined" color="error" startIcon={<DeleteIcon></DeleteIcon>}>
-                          Delete
-                        </Button>
-                      </Stack>
-                    </TableCell>
-                  </TableRow>
-                );
-              })}
+              {products &&
+                products.map((item) => {
+                  return (
+                    <TableRow key={item.id}>
+                      <TableCell>{item.id}</TableCell>
+                      <TableCell>
+                        <Avatar src={item.imageUrl} variant="square"></Avatar>
+                      </TableCell>
+                      <TableCell>{item.productName}</TableCell>
+                      <TableCell>{item.price}</TableCell>
+                      <TableCell>{item.inStock}</TableCell>
+                      <TableCell>{item.categoryName}</TableCell>
+                      <TableCell align="right">
+                        <Stack direction={"row"} spacing={2} justifyContent="right">
+                          <Button size="small" variant="outlined" startIcon={<EditIcon></EditIcon>}>
+                            Edit
+                          </Button>
+                          <Button size="small" variant="outlined" color="error" startIcon={<DeleteIcon></DeleteIcon>}>
+                            Delete
+                          </Button>
+                        </Stack>
+                      </TableCell>
+                    </TableRow>
+                  );
+                })}
             </TableBody>
           </Table>
         </TableContainer>

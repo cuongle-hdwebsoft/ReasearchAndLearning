@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
-import { Card, Typography, Button, Stack, useTheme, Breadcrumbs, Box } from "@mui/material";
-import React from "react";
+import { Card, Typography, Button, Stack, useTheme, Breadcrumbs } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import CustomTextInput from "../common/components/CustomTextInput";
 import { css } from "@emotion/react";
@@ -11,15 +11,12 @@ import CardHeaderPage from "../common/components/CardHeaderPage";
 
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-
-interface IForm {
-  productName: string;
-  price: number;
-  inStock: boolean;
-  amount: number;
-  categoryName: string;
-  image: string;
-}
+import { ICategory, IFormProduct } from "../modules/products/constant";
+import { useDispatch } from "react-redux";
+import { createProduct } from "../modules/products/actions";
+import { fetchAuth } from "../common/utils/fetch";
+import { errorAction } from "../modules/app/actions";
+import { AxiosResponse } from "axios";
 
 const schema = yup.object({
   image: yup.string().required(),
@@ -31,7 +28,7 @@ const schema = yup.object({
 });
 
 export default function ProductItemPage() {
-  const { control, handleSubmit } = useForm<IForm>({
+  const { control, handleSubmit } = useForm<IFormProduct>({
     defaultValues: {
       image: "",
       productName: "",
@@ -44,14 +41,34 @@ export default function ProductItemPage() {
   });
   const theme = useTheme();
   const history = useHistory();
+  const dispatch = useDispatch();
+  const [categories, setCategories] = useState<ICategory[]>([]);
 
   const handleCancel = () => {
     history.goBack();
   };
 
-  const onSubmit = (value: IForm) => {
-    console.log(value);
+  const onSubmit = (value: IFormProduct) => {
+    dispatch(createProduct(value));
   };
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const rs: AxiosResponse<ICategory[]> = await fetchAuth("GET", "/categories");
+
+        if (rs.status === 200) {
+          setCategories(rs.data);
+        } else {
+          dispatch(errorAction({ type: "error", message: "Fail to load categories" }));
+        }
+      } catch (error) {
+        dispatch(errorAction({ type: "error", message: "Something wrong" }));
+      }
+    };
+
+    getData();
+  }, []);
 
   return (
     <Card
@@ -162,10 +179,7 @@ export default function ProductItemPage() {
 
         <div className="form-item">
           <CustomSelect
-            items={[
-              { name: "Category 1", value: "1" },
-              { name: "Category 2", value: "2" },
-            ]}
+            items={categories.map((c) => ({ value: c.value, name: c.name }))}
             label="Category"
             name="categoryName"
             control={control}

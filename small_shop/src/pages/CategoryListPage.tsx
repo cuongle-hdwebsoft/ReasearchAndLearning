@@ -34,15 +34,14 @@ export default function CategoryListPage() {
     <div>
       <Box>
         <CardHeaderPage>
-          <Stack direction={"row"} alignItems="center">
-            <Typography
-              css={css`
-                margin-bottom: 10px;
-              `}
-              variant="h4"
-            >
-              Category page
-            </Typography>
+          <Stack
+            css={css`
+              margin-bottom: 30px;
+            `}
+            direction={"row"}
+            alignItems="center"
+          >
+            <Typography variant="h4">Category page</Typography>
             <Breadcrumbs
               separator="›"
               css={css`

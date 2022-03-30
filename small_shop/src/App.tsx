@@ -1,8 +1,8 @@
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import React, { Suspense, useState } from "react";
+import React, { Suspense, useEffect, useState } from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { SnackbarProvider } from "notistack";
+import { SnackbarProvider, useSnackbar } from "notistack";
 
 import { AppContext } from "./common/context/app";
 import MainLayout from "./common/hocs/MainLayout";

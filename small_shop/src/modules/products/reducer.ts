@@ -4,6 +4,7 @@ import { IProduct, IReducerApp, MODULE_NAME } from "./constant";
 const initialState: IReducerApp = {
   categories: [],
   productItem: null,
+  products: [],
 };
 
 export const reducer = createSlice({
@@ -13,7 +14,10 @@ export const reducer = createSlice({
     createProduct: function (state, action: PayloadAction<IProduct>) {
       state.productItem = action.payload;
     },
+    loadProducts: function (state, action: PayloadAction<IProduct[]>) {
+      state.products = action.payload;
+    },
   },
 });
 
-export const { createProduct } = reducer.actions;
+export const { createProduct, loadProducts } = reducer.actions;
