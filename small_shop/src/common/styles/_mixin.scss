@@ -37,3 +37,11 @@
     transform: translateY(-50%);
   }
 }
+
+@mixin fontSize() {
+  @for $i from 1 to 8 {
+    h#{$i} {
+      font-weight: 600 !important;
+    }
+  }
+}

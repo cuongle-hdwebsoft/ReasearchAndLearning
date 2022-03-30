@@ -1,6 +1,6 @@
 import * as yup from "yup";
 import styled from "@emotion/styled";
-import { Button, useTheme } from "@mui/material";
+import { Button, Card, useTheme } from "@mui/material";
 import CustomTextInput from "../common/components/CustomTextInput";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
@@ -8,6 +8,7 @@ import { useAppContextHook } from "../modules/app/hook";
 import { useSnackbar } from "notistack";
 import { useHistory } from "react-router-dom";
 import { fetch } from "../common/utils/fetch";
+import { useEffect, useState } from "react";
 
 const WrapLoginPageStyle = styled("div")`
   .wrap-form-login {
@@ -20,7 +21,6 @@ const WrapLoginPageStyle = styled("div")`
       width: 600px;
       padding: 50px;
       border-radius: 4px;
-      background-color: ${(props) => (props.theme == "light" ? "#fff" : "#111")};
 
       &__title {
         text-align: center;
@@ -48,8 +48,8 @@ interface IFormValue {
 }
 
 const schema = yup.object({
-  username: yup.string().required(),
-  password: yup.string().required(),
+  username: yup.string().required("Username is required"),
+  password: yup.string().required("Password is required"),
 });
 
 function LoginPage() {
@@ -57,6 +57,7 @@ function LoginPage() {
   const appContext = useAppContextHook();
   const { enqueueSnackbar } = useSnackbar();
   const history = useHistory();
+  const [isHidePage, setIsHidePage] = useState<boolean>(true);
 
   const { control, handleSubmit } = useForm<IFormValue>({
     defaultValues: {
@@ -75,41 +76,57 @@ function LoginPage() {
         localStorage.setItem("accessToken", "fake accessToken");
         enqueueSnackbar("Login success", { variant: "success" });
         history.push("/");
+      } else {
+        enqueueSnackbar("username or password not match", { variant: "error" });
       }
     } catch (error) {
       enqueueSnackbar("Login fail");
     }
   };
 
+  useEffect(() => {
+    if (appContext.isLogin) {
+      return history.push("/");
+    }
+
+    return setIsHidePage(false);
+  }, []);
+
+  if (isHidePage) {
+    return null;
+  }
+
   return (
     <WrapLoginPageStyle theme={theme.palette.mode}>
       <div className="wrap-form-login">
-        <div className="form-login">
-          <h2 className="form-login__title">Form Login</h2>
-          <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="form-login__form-item">
-              <CustomTextInput
-                muiProps={{ className: "form-login__input" }}
-                name="username"
-                label="Username"
-                control={control}
-              ></CustomTextInput>
-            </div>
-            <div className="form-login__form-item">
-              <CustomTextInput
-                muiProps={{ className: "form-login__input", type: "password" }}
-                name="password"
-                label="Password"
-                control={control}
-              ></CustomTextInput>
-            </div>
-            <div className="form-login__form-item">
-              <Button className="form-login__button" variant="outlined" type="submit">
-                Submit form
-              </Button>
-            </div>
-          </form>
-        </div>
+        <Card>
+          <div className="form-login">
+            <h2 className="form-login__title">Form Login</h2>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div className="form-login__form-item">
+                <CustomTextInput
+                  muiProps={{ className: "form-login__input" }}
+                  name="username"
+                  label="Username"
+                  control={control}
+                ></CustomTextInput>
+              </div>
+              <div className="form-login__form-item">
+                <CustomTextInput
+                  muiProps={{ className: "form-login__input", type: "password" }}
+                  name="password"
+                  label="Password"
+                  control={control}
+                ></CustomTextInput>
+              </div>
+              <div className="form-login__form-item">
+                <Button className="form-login__button" variant="contained" type="submit">
+                  Submit form
+                </Button>
+              </div>
+            </form>
+          </div>
+        </Card>
       </div>
     </WrapLoginPageStyle>
   );

@@ -1,3 +1,6 @@
+import { all } from "redux-saga/effects";
+import { watchProduct } from "./products/saga";
+
 export default function* rootSaga() {
-  console.log("root saga");
+  yield all([watchProduct()]);
 }

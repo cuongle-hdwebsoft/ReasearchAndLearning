@@ -1,4 +1,6 @@
-import React from "react";
+/** @jsxImportSource @emotion/react */
+
+import React, { useState } from "react";
 import {
   AppBar,
   Avatar,
@@ -10,20 +12,27 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
+  Menu,
+  MenuItem,
   Toolbar,
   Typography,
 } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import LightModeIcon from "@mui/icons-material/LightMode";
+import PowerSettingsNewIcon from "@mui/icons-material/PowerSettingsNew";
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
 
 import logo from "../../logo.svg";
 import { AppContext } from "../context/app";
 import { useHistory } from "react-router-dom";
 import { routes } from "../../routes";
+import { useAppContextHook } from "../../modules/app/hook";
+import { useSnackbar } from "notistack";
 
-const appBarHeight = "65px";
-const drawerWidth = "250px";
+import { css } from "@emotion/react";
+
+const appBarHeight = "66px";
+const drawerWidth = "200px";
 
 interface IProps {
   children?: React.ReactElement | React.ReactElement[];
@@ -31,6 +40,10 @@ interface IProps {
 
 export default function MainLayout(props: IProps) {
   const history = useHistory();
+  const appContext = useAppContextHook();
+  const { enqueueSnackbar } = useSnackbar();
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
 
   const handleClickMenu = (key: string) => {
     history.push("/" + key);
@@ -39,14 +52,27 @@ export default function MainLayout(props: IProps) {
   const renderListMenu = () =>
     routes.map((item) => (
       <ListItem key={item.key} disablePadding>
-        <ListItemButton divider onClick={() => handleClickMenu(item.key)}>
-          <ListItemIcon>
-            <MenuIcon></MenuIcon>
+        <ListItemButton onClick={() => handleClickMenu(item.key)}>
+          <ListItemIcon
+            css={css`
+              padding: 0px;
+              margin: 0px;
+              min-width: 40px;
+            `}
+          >
+            {<item.Icon></item.Icon>}
           </ListItemIcon>
           <ListItemText>{item.name}</ListItemText>
         </ListItemButton>
       </ListItem>
     ));
+
+  const handleLogout = () => {
+    appContext.setIsLogin(false);
+    localStorage.clear();
+    history.push("/login");
+    enqueueSnackbar("Logout successful", { variant: "success" });
+  };
 
   return (
     <Box>
@@ -100,30 +126,66 @@ export default function MainLayout(props: IProps) {
               </>
             )}
           </AppContext.Consumer>
-          <IconButton size="large">
+          <IconButton
+            aria-expanded={open}
+            aria-controls={open ? "menu-account" : undefined}
+            aria-haspopup={true}
+            id="account-button"
+            size="large"
+            onClick={(event: React.MouseEvent<HTMLButtonElement>) => setAnchorEl(event.currentTarget)}
+          >
             <AccountCircleIcon></AccountCircleIcon>
           </IconButton>
+          <Menu
+            id="menu-account"
+            MenuListProps={{
+              "aria-labelledby": "account-button",
+            }}
+            anchorEl={anchorEl}
+            open={open}
+            onClose={() => setAnchorEl(null)}
+          >
+            <MenuItem>
+              <ListItemIcon>
+                <AccountBoxIcon></AccountBoxIcon>
+              </ListItemIcon>
+              My profile
+            </MenuItem>
+            <MenuItem onClick={handleLogout}>
+              <ListItemIcon>
+                <PowerSettingsNewIcon></PowerSettingsNewIcon>
+              </ListItemIcon>
+              Logout
+            </MenuItem>
+          </Menu>
         </Box>
       </AppBar>
-      <Box>
+      <Box
+        sx={{
+          display: "flex",
+          top: appBarHeight,
+          position: "absolute",
+          minHeight: `calc(100vh - ${appBarHeight})`,
+          left: 0,
+          width: "100%",
+        }}
+      >
         <Drawer
           variant="permanent"
           sx={{
             width: drawerWidth,
-            height: "calc(100% - 66px)",
-            position: "absolute",
           }}
           anchor="left"
           open={false}
         >
-          <List>{renderListMenu()}</List>
+          <List sx={{ minHeight: `calc(100vh - ${appBarHeight})` }}>{renderListMenu()}</List>
         </Drawer>
         <Box
           sx={{
-            position: "absolute",
-            top: 66,
-            left: 250,
-            padding: 1,
+            minHeight: `calc(100vh - ${appBarHeight})`,
+            width: "100%",
+            padding: 2,
+            backgroundColor: (props) => props.palette.background.paper,
           }}
         >
           {props.children}

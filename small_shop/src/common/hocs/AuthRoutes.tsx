@@ -2,6 +2,7 @@ import { useSnackbar } from "notistack";
 import React, { useEffect, useRef, useState } from "react";
 import { Redirect, Route, Switch, useHistory } from "react-router-dom";
 import { useAppContextHook } from "../../modules/app/hook";
+import LoginPage from "../../pages/LoginPage";
 interface IProps {
   children?: React.ReactElement | React.ReactElement[] | any;
   path: string;
@@ -22,17 +23,12 @@ export default function AuthRoutes(props: IProps) {
           t.current = window.setTimeout(() => {
             const accessToken = localStorage.getItem("accessToken");
             const isLogin = localStorage.getItem("isLogin");
-            console.log("check auth", accessToken, isLogin);
             const isValid = true;
 
-            if (!isLogin || !accessToken) {
+            if (!isLogin || !accessToken || !isValid) {
               localStorage.clear();
-              history.push("/login");
-              return resolve(null);
-            }
-
-            if (!isValid) {
-              localStorage.clear();
+              appContext.setIsLogin(false);
+              setIsFetchingAuth(false);
               history.push("/login");
               return resolve(null);
             }
@@ -56,14 +52,12 @@ export default function AuthRoutes(props: IProps) {
     }
   }, []);
 
-  // console.log("Child render", isFetchingAuth, appContext.isLogin);
-
   if (isFetchingAuth) {
     return null;
   }
 
   if (!isFetchingAuth && !appContext.isLogin) {
-    return <Redirect to="/login" />;
+    return <Route component={LoginPage} path="/login" />;
   }
 
   return (
