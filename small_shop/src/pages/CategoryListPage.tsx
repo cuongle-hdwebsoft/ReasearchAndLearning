@@ -19,16 +19,31 @@ import {
   useTheme,
 } from "@mui/material";
 import { css } from "@emotion/react";
-import { category } from "../apis/category";
 
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CardHeaderPage from "../common/components/CardHeaderPage";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { fetchAuth } from "../common/utils/fetch";
+import { ICategory } from "../modules/products/constant";
 
 export default function CategoryListPage() {
   const theme = useTheme();
+  const [categories, setCategories] = useState<ICategory[]>([]);
+
+  useEffect(() => {
+    const getData = async () => {
+      const rs = await fetchAuth("GET", "/categories", null);
+
+      if (rs.status === 200) {
+        setCategories(rs.data);
+      }
+    };
+
+    getData();
+  }, []);
 
   return (
     <div>
@@ -92,7 +107,7 @@ export default function CategoryListPage() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {category.map((item) => {
+                {categories.map((item) => {
                   return (
                     <TableRow key={item.id}>
                       <TableCell>{item.id}</TableCell>
