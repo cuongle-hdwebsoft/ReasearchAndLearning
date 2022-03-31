@@ -49,8 +49,6 @@ export default function ProductListPage() {
     dispatch(loadProducts({ page: nextPage, limit: 10 }));
   };
 
-  // console.log(totalProducts, limit, page);
-
   return (
     <Box>
       <CardHeaderPage>
@@ -188,7 +186,7 @@ export default function ProductListPage() {
           component={"div"}
           count={totalProducts}
           rowsPerPage={limit}
-          page={totalProducts ? page : 0}
+          page={page ? page : 0}
         ></TablePagination>
       </Card>
     </Box>

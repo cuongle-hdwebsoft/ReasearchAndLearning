@@ -11,7 +11,7 @@ import CardHeaderPage from "../common/components/CardHeaderPage";
 
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ICategory, IFormProduct, IProduct } from "../modules/products/constant";
+import { ICategory, IFormProduct } from "../modules/products/constant";
 import { useDispatch } from "react-redux";
 import { createProduct, editProduct } from "../modules/products/actions";
 import { fetchAuth } from "../common/utils/fetch";
@@ -44,15 +44,15 @@ export default function ProductItemPage() {
   const history = useHistory();
   const dispatch = useDispatch();
   const params = useParams<{ id: string }>();
+  const id = params.id;
   const [categories, setCategories] = useState<ICategory[]>([]);
-  const isEdit = params.id ? true : false;
 
   const handleCancel = () => {
     history.goBack();
   };
 
   const onSubmit = (value: IFormProduct) => {
-    if (!isEdit) {
+    if (id == "null") {
       dispatch(createProduct(value));
     } else {
       dispatch(editProduct({ ...value, id: params.id }));
@@ -84,16 +84,17 @@ export default function ProductItemPage() {
           });
         } else {
           dispatch(errorAction({ type: "error", message: "Fail to load product" }));
+          history.goBack();
         }
       } catch (error) {
         dispatch(errorAction({ type: "error", message: "Something wrong" }));
       }
     };
 
-    if (isEdit) {
+    if (id == "null") {
       getData();
-      getProduct();
     } else {
+      getProduct();
       getData();
     }
   }, []);
@@ -115,7 +116,7 @@ export default function ProductItemPage() {
             `}
             variant="h4"
           >
-            {isEdit ? "Edit" : "Create"} product
+            {id === "null" ? "Create" : "Edit"} product
           </Typography>
           <Breadcrumbs
             separator="›"
@@ -148,7 +149,7 @@ export default function ProductItemPage() {
               `}
               to="/products/null"
             >
-              {isEdit ? "Edit" : "Create new"} product
+              {id === "null" ? "Create new" : "Edit"} product
             </Link>
           </Breadcrumbs>
         </Stack>

@@ -9,20 +9,21 @@ import MainLayout from "./common/hocs/MainLayout";
 
 import { store } from "./modules";
 import AuthRoutes from "./common/hocs/AuthRoutes";
+import PublicUtils from "./common/hocs/PublicUtils";
 
-import DashboardPage from "./pages/DashboardPage";
-import LoginPage from "./pages/LoginPage";
-import CategoryListPage from "./pages/CategoryListPage";
-import ProductListPage from "./pages/ProductListPage";
-import ProductItemPage from "./pages/ProductItemPage";
-import NotFound from "./pages/NotFound";
+// import DashboardPage from "./pages/DashboardPage";
+// import LoginPage from "./pages/LoginPage";
+// import CategoryListPage from "./pages/CategoryListPage";
+// import ProductListPage from "./pages/ProductListPage";
+// import ProductItemPage from "./pages/ProductItemPage";
+// import NotFound from "./pages/NotFound";
 
-// const CategoryListPage = React.lazy(() => import("./pages/CategoryListPage"));
-// const DashboardPage = React.lazy(() => import("./pages/DashboardPage"));
-// const NotFound = React.lazy(() => import("./pages/NotFound"));
-// const ProductListPage = React.lazy(() => import("./pages/ProductListPage"));
-// const LoginPage = React.lazy(() => import("./pages/LoginPage"));
-// const ProductItemPage = React.lazy(() => import("./pages/ProductItemPage"));
+const CategoryListPage = React.lazy(() => import("./pages/CategoryListPage"));
+const DashboardPage = React.lazy(() => import("./pages/DashboardPage"));
+const NotFound = React.lazy(() => import("./pages/NotFound"));
+const ProductListPage = React.lazy(() => import("./pages/ProductListPage"));
+const LoginPage = React.lazy(() => import("./pages/LoginPage"));
+const ProductItemPage = React.lazy(() => import("./pages/ProductItemPage"));
 
 const defaultTheme = (themeMode: "light" | "dark") =>
   createTheme({
@@ -53,38 +54,40 @@ function App() {
             anchorOrigin={{ horizontal: "center", vertical: "top" }}
           >
             <BrowserRouter>
-              <Suspense fallback={<div></div>}>
-                <Switch>
-                  <AuthRoutes path="/">
-                    <Route path="/" exact={true}>
-                      <MainLayout>
-                        <DashboardPage></DashboardPage>
-                      </MainLayout>
-                    </Route>
-                    <Route path="/login" exact={true}>
-                      <LoginPage></LoginPage>
-                    </Route>
-                    <Route path="/category" exact={true}>
-                      <MainLayout>
-                        <CategoryListPage></CategoryListPage>
-                      </MainLayout>
-                    </Route>
-                    <Route path="/products" exact={true}>
-                      <MainLayout>
-                        <ProductListPage></ProductListPage>
-                      </MainLayout>
-                    </Route>
-                    <Route path="/products/:id" exact={true}>
-                      <MainLayout>
-                        <ProductItemPage></ProductItemPage>
-                      </MainLayout>
-                    </Route>
-                    <Route path="*">
-                      <NotFound></NotFound>
-                    </Route>
-                  </AuthRoutes>
-                </Switch>
-              </Suspense>
+              <PublicUtils>
+                <Suspense fallback={<div></div>}>
+                  <Switch>
+                    <AuthRoutes path="/">
+                      <Route path="/" exact={true}>
+                        <MainLayout>
+                          <DashboardPage></DashboardPage>
+                        </MainLayout>
+                      </Route>
+                      <Route path="/login" exact={true}>
+                        <LoginPage></LoginPage>
+                      </Route>
+                      <Route path="/category" exact={true}>
+                        <MainLayout>
+                          <CategoryListPage></CategoryListPage>
+                        </MainLayout>
+                      </Route>
+                      <Route path="/products" exact={true}>
+                        <MainLayout>
+                          <ProductListPage></ProductListPage>
+                        </MainLayout>
+                      </Route>
+                      <Route path="/products/:id" exact={true}>
+                        <MainLayout>
+                          <ProductItemPage></ProductItemPage>
+                        </MainLayout>
+                      </Route>
+                      <Route path="*">
+                        <NotFound></NotFound>
+                      </Route>
+                    </AuthRoutes>
+                  </Switch>
+                </Suspense>
+              </PublicUtils>
             </BrowserRouter>
           </SnackbarProvider>
         </ThemeProvider>

@@ -37,7 +37,7 @@ export const reducer = createSlice({
         state.totalProducts = action.payload.totalProducts;
       }
 
-      if (action.payload.page) {
+      if (action.payload.page || action.payload.page === 0) {
         state.page = action.payload.page;
       }
 

@@ -34,6 +34,7 @@ declare global {
     app: {
       enqueueSnackbar?: (message: SnackbarMessage, options?: OptionsObject | undefined) => SnackbarKey | null;
       history: any;
+      modal?: any;
     };
   }
 }

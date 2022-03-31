@@ -14,3 +14,19 @@ export const AppContext = createContext<IAppContext>({
     console.log("setIsLogin");
   },
 });
+
+export interface IModalCustomContext {
+  isOpen: boolean;
+  open: () => void;
+  close: () => void;
+}
+
+export const ModalCustomContext = createContext<IModalCustomContext>({
+  isOpen: false,
+  open: function () {
+    console.log("open");
+  },
+  close: function () {
+    console.log("close");
+  },
+});

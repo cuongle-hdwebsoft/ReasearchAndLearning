@@ -13,6 +13,10 @@ import {
   EDIT_PRODUCT_ACTION,
   EDIT_PRODUCT_SUCCESS_ACTION,
   EDIT_PRODUCT_FAIL_ACTION,
+  DELETE_PRODUCT_ACTION,
+  IDeleteProductAction,
+  DELETE_PRODUCT_SUCCESS_ACTION,
+  DELETE_PRODUCT_FAIL_ACTION,
 } from "./constant";
 
 export const createProduct = (product: IFormProduct): ICreateProductAction => {
@@ -81,7 +85,7 @@ export const editProductSuccess = (): INotificationAction => {
     type: EDIT_PRODUCT_SUCCESS_ACTION,
     payload: {
       type: "success",
-      message: "Create product successfully",
+      message: "Edit product successfully",
     },
   };
 };
@@ -89,6 +93,35 @@ export const editProductSuccess = (): INotificationAction => {
 export const editProductFail = (): INotificationAction => {
   return {
     type: EDIT_PRODUCT_FAIL_ACTION,
+    payload: {
+      type: "error",
+      message: "Edit product fail",
+    },
+  };
+};
+
+export const deleteProduct = (idProduct: string): IDeleteProductAction => {
+  return {
+    type: DELETE_PRODUCT_ACTION,
+    payload: {
+      idProduct,
+    },
+  };
+};
+
+export const deleteProductSuccess = (): INotificationAction => {
+  return {
+    type: DELETE_PRODUCT_SUCCESS_ACTION,
+    payload: {
+      type: "success",
+      message: "Create product successfully",
+    },
+  };
+};
+
+export const deleteProductFail = (): INotificationAction => {
+  return {
+    type: DELETE_PRODUCT_FAIL_ACTION,
     payload: {
       type: "error",
       message: "Create product fail",

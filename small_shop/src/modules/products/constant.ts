@@ -12,6 +12,10 @@ export const EDIT_PRODUCT_ACTION = "EDIT_PRODUCT_ACTION";
 export const EDIT_PRODUCT_SUCCESS_ACTION = "EDIT_PRODUCT_SUCCESS_ACTION";
 export const EDIT_PRODUCT_FAIL_ACTION = "EDIT_PRODUCT_FAIL_ACTION";
 
+export const DELETE_PRODUCT_ACTION = "DELETE_PRODUCT_ACTION";
+export const DELETE_PRODUCT_SUCCESS_ACTION = "DELETE_PRODUCT_SUCCESS_ACTION";
+export const DELETE_PRODUCT_FAIL_ACTION = "DELETE_PRODUCT_FAIL_ACTION";
+
 export interface ICategory {
   name: string;
   id: string;
@@ -59,6 +63,7 @@ export interface IFilterProduct {
   productName?: string;
   inStock?: boolean;
   categoryName?: string;
+  [key: string]: string | number | unknown;
 }
 
 export interface ILoadProductParams extends IFilterProduct {
@@ -69,4 +74,11 @@ export interface ILoadProductParams extends IFilterProduct {
 export interface ILoadProductAction {
   type: string;
   payload: ILoadProductParams;
+}
+
+export interface IDeleteProductAction {
+  type: string;
+  payload: {
+    idProduct: string;
+  };
 }

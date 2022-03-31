@@ -1,11 +1,13 @@
 import { AxiosResponse } from "axios";
-import { call, delay, put, select, takeEvery, takeLatest } from "redux-saga/effects";
+import { all, call, delay, put, select, takeEvery, takeLatest, fork } from "redux-saga/effects";
 import { fetchAuth } from "../../common/utils/fetch";
 import { errorAction } from "../app/actions";
 import { watchNotification } from "../app/saga";
 import {
   createProductFail,
   createProductSuccess,
+  deleteProductFail,
+  deleteProductSuccess,
   editProductFail,
   editProductSuccess,
   loadProductsFail,
@@ -26,8 +28,13 @@ import {
   EDIT_PRODUCT_SUCCESS_ACTION,
   EDIT_PRODUCT_FAIL_ACTION,
   IEditProductAction,
+  DELETE_PRODUCT_ACTION,
+  DELETE_PRODUCT_SUCCESS_ACTION,
+  DELETE_PRODUCT_FAIL_ACTION,
+  IDeleteProductAction,
 } from "./constant";
 import { loadFilters, loadProducts, setIsLoading } from "./reducer";
+import { loadProducts as loadProductsAction } from "./actions";
 import queryString from "query-string";
 import { RootState } from "../hook";
 
@@ -37,7 +44,7 @@ export function* createProductSaga(action: ICreateProductAction) {
 
     if (result && result.status === 201) {
       yield put(createProductSuccess());
-      yield call(window.app.history.push, "/products");
+      yield fork(window.app.history.push, "/products");
     } else {
       yield put(createProductFail());
     }
@@ -57,9 +64,23 @@ export function* editProductSaga(action: IEditProductAction) {
 
     if (result && result.status === 200) {
       yield put(editProductSuccess());
-      yield call(window.app.history.push, "/products");
+      yield fork(window.app.history.push, "/products");
     } else {
       yield put(editProductFail());
+    }
+  } catch (error) {
+    yield put(errorAction({ type: "error", message: "Something wrong" }));
+  }
+}
+
+export function* deleteProductSaga(action: IDeleteProductAction) {
+  try {
+    const result: AxiosResponse<IProduct> = yield call(fetchAuth, "DELETE", "/products/" + action.payload.idProduct);
+
+    if (result.status === 200) {
+      yield all([put(deleteProductSuccess()), put(loadProductsAction({}))]);
+    } else {
+      yield put(deleteProductFail());
     }
   } catch (error) {
     yield put(errorAction({ type: "error", message: "Something wrong" }));
@@ -81,20 +102,17 @@ export function* loadProductsSaga(action: ILoadProductAction) {
       _page: page + 1,
     };
 
-    if (action.payload.productName) {
-      params.productName = action.payload.productName;
-    }
+    const keys: (keyof IFilterProduct)[] = ["productName", "categoryName"];
+    for (let i = 0; i < keys.length; i++) {
+      const key = keys[i];
 
-    if (action.payload.productName === "") {
-      delete params.productName;
-    }
+      if (action.payload[key]) {
+        params[key] = action.payload[key];
+      }
 
-    if (action.payload.categoryName) {
-      params.categoryName = action.payload.categoryName;
-    }
-
-    if (action.payload.categoryName === "") {
-      delete params.categoryName;
+      if (action.payload[key] === "") {
+        delete params[key];
+      }
     }
 
     yield put(setIsLoading(true));
@@ -153,4 +171,8 @@ export function* watchProduct() {
   yield takeLatest(EDIT_PRODUCT_ACTION, editProductSaga);
   yield takeEvery(EDIT_PRODUCT_SUCCESS_ACTION, watchNotification);
   yield takeEvery(EDIT_PRODUCT_FAIL_ACTION, watchNotification);
+
+  yield takeLatest(DELETE_PRODUCT_ACTION, deleteProductSaga);
+  yield takeEvery(DELETE_PRODUCT_SUCCESS_ACTION, watchNotification);
+  yield takeEvery(DELETE_PRODUCT_FAIL_ACTION, watchNotification);
 }

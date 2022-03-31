@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import {
   AppBar,
   Avatar,
@@ -44,12 +44,6 @@ export default function MainLayout(props: IProps) {
   const { enqueueSnackbar } = useSnackbar();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
-
-  window.app = {
-    history: null,
-  };
-  window.app.enqueueSnackbar = enqueueSnackbar;
-  window.app.history = history;
 
   const handleClickMenu = (key: string) => {
     history.push("/" + key);
@@ -194,7 +188,7 @@ export default function MainLayout(props: IProps) {
             backgroundColor: (props) => props.palette.background.paper,
           }}
         >
-          {props.children}
+          <Suspense fallback={<div style={{ color: "#fff", fontSize: 300 }}>Loading</div>}>{props.children}</Suspense>
         </Box>
       </Box>
     </Box>

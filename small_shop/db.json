@@ -599,6 +599,16 @@
       "categoryName": "Maserati",
       "isActive": true,
       "id": 58
+    },
+    {
+      "categoryName": "Maserati",
+      "amount": 80,
+      "inStock": true,
+      "price": 50000,
+      "productName": "3",
+      "imageUrl": "Product images",
+      "isActive": true,
+      "id": 59
     }
   ],
   "categories": [
