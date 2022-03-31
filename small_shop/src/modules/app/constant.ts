@@ -2,6 +2,7 @@ import { OptionsObject, SnackbarKey, SnackbarMessage, VariantType } from "notist
 
 export const MODULE_NAME = "APP_MODULE";
 export const WATCH_NOTIFICATION_SAGA = "WATCH_NOTIFICATION_SAGA";
+export const WATCH_HISTORY_SAGA = "WATCH_HISTORY_SAGA";
 
 export interface IMessage {
   message: string;
@@ -22,6 +23,15 @@ export interface IReducerApp {
     rememberPassword: boolean;
   };
   isRunning: boolean;
+  toast?: {
+    type: VariantType | undefined;
+    message: string;
+    createdAt: string;
+  } | null;
+  history?: {
+    path: string;
+    createdAt: string;
+  } | null;
 }
 
 export interface IInitActionPayload {
@@ -37,4 +47,20 @@ declare global {
       modal?: any;
     };
   }
+}
+
+export interface IToastAction {
+  type: VariantType | undefined;
+  message: string;
+  createdAt: string;
+}
+
+export interface IHistoryAction {
+  path: string;
+  createdAt: string;
+}
+
+export interface IWatchHistoryAction {
+  type: string;
+  payload: string;
 }

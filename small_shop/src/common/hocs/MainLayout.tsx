@@ -30,6 +30,7 @@ import { useAppContextHook } from "../../modules/app/hook";
 import { useSnackbar } from "notistack";
 
 import { css } from "@emotion/react";
+import Loading from "../components/Loading";
 
 const appBarHeight = "66px";
 const drawerWidth = "200px";
@@ -188,7 +189,7 @@ export default function MainLayout(props: IProps) {
             backgroundColor: (props) => props.palette.background.paper,
           }}
         >
-          <Suspense fallback={<div style={{ color: "#fff", fontSize: 300 }}>Loading</div>}>{props.children}</Suspense>
+          <Suspense fallback={<Loading></Loading>}>{props.children}</Suspense>
         </Box>
       </Box>
     </Box>

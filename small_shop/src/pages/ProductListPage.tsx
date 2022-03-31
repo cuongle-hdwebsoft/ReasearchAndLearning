@@ -24,21 +24,23 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CircleIcon from "@mui/icons-material/Circle";
 import { Link, useHistory } from "react-router-dom";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import queryString from "query-string";
 
 import CardHeaderPage from "../common/components/CardHeaderPage";
 import { useProductReducerHook } from "../modules/products/hook";
-import { loadProducts } from "../modules/products/actions";
+import { deleteProduct, loadProducts } from "../modules/products/actions";
 import FilterProducts from "../common/components/FilterProducts";
 import FakeTableLoading from "../common/components/FakeTableLoading";
+import { ModalCustomContext } from "../common/components/ModalProvider";
 
 export default function ProductListPage() {
   const history = useHistory();
   const theme = useTheme();
   const { products, totalProducts, limit, page, isLoading } = useProductReducerHook();
   const dispatch = useDispatch();
+  const modalContext = useContext(ModalCustomContext);
 
   useEffect(() => {
     const { query } = queryString.parseUrl(window.location.href);
@@ -47,6 +49,37 @@ export default function ProductListPage() {
 
   const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, nextPage: number) => {
     dispatch(loadProducts({ page: nextPage, limit: 10 }));
+  };
+
+  const handleDeleteProduct = (id: string | number) => {
+    modalContext.open(
+      <Box>
+        <h3
+          css={css`
+            color: ${theme.palette.text.primary};
+            text-align: center;
+            font-weight: bold;
+          `}
+        >
+          Are you sure to delete this item?
+        </h3>
+        <Stack justifyContent={"space-around"} direction={"row"} spacing="4">
+          <Button onClick={modalContext.close} variant="contained" color="error">
+            Cancel
+          </Button>
+          <Button
+            onClick={() => {
+              dispatch(deleteProduct(String(id)));
+              modalContext.close();
+            }}
+            variant="contained"
+            color="primary"
+          >
+            Yes! Sure
+          </Button>
+        </Stack>
+      </Box>,
+    );
   };
 
   return (
@@ -169,7 +202,13 @@ export default function ProductListPage() {
                           >
                             Edit
                           </Button>
-                          <Button size="small" variant="outlined" color="error" startIcon={<DeleteIcon></DeleteIcon>}>
+                          <Button
+                            onClick={() => handleDeleteProduct(item.id)}
+                            size="small"
+                            variant="outlined"
+                            color="error"
+                            startIcon={<DeleteIcon></DeleteIcon>}
+                          >
                             Delete
                           </Button>
                         </Stack>

@@ -114,7 +114,7 @@ export const deleteProductSuccess = (): INotificationAction => {
     type: DELETE_PRODUCT_SUCCESS_ACTION,
     payload: {
       type: "success",
-      message: "Create product successfully",
+      message: "Delete product successfully",
     },
   };
 };
@@ -124,7 +124,7 @@ export const deleteProductFail = (): INotificationAction => {
     type: DELETE_PRODUCT_FAIL_ACTION,
     payload: {
       type: "error",
-      message: "Create product fail",
+      message: "Delete product fail",
     },
   };
 };

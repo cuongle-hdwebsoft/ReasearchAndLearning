@@ -1,7 +1,7 @@
 import { AxiosResponse } from "axios";
-import { all, call, delay, put, select, takeEvery, takeLatest, fork } from "redux-saga/effects";
+import { all, call, delay, put, select, takeEvery, takeLatest } from "redux-saga/effects";
 import { fetchAuth } from "../../common/utils/fetch";
-import { errorAction } from "../app/actions";
+import { errorAction, historyAction } from "../app/actions";
 import { watchNotification } from "../app/saga";
 import {
   createProductFail,
@@ -44,7 +44,7 @@ export function* createProductSaga(action: ICreateProductAction) {
 
     if (result && result.status === 201) {
       yield put(createProductSuccess());
-      yield fork(window.app.history.push, "/products");
+      yield put(historyAction("/products"));
     } else {
       yield put(createProductFail());
     }
@@ -64,7 +64,7 @@ export function* editProductSaga(action: IEditProductAction) {
 
     if (result && result.status === 200) {
       yield put(editProductSuccess());
-      yield fork(window.app.history.push, "/products");
+      yield put(historyAction("/products"));
     } else {
       yield put(editProductFail());
     }

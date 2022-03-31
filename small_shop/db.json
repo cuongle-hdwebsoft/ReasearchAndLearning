@@ -602,13 +602,23 @@
     },
     {
       "categoryName": "Maserati",
-      "amount": 80,
+      "amount": 12,
       "inStock": true,
-      "price": 50000,
+      "price": 2,
       "productName": "3",
-      "imageUrl": "Product images",
+      "imageUrl": "3",
       "isActive": true,
       "id": 59
+    },
+    {
+      "imageUrl": "test",
+      "productName": "test product",
+      "price": 12,
+      "inStock": true,
+      "amount": 12,
+      "categoryName": "Hyundai",
+      "isActive": true,
+      "id": 61
     }
   ],
   "categories": [

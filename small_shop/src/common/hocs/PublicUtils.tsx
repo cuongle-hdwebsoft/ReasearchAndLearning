@@ -1,36 +1,26 @@
 import { useSnackbar } from "notistack";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import CustomModal from "../components/CustomModal";
+import { useAppReducerHook } from "../../modules/app/hook";
 
 interface IProps {
   children: React.ReactElement | React.ReactElement[];
 }
 
 export default function PublicUtils(props: IProps) {
-  const { enqueueSnackbar } = useSnackbar();
   const history = useHistory();
-  const modalRef = useRef<any>();
-
-  window.app = {
-    history: null,
-  };
-  window.app.enqueueSnackbar = enqueueSnackbar;
-  window.app.history = history;
+  const { enqueueSnackbar } = useSnackbar();
+  const { toast, history: historyReducer } = useAppReducerHook();
 
   useEffect(() => {
-    window.app.modal = {
-      open: modalRef.current.handleOpen,
-      close: modalRef.current.handleClose,
-    };
-  }, []);
+    if (toast) {
+      enqueueSnackbar(toast.message, { variant: toast.type });
+    }
+  }, [toast]);
 
-  return (
-    <>
-      <CustomModal ref={modalRef}>
-        <div style={{ color: "#fff" }}>Test</div>
-      </CustomModal>
-      {props.children}
-    </>
-  );
+  useEffect(() => {
+    if (historyReducer) history.push(historyReducer.path);
+  }, [historyReducer]);
+
+  return <>{props.children}</>;
 }
