@@ -8,6 +8,10 @@ export const LOAD_PRODUCTS = "LOAD_PRODUCTS";
 export const LOAD_PRODUCT_SUCCESS = "LOAD_PRODUCT_SUCCESS";
 export const LOAD_PRODUCT_FAIL = "LOAD_PRODUCT_FAIL";
 
+export const EDIT_PRODUCT_ACTION = "EDIT_PRODUCT_ACTION";
+export const EDIT_PRODUCT_SUCCESS_ACTION = "EDIT_PRODUCT_SUCCESS_ACTION";
+export const EDIT_PRODUCT_FAIL_ACTION = "EDIT_PRODUCT_FAIL_ACTION";
+
 export interface ICategory {
   name: string;
   id: string;
@@ -25,22 +29,44 @@ export interface IProduct {
   isActive: boolean;
 }
 
-export interface IFormProduct {
-  productName: string;
-  price: number;
-  inStock: boolean;
-  amount: number;
-  categoryName: string;
-  image: string;
-}
-
+export type IFormProduct = Omit<IProduct, "id">;
 export interface IReducerApp {
   categories: ICategory[];
   productItem: IProduct | null;
   products: IProduct[] | null;
+  totalProducts: number;
+  page: number;
+  limit: number;
+  isLoading: boolean;
+  filter?: {
+    productName?: string;
+    inStock?: boolean;
+    categoryName?: string;
+  };
 }
 
 export interface ICreateProductAction {
   type: string;
   payload: IFormProduct;
+}
+
+export interface IEditProductAction {
+  type: string;
+  payload: IFormProduct & { id: string | number };
+}
+
+export interface IFilterProduct {
+  productName?: string;
+  inStock?: boolean;
+  categoryName?: string;
+}
+
+export interface ILoadProductParams extends IFilterProduct {
+  page?: number;
+  limit?: number;
+}
+
+export interface ILoadProductAction {
+  type: string;
+  payload: ILoadProductParams;
 }

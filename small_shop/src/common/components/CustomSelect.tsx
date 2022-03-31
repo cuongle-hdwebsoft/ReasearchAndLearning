@@ -1,4 +1,4 @@
-import { FormHelperText, InputLabel, MenuItem, Select, SelectProps } from "@mui/material";
+import { FormControl, FormHelperText, InputLabel, MenuItem, Select, SelectProps } from "@mui/material";
 import { Controller } from "react-hook-form";
 
 interface ICustomSelect {
@@ -17,9 +17,9 @@ export default function CustomSelect(props: ICustomSelect) {
       control={control}
       name={name}
       render={({ field, fieldState: { invalid, error } }) => (
-        <>
-          <InputLabel>{label}</InputLabel>
-          <Select {...field} {...muiProps}>
+        <FormControl error={invalid} size="small">
+          <InputLabel id={name + "-label"}>{label}</InputLabel>
+          <Select labelId={name + "-label"} id={name} label="Age" {...muiProps} {...field}>
             {items?.map((item) => (
               <MenuItem key={item.value} value={item.value}>
                 {item.name}
@@ -27,7 +27,7 @@ export default function CustomSelect(props: ICustomSelect) {
             ))}
           </Select>
           <FormHelperText error={invalid}>{invalid ? error?.message : ""}</FormHelperText>
-        </>
+        </FormControl>
       )}
     ></Controller>
   );

@@ -6,9 +6,13 @@ import {
   ICreateProductAction,
   IFormProduct,
   LOAD_PRODUCT_SUCCESS,
-  IProduct,
   LOAD_PRODUCT_FAIL,
   LOAD_PRODUCTS,
+  ILoadProductParams,
+  IEditProductAction,
+  EDIT_PRODUCT_ACTION,
+  EDIT_PRODUCT_SUCCESS_ACTION,
+  EDIT_PRODUCT_FAIL_ACTION,
 } from "./constant";
 
 export const createProduct = (product: IFormProduct): ICreateProductAction => {
@@ -38,9 +42,10 @@ export const createProductFail = (): INotificationAction => {
   };
 };
 
-export const loadProducts = () => {
+export const loadProducts = (params: ILoadProductParams) => {
   return {
     type: LOAD_PRODUCTS,
+    payload: params,
   };
 };
 
@@ -60,6 +65,33 @@ export const loadProductsFail = (): INotificationAction => {
     payload: {
       type: "error",
       message: "Load products fail",
+    },
+  };
+};
+
+export const editProduct = (product: IFormProduct & { id: string | number }): IEditProductAction => {
+  return {
+    type: EDIT_PRODUCT_ACTION,
+    payload: product,
+  };
+};
+
+export const editProductSuccess = (): INotificationAction => {
+  return {
+    type: EDIT_PRODUCT_SUCCESS_ACTION,
+    payload: {
+      type: "success",
+      message: "Create product successfully",
+    },
+  };
+};
+
+export const editProductFail = (): INotificationAction => {
+  return {
+    type: EDIT_PRODUCT_FAIL_ACTION,
+    payload: {
+      type: "error",
+      message: "Create product fail",
     },
   };
 };

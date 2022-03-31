@@ -1,6 +1,6 @@
 import { useSnackbar } from "notistack";
 import React, { useEffect, useRef, useState } from "react";
-import { Redirect, Route, Switch, useHistory } from "react-router-dom";
+import { Route, Switch, useHistory } from "react-router-dom";
 import { useAppContextHook } from "../../modules/app/hook";
 import LoginPage from "../../pages/LoginPage";
 interface IProps {

@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import {
   AppBar,
   Avatar,
@@ -45,6 +45,12 @@ export default function MainLayout(props: IProps) {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
+  window.app = {
+    history: null,
+  };
+  window.app.enqueueSnackbar = enqueueSnackbar;
+  window.app.history = history;
+
   const handleClickMenu = (key: string) => {
     history.push("/" + key);
   };
@@ -73,12 +79,6 @@ export default function MainLayout(props: IProps) {
     history.push("/login");
     enqueueSnackbar("Logout successful", { variant: "success" });
   };
-
-  useEffect(() => {
-    window.app = {};
-    window.app.enqueueSnackbar = enqueueSnackbar;
-    window.app.history = history;
-  }, []);
 
   return (
     <Box>

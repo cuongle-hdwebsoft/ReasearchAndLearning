@@ -6,20 +6,20 @@ import CustomTextInput from "../common/components/CustomTextInput";
 import { css } from "@emotion/react";
 import CustomRadio from "../common/components/CustomRadio";
 import CustomSelect from "../common/components/CustomSelect";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useParams } from "react-router-dom";
 import CardHeaderPage from "../common/components/CardHeaderPage";
 
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ICategory, IFormProduct } from "../modules/products/constant";
+import { ICategory, IFormProduct, IProduct } from "../modules/products/constant";
 import { useDispatch } from "react-redux";
-import { createProduct } from "../modules/products/actions";
+import { createProduct, editProduct } from "../modules/products/actions";
 import { fetchAuth } from "../common/utils/fetch";
 import { errorAction } from "../modules/app/actions";
 import { AxiosResponse } from "axios";
 
 const schema = yup.object({
-  image: yup.string().required(),
+  imageUrl: yup.string().required(),
   productName: yup.string().required(),
   price: yup.number().positive().min(1).required(),
   inStock: yup.bool(),
@@ -28,28 +28,35 @@ const schema = yup.object({
 });
 
 export default function ProductItemPage() {
-  const { control, handleSubmit } = useForm<IFormProduct>({
+  const { control, handleSubmit, setValue } = useForm<IFormProduct>({
     defaultValues: {
-      image: "",
+      imageUrl: "",
       productName: "",
       price: 0,
       inStock: true,
       amount: 0,
       categoryName: "",
+      isActive: true,
     },
     resolver: yupResolver(schema),
   });
   const theme = useTheme();
   const history = useHistory();
   const dispatch = useDispatch();
+  const params = useParams<{ id: string }>();
   const [categories, setCategories] = useState<ICategory[]>([]);
+  const isEdit = params.id ? true : false;
 
   const handleCancel = () => {
     history.goBack();
   };
 
   const onSubmit = (value: IFormProduct) => {
-    dispatch(createProduct(value));
+    if (!isEdit) {
+      dispatch(createProduct(value));
+    } else {
+      dispatch(editProduct({ ...value, id: params.id }));
+    }
   };
 
   useEffect(() => {
@@ -67,8 +74,31 @@ export default function ProductItemPage() {
       }
     };
 
-    getData();
+    const getProduct = async () => {
+      try {
+        const rs: AxiosResponse<ICategory[]> = await fetchAuth("GET", "/products/" + params.id);
+
+        if (rs.status === 200) {
+          Object.keys(rs.data).forEach((key: any) => {
+            setValue(key, rs.data[key]);
+          });
+        } else {
+          dispatch(errorAction({ type: "error", message: "Fail to load product" }));
+        }
+      } catch (error) {
+        dispatch(errorAction({ type: "error", message: "Something wrong" }));
+      }
+    };
+
+    if (isEdit) {
+      getData();
+      getProduct();
+    } else {
+      getData();
+    }
   }, []);
+
+  console.log("render");
 
   return (
     <Card
@@ -85,7 +115,7 @@ export default function ProductItemPage() {
             `}
             variant="h4"
           >
-            Create product
+            {isEdit ? "Edit" : "Create"} product
           </Typography>
           <Breadcrumbs
             separator="›"
@@ -118,7 +148,7 @@ export default function ProductItemPage() {
               `}
               to="/products/null"
             >
-              Create new product
+              {isEdit ? "Edit" : "Create new"} product
             </Link>
           </Breadcrumbs>
         </Stack>
@@ -134,7 +164,7 @@ export default function ProductItemPage() {
             muiProps={{ style: { width: 500 }, size: "small", InputLabelProps: { shrink: true } }}
             label="Product image"
             control={control}
-            name="image"
+            name="imageUrl"
           ></CustomTextInput>
         </div>
 
@@ -183,12 +213,12 @@ export default function ProductItemPage() {
             label="Category"
             name="categoryName"
             control={control}
-            muiProps={{ sx: { minWidth: 500 }, size: "small" }}
+            muiProps={{ sx: { minWidth: 500 } }}
           ></CustomSelect>
         </div>
 
         <Stack direction={"row"} justifyContent="space-between">
-          <Button onClick={handleCancel} color="error" variant="outlined" type="submit">
+          <Button onClick={handleCancel} color="error" variant="outlined" type="button">
             cancel
           </Button>
           <Button variant="outlined" type="submit">

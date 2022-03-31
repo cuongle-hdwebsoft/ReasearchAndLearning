@@ -1,5 +1,4 @@
 import { OptionsObject, SnackbarKey, SnackbarMessage, VariantType } from "notistack";
-import { History } from "history";
 
 export const MODULE_NAME = "APP_MODULE";
 export const WATCH_NOTIFICATION_SAGA = "WATCH_NOTIFICATION_SAGA";
@@ -33,8 +32,8 @@ export interface IInitActionPayload {
 declare global {
   interface Window {
     app: {
-      enqueueSnackbar?: (message: SnackbarMessage, options?: OptionsObject | undefined) => SnackbarKey;
-      history?: any;
+      enqueueSnackbar?: (message: SnackbarMessage, options?: OptionsObject | undefined) => SnackbarKey | null;
+      history: any;
     };
   }
 }
