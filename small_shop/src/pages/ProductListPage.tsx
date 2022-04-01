@@ -50,7 +50,11 @@ export default function ProductListPage() {
   }, []);
 
   const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, nextPage: number) => {
-    dispatch(loadProducts({ page: nextPage, limit: 10 }));
+    dispatch(loadProducts({ page: nextPage, limit: limit }));
+  };
+
+  const handleChangeRowPerPage = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    dispatch(loadProducts({ page: 0, limit: parseInt(event.target.value) }));
   };
 
   const handleDeleteProduct = (id: string | number) => {
@@ -224,6 +228,7 @@ export default function ProductListPage() {
         </TableContainer>
         <TablePagination
           onPageChange={handleChangePage}
+          onRowsPerPageChange={handleChangeRowPerPage}
           component={"div"}
           count={totalProducts}
           rowsPerPage={limit}
