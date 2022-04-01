@@ -14,6 +14,7 @@ import {
   ListItemText,
   Menu,
   MenuItem,
+  Stack,
   Toolbar,
   Typography,
 } from "@mui/material";
@@ -28,9 +29,13 @@ import { useHistory } from "react-router-dom";
 import { routes } from "../../routes";
 import { useAppContextHook } from "../../modules/app/hook";
 import { useSnackbar } from "notistack";
+import { useTranslation } from "react-i18next";
 
 import { css } from "@emotion/react";
 import Loading from "../components/Loading";
+
+import vi from "../images/vi.png";
+import en from "../images/en.png";
 
 const appBarHeight = "66px";
 const drawerWidth = "200px";
@@ -44,6 +49,7 @@ export default function MainLayout(props: IProps) {
   const appContext = useAppContextHook();
   const { enqueueSnackbar } = useSnackbar();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const { t } = useTranslation();
   const open = Boolean(anchorEl);
 
   const handleClickMenu = (key: string) => {
@@ -63,7 +69,7 @@ export default function MainLayout(props: IProps) {
           >
             {<item.Icon></item.Icon>}
           </ListItemIcon>
-          <ListItemText>{item.name}</ListItemText>
+          <ListItemText>{t(item.name)}</ListItemText>
         </ListItemButton>
       </ListItem>
     ));
@@ -116,11 +122,16 @@ export default function MainLayout(props: IProps) {
           sx={{
             marginLeft: "auto",
             paddingRight: 2,
+            display: "flex",
+            alignItems: "center",
           }}
         >
           <AppContext.Consumer>
             {(context) => (
               <>
+                <IconButton onClick={context.toggleLang}>
+                  <Avatar style={{ width: 30, height: 30 }} src={context.lang === "vi" ? vi : en}></Avatar>
+                </IconButton>
                 <IconButton onClick={context.toggleTheme} size="large">
                   <LightModeIcon></LightModeIcon>
                 </IconButton>
@@ -152,6 +163,7 @@ export default function MainLayout(props: IProps) {
               </ListItemIcon>
               My profile
             </MenuItem>
+            <MenuItem></MenuItem>
             <MenuItem onClick={handleLogout}>
               <ListItemIcon>
                 <PowerSettingsNewIcon></PowerSettingsNewIcon>

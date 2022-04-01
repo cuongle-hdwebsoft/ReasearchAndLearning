@@ -4,6 +4,7 @@ import { ICategory, IFilterProduct } from "../../modules/products/constant";
 import { loadProducts } from "../../modules/products/actions";
 import { useEffect, useState } from "react";
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Stack, TextField } from "@mui/material";
+import { useTranslation } from "react-i18next";
 import { fetchAuth } from "../utils/fetch";
 import { AxiosResponse } from "axios";
 import { errorAction } from "../../modules/app/actions";
@@ -12,6 +13,7 @@ export default function FilterProducts() {
   const { filter } = useProductReducerHook();
   const dispatch = useDispatch();
   const [categories, setCategories] = useState<ICategory[]>([]);
+  const { t } = useTranslation();
 
   const handleChangeInput = (key: keyof IFilterProduct) => (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(
@@ -54,11 +56,11 @@ export default function FilterProducts() {
           onChange={handleChangeInput("productName")}
           InputLabelProps={{ shrink: true }}
           size="small"
-          label="Product name"
+          label={t("ProductName")}
           value={filter?.productName ? filter?.productName : ""}
         ></TextField>
         <FormControl size="small" sx={{ width: 300 }}>
-          <InputLabel>Category</InputLabel>
+          <InputLabel>{t("Category")}</InputLabel>
           <Select
             value={filter?.categoryName ? filter?.categoryName : ""}
             onChange={handleChangeSelect("categoryName")}

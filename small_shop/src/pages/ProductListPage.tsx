@@ -27,6 +27,7 @@ import { Link, useHistory } from "react-router-dom";
 import React, { useContext, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import queryString from "query-string";
+import { useTranslation, Trans } from "react-i18next";
 
 import CardHeaderPage from "../common/components/CardHeaderPage";
 import { useProductReducerHook } from "../modules/products/hook";
@@ -41,6 +42,7 @@ export default function ProductListPage() {
   const { products, totalProducts, limit, page, isLoading } = useProductReducerHook();
   const dispatch = useDispatch();
   const modalContext = useContext(ModalCustomContext);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const { query } = queryString.parseUrl(window.location.href);
@@ -92,7 +94,7 @@ export default function ProductListPage() {
           direction={"row"}
           alignItems="center"
         >
-          <Typography variant="h4">Product page</Typography>
+          <Typography variant="h4">{t("ProductPage")}</Typography>
           <Breadcrumbs
             separator="›"
             css={css`
@@ -106,7 +108,7 @@ export default function ProductListPage() {
                 text-decoration: none;
               `}
             >
-              Dashboard
+              {t("Dashboard")}
             </Link>
             <Link
               css={css`
@@ -115,7 +117,7 @@ export default function ProductListPage() {
               `}
               to="/products"
             >
-              Products
+              {t("Products")}
             </Link>
           </Breadcrumbs>
         </Stack>
@@ -127,7 +129,7 @@ export default function ProductListPage() {
             `}
           >
             <Button onClick={() => history.push("/products/null")} variant="contained" startIcon={<AddIcon></AddIcon>}>
-              Add new
+              <Trans i18nKey={"AddNew"}>Add new {{ name: "product" }}</Trans>
             </Button>
           </Stack>
         </Box>
@@ -138,28 +140,28 @@ export default function ProductListPage() {
             <TableHead>
               <TableRow>
                 <TableCell>
-                  <div>ID</div>
+                  <div>{t("ID")}</div>
                 </TableCell>
                 <TableCell>
-                  <div>Image</div>
+                  <div>{t("Image")}</div>
                 </TableCell>
                 <TableCell>
-                  <div>Name</div>
+                  <div>{t("Name")}</div>
                 </TableCell>
                 <TableCell>
-                  <div>Price</div>
+                  <div>{t("Price")}</div>
                 </TableCell>
                 <TableCell>
-                  <div>Stock</div>
+                  <div>{t("Stock")}</div>
                 </TableCell>
                 <TableCell>
-                  <div>Categoy name</div>
+                  <div>{t("CategoyName")}</div>
                 </TableCell>
                 <TableCell>
-                  <div>In stock</div>
+                  <div>{t("InStock")}</div>
                 </TableCell>
                 <TableCell align="right">
-                  <div>Action</div>
+                  <div>{t("Action")}</div>
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -200,7 +202,7 @@ export default function ProductListPage() {
                             variant="outlined"
                             startIcon={<EditIcon></EditIcon>}
                           >
-                            Edit
+                            {t("Edit")}
                           </Button>
                           <Button
                             onClick={() => handleDeleteProduct(item.id)}
@@ -209,7 +211,7 @@ export default function ProductListPage() {
                             color="error"
                             startIcon={<DeleteIcon></DeleteIcon>}
                           >
-                            Delete
+                            {t("Delete")}
                           </Button>
                         </Stack>
                       </TableCell>

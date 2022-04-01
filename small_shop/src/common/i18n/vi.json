@@ -1,0 +1,20 @@
+{
+  "translation": {
+    "Category": "Danh mục",
+    "Products": "Sản phẩm",
+    "ProductPage": "Trang sản phẩm",
+    "Dashboard": "Bảng điều khiển",
+    "ProductName": "Tên sản phẩm",
+    "ID": "ID",
+    "Image": "Ảnh",
+    "Name": "Tên",
+    "Price": "Giá",
+    "Stock": "Kho",
+    "CategoyName": "Tên danh mục",
+    "InStock": "Còn trong kho",
+    "Action": "Hành động",
+    "Edit": "Chỉnh sửa",
+    "Delete": "Xóa",
+    "AddNew": "Thêm mới sản phẩm"
+  }
+}

@@ -35,7 +35,12 @@ export default function CategoryListPage() {
 
   useEffect(() => {
     const getData = async () => {
-      const rs = await fetchAuth("GET", "/categories", null);
+      const rs = await fetchAuth("GET", "/categories", null, {
+        params: {
+          _limit: 10,
+          page: 1,
+        },
+      });
 
       if (rs.status === 200) {
         setCategories(rs.data);

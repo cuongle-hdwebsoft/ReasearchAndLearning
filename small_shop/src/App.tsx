@@ -3,6 +3,7 @@ import React, { Suspense, useState } from "react";
 import { Provider } from "react-redux";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import { SnackbarProvider } from "notistack";
+import { useTranslation } from "react-i18next";
 
 import { AppContext } from "./common/context/app";
 import MainLayout from "./common/hocs/MainLayout";
@@ -27,6 +28,8 @@ const ProductListPage = React.lazy(() => import("./pages/ProductListPage"));
 const LoginPage = React.lazy(() => import("./pages/LoginPage"));
 const ProductItemPage = React.lazy(() => import("./pages/ProductItemPage"));
 
+import "./common/i18n/index";
+
 const defaultTheme = (themeMode: "light" | "dark") =>
   createTheme({
     palette: {
@@ -37,6 +40,18 @@ const defaultTheme = (themeMode: "light" | "dark") =>
 function App() {
   const [theme, setTheme] = useState<"light" | "dark">("dark");
   const [isLogin, setIsLogin] = useState<boolean>(false);
+  const [lang, setLang] = useState<"vi" | "en">("en");
+  const { i18n } = useTranslation();
+
+  const toggleLang = () => {
+    if (lang === "vi") {
+      i18n.changeLanguage("en");
+      setLang("en");
+    } else {
+      i18n.changeLanguage("vi");
+      setLang("vi");
+    }
+  };
 
   const toggleTheme = () => {
     if (theme === "light") {
@@ -48,7 +63,7 @@ function App() {
 
   return (
     <Provider store={store}>
-      <AppContext.Provider value={{ theme, toggleTheme, isLogin, setIsLogin }}>
+      <AppContext.Provider value={{ theme, toggleTheme, isLogin, setIsLogin, toggleLang, lang }}>
         <ThemeProvider theme={defaultTheme(theme)}>
           <SnackbarProvider
             maxSnack={5}

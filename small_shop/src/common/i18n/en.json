@@ -1,0 +1,20 @@
+{
+  "translation": {
+    "Category": "Category",
+    "Products": "Products",
+    "ProductPage": "Product page",
+    "Dashboard": "Dashboard",
+    "ProductName": "Product name",
+    "ID": "ID",
+    "Image": "Image",
+    "Name": "Name",
+    "Price": "Price",
+    "Stock": "Stock",
+    "CategoyName": "Categoy name",
+    "InStock": "In stock",
+    "Action": "Action",
+    "Edit": "Edit",
+    "Delete": "Delete",
+    "AddNew": "Add new product"
+  }
+}
