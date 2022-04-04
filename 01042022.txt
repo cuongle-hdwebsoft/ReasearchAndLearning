@@ -1,0 +1,23 @@
+1/4/2022
+Hook
+- Lấy url xuống -> parameter dạng generic tùy theo page và màn hình. để lấy các giá trị hiện tại limit, page, filter...
+- Context
+	- Độc lập với Redux, qua app khác có Redux thì nó vẫn chạy ổn 
+	- Dùng cho Auth, Lang, Theme là khá tốt. Mặc dù render toàn bộ nhưng nó không quá nhiều trong lúc sử dụng => khá là An toàn và sử dụng tốt.
+- Có nên luôn add biến vào dependencies theo React hay không? useEffect không lúc nào 100% cũng kêu mình thêm vào dependencies là đúng, chỉ cần watch cái nào mình cần theo nhu cầu. Xác định logic của mình có cần chạy lại hàm đó khi mà biến đó thay đổi hay không?
+- Nếu có quá nhiều useEffect thì sẽ move vào Custom Hook => Code clean, chạy vẫn y chang.
+- Có 1 thư viện để dùng với i18n...
+- Có thể lưu các filter trên redux, còn products thì mình dùng custom hook lắng nghe filter để query và lấy dữ liệu về bằng React Query sau đó hiển thị lên mà không
+- Không bọc Public utils, code bọc không dc ổn
+- Modal của MUI đã có Hook để dùng rồi không cần sử dụng cái Provider Context kia, có thể tạo 1 Hook?? làm s
+- Handle ngoài cái data đẩy vào saga, saga đẩy vào là clear
+- Viết 1 server handle cái error products thay vì gọi fetch như kia rườm rà để handle error
+- Extract các hàm Auth từ Provider để các Component con sử dụng.
+- Viết độc lập Component với API để flexible
+- Replace url liền luôn
+- Refector code
+- useDeboucing của BM
+- Delete all problem solved BE
+
+https://react-table.tanstack.com/docs/api/useTable
+https://www.npmjs.com/package/i18n-extract
