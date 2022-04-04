@@ -15,6 +15,7 @@
     "Action": "Action",
     "Edit": "Edit",
     "Delete": "Delete",
-    "AddNew": "Add new product"
+    "AddNew": "Add new product",
+    "Items": "items"
   }
 }

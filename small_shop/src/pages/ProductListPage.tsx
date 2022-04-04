@@ -190,7 +190,9 @@ export default function ProductListPage() {
                         <div>{item.price}</div>
                       </TableCell>
                       <TableCell>
-                        <div>{item.amount} (items)</div>
+                        <div>
+                          {item.amount} ({t("Items")})
+                        </div>
                       </TableCell>
                       <TableCell>
                         <div>{item.categoryName}</div>
