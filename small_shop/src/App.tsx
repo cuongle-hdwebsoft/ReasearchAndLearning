@@ -29,6 +29,7 @@ const LoginPage = React.lazy(() => import("./pages/LoginPage"));
 const ProductItemPage = React.lazy(() => import("./pages/ProductItemPage"));
 
 import "./common/i18n/index";
+import AuthContextProvider, { handler } from "./common/hocs/AuthContextProvider";
 
 const defaultTheme = (themeMode: "light" | "dark") =>
   createTheme({
@@ -39,7 +40,6 @@ const defaultTheme = (themeMode: "light" | "dark") =>
 
 function App() {
   const [theme, setTheme] = useState<"light" | "dark">("dark");
-  const [isLogin, setIsLogin] = useState<boolean>(false);
   const [lang, setLang] = useState<"vi" | "en">("en");
   const { i18n } = useTranslation();
 
@@ -63,53 +63,54 @@ function App() {
 
   return (
     <Provider store={store}>
-      <AppContext.Provider value={{ theme, toggleTheme, isLogin, setIsLogin, toggleLang, lang }}>
-        <ThemeProvider theme={defaultTheme(theme)}>
-          <SnackbarProvider
-            maxSnack={5}
-            autoHideDuration={1000}
-            anchorOrigin={{ horizontal: "center", vertical: "top" }}
-          >
-            <BrowserRouter>
-              <ModalProvider>
-                <PublicUtils>
-                  <Suspense fallback={<Loading></Loading>}>
-                    <Switch>
-                      <AuthRoutes path="/">
-                        <Route path="/" exact={true}>
-                          <MainLayout>
-                            <DashboardPage></DashboardPage>
-                          </MainLayout>
-                        </Route>
-                        <Route path="/login" exact={true}>
-                          <LoginPage></LoginPage>
-                        </Route>
-                        <Route path="/category" exact={true}>
-                          <MainLayout>
-                            <CategoryListPage></CategoryListPage>
-                          </MainLayout>
-                        </Route>
-                        <Route path="/products" exact={true}>
-                          <MainLayout>
-                            <ProductListPage></ProductListPage>
-                          </MainLayout>
-                        </Route>
-                        <Route path="/products/:id" exact={true}>
-                          <MainLayout>
-                            <ProductItemPage></ProductItemPage>
-                          </MainLayout>
-                        </Route>
-                        <Route path="*">
-                          <NotFound></NotFound>
-                        </Route>
-                      </AuthRoutes>
-                    </Switch>
-                  </Suspense>
-                </PublicUtils>
-              </ModalProvider>
-            </BrowserRouter>
-          </SnackbarProvider>
-        </ThemeProvider>
+      <AppContext.Provider value={{ theme, toggleTheme, toggleLang, lang }}>
+        <AuthContextProvider handlers={handler}>
+          <ThemeProvider theme={defaultTheme(theme)}>
+            <SnackbarProvider
+              maxSnack={5}
+              autoHideDuration={1000}
+              anchorOrigin={{ horizontal: "center", vertical: "top" }}
+            >
+              <BrowserRouter>
+                <ModalProvider>
+                  <PublicUtils>
+                    <Suspense fallback={<Loading></Loading>}>
+                      <Switch>
+                        <AuthRoutes path="/" loginPage={<LoginPage></LoginPage>}>
+                          <Route path="/" exact={true}>
+                            <MainLayout>
+                              <DashboardPage></DashboardPage>
+                            </MainLayout>
+                          </Route>
+                          <Route path="/category" exact={true}>
+                            <MainLayout>
+                              <CategoryListPage></CategoryListPage>
+                            </MainLayout>
+                          </Route>
+                          <Route path="/products" exact={true}>
+                            <MainLayout>
+                              <ProductListPage></ProductListPage>
+                            </MainLayout>
+                          </Route>
+                          <Route path="/products/:id" exact={true}>
+                            <MainLayout>
+                              <ProductItemPage></ProductItemPage>
+                            </MainLayout>
+                          </Route>
+                          <Route path="*">
+                            <MainLayout>
+                              <NotFound></NotFound>
+                            </MainLayout>
+                          </Route>
+                        </AuthRoutes>
+                      </Switch>
+                    </Suspense>
+                  </PublicUtils>
+                </ModalProvider>
+              </BrowserRouter>
+            </SnackbarProvider>
+          </ThemeProvider>
+        </AuthContextProvider>
       </AppContext.Provider>
     </Provider>
   );

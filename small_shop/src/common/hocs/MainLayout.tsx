@@ -26,7 +26,6 @@ import logo from "../../logo.svg";
 import { AppContext } from "../context/app";
 import { useHistory } from "react-router-dom";
 import { routes } from "../../routes";
-import { useAppContextHook } from "../../modules/app/hook";
 import { useSnackbar } from "notistack";
 import { useTranslation } from "react-i18next";
 
@@ -35,6 +34,7 @@ import Loading from "../components/Loading";
 
 import vi from "../images/vi.png";
 import en from "../images/en.png";
+import useAuthContext from "../hooks/useAuthContext";
 
 const appBarHeight = "66px";
 const drawerWidth = "200px";
@@ -45,7 +45,7 @@ interface IProps {
 
 export default function MainLayout(props: IProps) {
   const history = useHistory();
-  const appContext = useAppContextHook();
+  const { setIsLogin } = useAuthContext();
   const { enqueueSnackbar } = useSnackbar();
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const { t } = useTranslation();
@@ -74,7 +74,7 @@ export default function MainLayout(props: IProps) {
     ));
 
   const handleLogout = () => {
-    appContext.setIsLogin(false);
+    setIsLogin(false);
     localStorage.clear();
     history.push("/login");
     enqueueSnackbar("Logout successful", { variant: "success" });
@@ -162,7 +162,6 @@ export default function MainLayout(props: IProps) {
               </ListItemIcon>
               My profile
             </MenuItem>
-            <MenuItem></MenuItem>
             <MenuItem onClick={handleLogout}>
               <ListItemIcon>
                 <PowerSettingsNewIcon></PowerSettingsNewIcon>

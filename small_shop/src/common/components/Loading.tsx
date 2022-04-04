@@ -8,12 +8,12 @@ const WrapBody = styled.div<{ bg: string }>`
   left: 0;
   width: 100vw;
   height: 100vh;
-
+  z-index: 99;
   display: flex;
   justify-content: center;
   align-items: center;
-
   background-color: ${(props) => props.bg};
+  opacity: 0.9;
 `;
 
 export default function Loading() {
