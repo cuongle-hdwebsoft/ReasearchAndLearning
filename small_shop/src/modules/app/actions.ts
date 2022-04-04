@@ -6,14 +6,14 @@ import {
   WATCH_NOTIFICATION_SAGA,
 } from "./constant";
 
-export const errorAction = (payload: IMessage): INotificationAction => {
+export const errorActionSaga = (payload: IMessage): INotificationAction => {
   return {
     type: WATCH_NOTIFICATION_SAGA,
     payload,
   };
 };
 
-export const historyAction = (payload: string): IWatchHistoryAction => {
+export const historyActionSaga = (payload: string): IWatchHistoryAction => {
   return {
     type: WATCH_HISTORY_SAGA,
     payload: payload,

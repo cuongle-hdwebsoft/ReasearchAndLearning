@@ -31,7 +31,7 @@ import { useTranslation, Trans } from "react-i18next";
 
 import CardHeaderPage from "../common/components/CardHeaderPage";
 import { useProductReducerHook } from "../modules/products/hook";
-import { deleteProduct, loadProducts } from "../modules/products/actions";
+import { deleteProductActionSaga, loadProductsActionSaga } from "../modules/products/actions";
 import FilterProducts from "../common/components/FilterProducts";
 import FakeTableLoading from "../common/components/FakeTableLoading";
 import { ModalCustomContext } from "../common/components/ModalProvider";
@@ -46,15 +46,15 @@ export default function ProductListPage() {
 
   useEffect(() => {
     const { query } = queryString.parseUrl(window.location.href);
-    dispatch(loadProducts(query));
+    dispatch(loadProductsActionSaga(query));
   }, []);
 
   const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, nextPage: number) => {
-    dispatch(loadProducts({ page: nextPage, limit: limit }));
+    dispatch(loadProductsActionSaga({ page: nextPage, limit: limit }));
   };
 
   const handleChangeRowPerPage = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    dispatch(loadProducts({ page: 0, limit: parseInt(event.target.value) }));
+    dispatch(loadProductsActionSaga({ page: 0, limit: parseInt(event.target.value) }));
   };
 
   const handleDeleteProduct = (id: string | number) => {
@@ -75,7 +75,7 @@ export default function ProductListPage() {
           </Button>
           <Button
             onClick={() => {
-              dispatch(deleteProduct(String(id)));
+              dispatch(deleteProductActionSaga(String(id)));
               modalContext.close();
             }}
             variant="contained"

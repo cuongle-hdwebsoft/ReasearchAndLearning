@@ -19,14 +19,14 @@ import {
   DELETE_PRODUCT_FAIL_ACTION,
 } from "./constant";
 
-export const createProduct = (product: IFormProduct): ICreateProductAction => {
+export const createProductActionSaga = (product: IFormProduct): ICreateProductAction => {
   return {
     type: CREATE_PRODUCT_ACTION,
     payload: product,
   };
 };
 
-export const createProductSuccess = (): INotificationAction => {
+export const createProductSuccessActionSaga = (): INotificationAction => {
   return {
     type: CREATE_PRODUCT_SUCCESS_ACTION,
     payload: {
@@ -36,7 +36,7 @@ export const createProductSuccess = (): INotificationAction => {
   };
 };
 
-export const createProductFail = (): INotificationAction => {
+export const createProductFailActionSaga = (): INotificationAction => {
   return {
     type: CREATE_PRODUCT_FAIL_ACTION,
     payload: {
@@ -46,14 +46,14 @@ export const createProductFail = (): INotificationAction => {
   };
 };
 
-export const loadProducts = (params: ILoadProductParams) => {
+export const loadProductsActionSaga = (params: ILoadProductParams) => {
   return {
     type: LOAD_PRODUCTS,
     payload: params,
   };
 };
 
-export const loadProductsSuccess = (): INotificationAction => {
+export const loadProductsSuccessActionSaga = (): INotificationAction => {
   return {
     type: LOAD_PRODUCT_SUCCESS,
     payload: {
@@ -63,7 +63,7 @@ export const loadProductsSuccess = (): INotificationAction => {
   };
 };
 
-export const loadProductsFail = (): INotificationAction => {
+export const loadProductsFailActionSaga = (): INotificationAction => {
   return {
     type: LOAD_PRODUCT_FAIL,
     payload: {
@@ -73,14 +73,14 @@ export const loadProductsFail = (): INotificationAction => {
   };
 };
 
-export const editProduct = (product: IFormProduct & { id: string | number }): IEditProductAction => {
+export const editProductActionSaga = (product: IFormProduct & { id: string | number }): IEditProductAction => {
   return {
     type: EDIT_PRODUCT_ACTION,
     payload: product,
   };
 };
 
-export const editProductSuccess = (): INotificationAction => {
+export const editProductSuccessActionSaga = (): INotificationAction => {
   return {
     type: EDIT_PRODUCT_SUCCESS_ACTION,
     payload: {
@@ -90,7 +90,7 @@ export const editProductSuccess = (): INotificationAction => {
   };
 };
 
-export const editProductFail = (): INotificationAction => {
+export const editProductFailActionSaga = (): INotificationAction => {
   return {
     type: EDIT_PRODUCT_FAIL_ACTION,
     payload: {
@@ -100,7 +100,7 @@ export const editProductFail = (): INotificationAction => {
   };
 };
 
-export const deleteProduct = (idProduct: string): IDeleteProductAction => {
+export const deleteProductActionSaga = (idProduct: string): IDeleteProductAction => {
   return {
     type: DELETE_PRODUCT_ACTION,
     payload: {
@@ -109,7 +109,7 @@ export const deleteProduct = (idProduct: string): IDeleteProductAction => {
   };
 };
 
-export const deleteProductSuccess = (): INotificationAction => {
+export const deleteProductSuccessActionSaga = (): INotificationAction => {
   return {
     type: DELETE_PRODUCT_SUCCESS_ACTION,
     payload: {
@@ -119,7 +119,7 @@ export const deleteProductSuccess = (): INotificationAction => {
   };
 };
 
-export const deleteProductFail = (): INotificationAction => {
+export const deleteProductFailActionSaga = (): INotificationAction => {
   return {
     type: DELETE_PRODUCT_FAIL_ACTION,
     payload: {

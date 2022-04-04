@@ -13,9 +13,9 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { ICategory, IFormProduct } from "../modules/products/constant";
 import { useDispatch } from "react-redux";
-import { createProduct, editProduct } from "../modules/products/actions";
+import { createProductActionSaga, editProductActionSaga } from "../modules/products/actions";
 import { fetchAuth } from "../common/utils/fetch";
-import { errorAction } from "../modules/app/actions";
+import { errorActionSaga } from "../modules/app/actions";
 import { AxiosResponse } from "axios";
 
 const schema = yup.object({
@@ -53,9 +53,9 @@ export default function ProductItemPage() {
 
   const onSubmit = (value: IFormProduct) => {
     if (id == "null") {
-      dispatch(createProduct(value));
+      dispatch(createProductActionSaga(value));
     } else {
-      dispatch(editProduct({ ...value, id: params.id }));
+      dispatch(editProductActionSaga({ ...value, id: params.id }));
     }
   };
 
@@ -67,10 +67,10 @@ export default function ProductItemPage() {
         if (rs.status === 200) {
           setCategories(rs.data);
         } else {
-          dispatch(errorAction({ type: "error", message: "Fail to load categories" }));
+          dispatch(errorActionSaga({ type: "error", message: "Fail to load categories" }));
         }
       } catch (error) {
-        dispatch(errorAction({ type: "error", message: "Something wrong" }));
+        dispatch(errorActionSaga({ type: "error", message: "Something wrong" }));
       }
     };
 
@@ -83,11 +83,11 @@ export default function ProductItemPage() {
             setValue(key, rs.data[key]);
           });
         } else {
-          dispatch(errorAction({ type: "error", message: "Fail to load product" }));
+          dispatch(errorActionSaga({ type: "error", message: "Fail to load product" }));
           history.goBack();
         }
       } catch (error) {
-        dispatch(errorAction({ type: "error", message: "Something wrong" }));
+        dispatch(errorActionSaga({ type: "error", message: "Something wrong" }));
       }
     };
 

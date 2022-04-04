@@ -1,16 +1,16 @@
 import { AxiosResponse } from "axios";
 import { all, call, delay, put, select, takeEvery, takeLatest } from "redux-saga/effects";
 import { fetchAuth } from "../../common/utils/fetch";
-import { errorAction, historyAction } from "../app/actions";
+import { errorActionSaga, historyActionSaga } from "../app/actions";
 import { watchNotification } from "../app/saga";
 import {
-  createProductFail,
-  createProductSuccess,
-  deleteProductFail,
-  deleteProductSuccess,
-  editProductFail,
-  editProductSuccess,
-  loadProductsFail,
+  createProductFailActionSaga,
+  createProductSuccessActionSaga,
+  deleteProductFailActionSaga,
+  deleteProductSuccessActionSaga,
+  editProductFailActionSaga,
+  editProductSuccessActionSaga,
+  loadProductsFailActionSaga,
 } from "./actions";
 import {
   IProduct,
@@ -34,7 +34,7 @@ import {
   IDeleteProductAction,
 } from "./constant";
 import { loadFilters, loadProducts, setIsLoading } from "./reducer";
-import { loadProducts as loadProductsAction } from "./actions";
+import { loadProductsActionSaga } from "./actions";
 import queryString from "query-string";
 import { RootState } from "../hook";
 
@@ -43,13 +43,13 @@ export function* createProductSaga(action: ICreateProductAction) {
     const result: AxiosResponse<IProduct> = yield call(fetchAuth, "POST", "/products", action.payload);
 
     if (result && result.status === 201) {
-      yield put(createProductSuccess());
-      yield put(historyAction("/products"));
+      yield put(createProductSuccessActionSaga());
+      yield put(historyActionSaga("/products"));
     } else {
-      yield put(createProductFail());
+      yield put(createProductFailActionSaga());
     }
   } catch (error) {
-    yield put(errorAction({ type: "error", message: "Something wrong" }));
+    yield put(errorActionSaga({ type: "error", message: "Something wrong" }));
   }
 }
 
@@ -63,13 +63,13 @@ export function* editProductSaga(action: IEditProductAction) {
     );
 
     if (result && result.status === 200) {
-      yield put(editProductSuccess());
-      yield put(historyAction("/products"));
+      yield put(editProductSuccessActionSaga());
+      yield put(historyActionSaga("/products"));
     } else {
-      yield put(editProductFail());
+      yield put(editProductFailActionSaga());
     }
   } catch (error) {
-    yield put(errorAction({ type: "error", message: "Something wrong" }));
+    yield put(errorActionSaga({ type: "error", message: "Something wrong" }));
   }
 }
 
@@ -78,12 +78,12 @@ export function* deleteProductSaga(action: IDeleteProductAction) {
     const result: AxiosResponse<IProduct> = yield call(fetchAuth, "DELETE", "/products/" + action.payload.idProduct);
 
     if (result.status === 200) {
-      yield all([put(deleteProductSuccess()), put(loadProductsAction({}))]);
+      yield all([put(deleteProductSuccessActionSaga()), put(loadProductsActionSaga({}))]);
     } else {
-      yield put(deleteProductFail());
+      yield put(deleteProductFailActionSaga());
     }
   } catch (error) {
-    yield put(errorAction({ type: "error", message: "Something wrong" }));
+    yield put(errorActionSaga({ type: "error", message: "Something wrong" }));
   }
 }
 
@@ -100,20 +100,14 @@ export function* loadProductsSaga(action: ILoadProductAction) {
       ...reducerProduct.filter,
       _limit: limit,
       _page: page + 1,
+      ...action.payload,
     };
 
-    const keys: (keyof IFilterProduct)[] = ["productName", "categoryName"];
-    for (let i = 0; i < keys.length; i++) {
-      const key = keys[i];
-
-      if (action.payload[key]) {
-        params[key] = action.payload[key];
-      }
-
-      if (action.payload[key] === "") {
+    Object.keys(params).forEach((key) => {
+      if (params[key] === "") {
         delete params[key];
       }
-    }
+    });
 
     yield put(setIsLoading(true));
     yield put(loadFilters({ productName: params.productName, categoryName: params.categoryName }));
@@ -150,12 +144,12 @@ export function* loadProductsSaga(action: ILoadProductAction) {
         ),
       );
     } else {
-      yield put(loadProductsFail());
+      yield put(loadProductsFailActionSaga());
     }
 
     yield put(setIsLoading(false));
   } catch (error) {
-    yield put(errorAction({ type: "error", message: "Something wrong" }));
+    yield put(errorActionSaga({ type: "error", message: "Something wrong" }));
   }
 }
 

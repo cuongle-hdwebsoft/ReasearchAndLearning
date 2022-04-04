@@ -1,13 +1,13 @@
 import { useProductReducerHook } from "../../modules/products/hook";
 import { useDispatch } from "react-redux";
 import { ICategory, IFilterProduct } from "../../modules/products/constant";
-import { loadProducts } from "../../modules/products/actions";
+import { loadProductsActionSaga } from "../../modules/products/actions";
 import { useEffect, useState } from "react";
 import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Stack, TextField } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { fetchAuth } from "../utils/fetch";
 import { AxiosResponse } from "axios";
-import { errorAction } from "../../modules/app/actions";
+import { errorActionSaga } from "../../modules/app/actions";
 
 export default function FilterProducts() {
   const { filter } = useProductReducerHook();
@@ -17,7 +17,7 @@ export default function FilterProducts() {
 
   const handleChangeInput = (key: keyof IFilterProduct) => (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(
-      loadProducts({
+      loadProductsActionSaga({
         [key]: e.target.value,
       }),
     );
@@ -25,7 +25,7 @@ export default function FilterProducts() {
 
   const handleChangeSelect = (key: keyof IFilterProduct) => (e: SelectChangeEvent<string>) => {
     dispatch(
-      loadProducts({
+      loadProductsActionSaga({
         [key]: e.target.value,
       }),
     );
@@ -39,10 +39,10 @@ export default function FilterProducts() {
         if (rs.status === 200) {
           setCategories(rs.data);
         } else {
-          dispatch(errorAction({ type: "error", message: "Fail to load categories" }));
+          dispatch(errorActionSaga({ type: "error", message: "Fail to load categories" }));
         }
       } catch (error) {
-        dispatch(errorAction({ type: "error", message: "Something wrong" }));
+        dispatch(errorActionSaga({ type: "error", message: "Something wrong" }));
       }
     };
 
