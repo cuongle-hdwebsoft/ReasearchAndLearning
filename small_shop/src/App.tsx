@@ -15,6 +15,7 @@ import DashboardPage from "./pages/DashboardPage";
 import NotFound from "./pages/NotFound";
 import ProductListPage from "./pages/ProductListPage";
 import LoginPage from "./pages/LoginPage";
+import AppProvider from "./common/hocs/AppProvider";
 
 const defaultTheme = (themeMode: "light" | "dark") =>
   createTheme({
@@ -39,7 +40,7 @@ function App() {
 
   return (
     <Provider store={store}>
-      <AppContext.Provider value={{ theme, toggleTheme, isLogin, setIsLogin }}>
+      <AppProvider value={{ theme, toggleTheme, isLogin, setIsLogin }}>
         <ThemeProvider theme={defaultTheme(theme)}>
           <SnackbarProvider maxSnack={5}>
             <BrowserRouter>
@@ -71,7 +72,7 @@ function App() {
             </BrowserRouter>
           </SnackbarProvider>
         </ThemeProvider>
-      </AppContext.Provider>
+      </AppProvider>
     </Provider>
   );
 }

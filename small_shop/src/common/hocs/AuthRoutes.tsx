@@ -16,47 +16,42 @@ export default function AuthRoutes(props: IProps) {
   const t = useRef<number>();
 
   useEffect(() => {
-    try {
-      const getData = async () => {
-        await new Promise((resolve) => {
-          t.current = window.setTimeout(() => {
-            const accessToken = localStorage.getItem("accessToken");
-            const isLogin = localStorage.getItem("isLogin");
-            console.log("check auth", accessToken, isLogin);
-            const isValid = true;
+    const getData = async () => {
+      let accessToken;
+      let isLogin;
+      let isValid;
 
-            if (!isLogin || !accessToken) {
-              localStorage.clear();
-              history.push("/login");
-              return resolve(null);
-            }
+      await new Promise((resolve) =>
+        setTimeout(() => {
+          accessToken = localStorage.getItem("accessToken");
+          isLogin = localStorage.getItem("isLogin");
+          isValid = true;
+          resolve(0);
+        }, 3000),
+      );
 
-            if (!isValid) {
-              localStorage.clear();
-              history.push("/login");
-              return resolve(null);
-            }
+      if (!isLogin || !accessToken || !isValid) {
+        localStorage.clear();
+        history.push("/login");
+      }
 
-            appContext.setIsLogin(true);
-            setIsFetchingAuth(false);
-            resolve(0);
-          }, 500);
-        });
-      };
+      appContext.setIsLogin(true);
+      console.log(1);
+      setIsFetchingAuth(false);
+      console.log(2);
+    };
 
-      getData();
+    getData();
 
-      return () => {
-        if (t.current) {
-          clearTimeout(t.current);
-        }
-      };
-    } catch (error) {
-      enqueueSnackbar("Something wrong");
-    }
+    return () => {
+      console.log(3);
+      if (t.current) {
+        clearTimeout(t.current);
+      }
+    };
   }, []);
 
-  // console.log("Child render", isFetchingAuth, appContext.isLogin);
+  console.log("Child render isFetchingAuth, isLogin", isFetchingAuth, appContext.isLogin);
 
   if (isFetchingAuth) {
     return null;
