@@ -1,7 +1,7 @@
 /** @jsxImportSource @emotion/react */
 import { Card, Typography, Button, Stack, useTheme, Breadcrumbs } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import CustomTextInput from "../common/components/CustomTextInput";
 import { css } from "@emotion/react";
 import CustomRadio from "../common/components/CustomRadio";
@@ -28,7 +28,7 @@ const schema = yup.object({
 });
 
 export default function ProductItemPage() {
-  const { control, handleSubmit, setValue } = useForm<IFormProduct>({
+  const methods = useForm<IFormProduct>({
     defaultValues: {
       imageUrl: "",
       productName: "",
@@ -80,7 +80,7 @@ export default function ProductItemPage() {
 
         if (rs.status === 200) {
           Object.keys(rs.data).forEach((key: any) => {
-            setValue(key, rs.data[key]);
+            methods.setValue(key, rs.data[key]);
           });
         } else {
           dispatch(errorActionSaga({ type: "error", message: "Fail to load product" }));
@@ -154,79 +154,75 @@ export default function ProductItemPage() {
           </Breadcrumbs>
         </Stack>
       </CardHeaderPage>
-      <form
-        onSubmit={handleSubmit(onSubmit)}
-        css={css`
-          width: 500px;
-        `}
-      >
-        <div className="form-item">
-          <CustomTextInput
-            muiProps={{ style: { width: 500 }, size: "small", InputLabelProps: { shrink: true } }}
-            label="Product image"
-            control={control}
-            name="imageUrl"
-          ></CustomTextInput>
-        </div>
+      <FormProvider {...methods}>
+        <form
+          onSubmit={methods.handleSubmit(onSubmit)}
+          css={css`
+            width: 500px;
+          `}
+        >
+          <div className="form-item">
+            <CustomTextInput
+              muiProps={{ style: { width: 500 }, size: "small", InputLabelProps: { shrink: true } }}
+              label="Product image"
+              name="imageUrl"
+            ></CustomTextInput>
+          </div>
 
-        <div className="form-item">
-          <CustomTextInput
-            muiProps={{ style: { width: 500 }, size: "small", InputLabelProps: { shrink: true } }}
-            label="Product name"
-            control={control}
-            name="productName"
-          ></CustomTextInput>
-        </div>
+          <div className="form-item">
+            <CustomTextInput
+              muiProps={{ style: { width: 500 }, size: "small", InputLabelProps: { shrink: true } }}
+              label="Product name"
+              name="productName"
+            ></CustomTextInput>
+          </div>
 
-        <div className="form-item">
-          <CustomTextInput
-            muiProps={{ style: { width: 500 }, size: "small", InputLabelProps: { shrink: true }, type: "number" }}
-            label="Product price"
-            control={control}
-            name="price"
-          ></CustomTextInput>
-        </div>
+          <div className="form-item">
+            <CustomTextInput
+              muiProps={{ style: { width: 500 }, size: "small", InputLabelProps: { shrink: true }, type: "number" }}
+              label="Product price"
+              name="price"
+            ></CustomTextInput>
+          </div>
 
-        <div className="form-item">
-          <CustomRadio
-            items={[
-              { name: "Yes", value: "true" },
-              { name: "No", value: "false" },
-            ]}
-            label="In stock"
-            control={control}
-            name="inStock"
-          ></CustomRadio>
-        </div>
+          <div className="form-item">
+            <CustomRadio
+              items={[
+                { name: "Yes", value: "true" },
+                { name: "No", value: "false" },
+              ]}
+              label="In stock"
+              name="inStock"
+            ></CustomRadio>
+          </div>
 
-        <div className="form-item">
-          <CustomTextInput
-            muiProps={{ style: { width: 500 }, size: "small", InputLabelProps: { shrink: true }, type: "number" }}
-            label="Amount"
-            control={control}
-            name="amount"
-          ></CustomTextInput>
-        </div>
+          <div className="form-item">
+            <CustomTextInput
+              muiProps={{ style: { width: 500 }, size: "small", InputLabelProps: { shrink: true }, type: "number" }}
+              label="Amount"
+              name="amount"
+            ></CustomTextInput>
+          </div>
 
-        <div className="form-item">
-          <CustomSelect
-            items={categories.map((c) => ({ value: c.value, name: c.name }))}
-            label="Category"
-            name="categoryName"
-            control={control}
-            muiProps={{ sx: { minWidth: 500 } }}
-          ></CustomSelect>
-        </div>
+          <div className="form-item">
+            <CustomSelect
+              items={categories.map((c) => ({ value: c.value, name: c.name }))}
+              label="Category"
+              name="categoryName"
+              muiProps={{ sx: { minWidth: 500 } }}
+            ></CustomSelect>
+          </div>
 
-        <Stack direction={"row"} justifyContent="space-between">
-          <Button onClick={handleCancel} color="error" variant="outlined" type="button">
-            cancel
-          </Button>
-          <Button variant="outlined" type="submit">
-            submit
-          </Button>
-        </Stack>
-      </form>
+          <Stack direction={"row"} justifyContent="space-between">
+            <Button onClick={handleCancel} color="error" variant="outlined" type="button">
+              cancel
+            </Button>
+            <Button variant="outlined" type="submit">
+              submit
+            </Button>
+          </Stack>
+        </form>
+      </FormProvider>
     </Card>
   );
 }

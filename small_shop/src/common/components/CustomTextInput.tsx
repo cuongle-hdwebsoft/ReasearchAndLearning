@@ -1,15 +1,15 @@
-import { Controller } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 import { TextField, TextFieldProps } from "@mui/material";
 
 interface ICustomTextInput {
-  control: any;
   name: string;
   label: string;
   muiProps?: TextFieldProps;
 }
 
 export default function CustomTextInput(props: ICustomTextInput) {
-  const { control, name, label, muiProps } = props;
+  const { name, label, muiProps } = props;
+  const { control } = useFormContext();
 
   return (
     <Controller

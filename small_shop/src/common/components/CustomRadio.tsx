@@ -1,8 +1,7 @@
 import { FormControlLabel, FormHelperText, InputLabel, Radio, RadioGroup, RadioProps } from "@mui/material";
-import { Controller } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 
 interface ICustomRadio {
-  control: any;
   name: string;
   label: string;
   muiProps?: RadioProps;
@@ -10,7 +9,8 @@ interface ICustomRadio {
 }
 
 export default function CustomRadio(props: ICustomRadio) {
-  const { control, muiProps, name, label, items } = props;
+  const { muiProps, name, label, items } = props;
+  const { control } = useFormContext();
 
   return (
     <Controller

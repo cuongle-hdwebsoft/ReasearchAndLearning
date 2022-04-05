@@ -1,8 +1,7 @@
 import { FormControl, FormHelperText, InputLabel, MenuItem, Select, SelectProps } from "@mui/material";
-import { Controller } from "react-hook-form";
+import { Controller, useFormContext } from "react-hook-form";
 
 interface ICustomSelect {
-  control: any;
   name: string;
   label: string;
   muiProps?: SelectProps;
@@ -10,7 +9,8 @@ interface ICustomSelect {
 }
 
 export default function CustomSelect(props: ICustomSelect) {
-  const { control, muiProps, name, label, items } = props;
+  const { muiProps, name, label, items } = props;
+  const { control } = useFormContext();
 
   return (
     <Controller
