@@ -1,4 +1,4 @@
-import { all, call, delay, put, select, takeEvery, takeLatest } from "redux-saga/effects";
+import { all, call, delay, put, takeEvery, takeLatest } from "redux-saga/effects";
 import { errorActionSaga, historyActionSaga } from "../app/actions";
 import { watchNotification } from "../app/saga";
 import {

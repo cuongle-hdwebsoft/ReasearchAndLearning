@@ -25,3 +25,4 @@ https://www.npmjs.com/package/i18n-extract
 - Custom Form
 - Custom lại cái useSelector
 - Retouch loadProductSaga
+- Demo lai use custom hook query de coi life cycle render
