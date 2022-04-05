@@ -1,6 +1,4 @@
-import { AxiosResponse } from "axios";
 import { all, call, delay, put, select, takeEvery, takeLatest } from "redux-saga/effects";
-import { fetchAuth } from "../../common/utils/fetch";
 import { errorActionSaga, historyActionSaga } from "../app/actions";
 import { watchNotification } from "../app/saga";
 import {
@@ -13,7 +11,6 @@ import {
   loadProductsFailActionSaga,
 } from "./actions";
 import {
-  IProduct,
   CREATE_PRODUCT_ACTION,
   CREATE_PRODUCT_FAIL_ACTION,
   CREATE_PRODUCT_SUCCESS_ACTION,
