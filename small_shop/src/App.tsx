@@ -21,12 +21,12 @@ import ModalProvider from "./common/components/ModalProvider";
 // import ProductItemPage from "./pages/ProductItemPage";
 // import NotFound from "./pages/NotFound";
 
-const CategoryListPage = React.lazy(() => import("./pages/CategoryListPage"));
-const DashboardPage = React.lazy(() => import("./pages/DashboardPage"));
-const NotFound = React.lazy(() => import("./pages/NotFound"));
-const ProductListPage = React.lazy(() => import("./pages/ProductListPage"));
-const LoginPage = React.lazy(() => import("./pages/LoginPage"));
-const ProductItemPage = React.lazy(() => import("./pages/ProductItemPage"));
+const CategoryListPage = React.lazy(() => import("./modules/category/pages/CategoryListPage"));
+const DashboardPage = React.lazy(() => import("./modules/app/pages/DashboardPage"));
+const NotFound = React.lazy(() => import("./modules/app/pages/NotFound"));
+const ProductListPage = React.lazy(() => import("./modules/products/pages/ProductListPage"));
+const LoginPage = React.lazy(() => import("./modules/login/pages/LoginPage"));
+const ProductItemPage = React.lazy(() => import("./modules/products/pages/ProductItemPage"));
 
 import "./common/i18n/index";
 import AuthContextProvider, { handler } from "./common/hocs/AuthContextProvider";

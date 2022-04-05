@@ -13,11 +13,15 @@ Hook
 - Handle ngoài cái data đẩy vào saga, saga đẩy vào là clear  => done
 - Viết 1 server handle cái error products thay vì gọi fetch như kia rườm rà để handle error  => done
 - Extract các hàm Auth từ Provider để các Component con sử dụng.  => done
-- Viết độc lập Component với API để flexible
+- Viết độc lập Component với API để flexible 
 - Replace url liền luôn  => done
-- Refector code
+- Refector code => progress
 - useDeboucing của BM
 - Delete all problem solved BE
 
 https://react-table.tanstack.com/docs/api/useTable
 https://www.npmjs.com/package/i18n-extract
+
+- Custom Form
+- Custom lại cái useSelector
+- Retouch loadProductSaga

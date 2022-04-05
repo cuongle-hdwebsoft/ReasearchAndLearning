@@ -83,18 +83,7 @@ export function* deleteProductSaga(action: IDeleteProductAction) {
 export function* loadProductsSaga(action: ILoadProductAction) {
   try {
     const reducerProduct: IReducerApp = yield select((state: RootState) => state.APP_PRODUCT);
-    const { page, limit, filter, params, url } = formatData<IFilterProduct>(
-      {
-        limit: reducerProduct.limit,
-        page: reducerProduct.page,
-        filter: reducerProduct.filter,
-      },
-      {
-        limit: action.payload.limit,
-        page: action.payload.page,
-        filter: action.payload.filter,
-      },
-    );
+    const { page, limit, filter, params, url } = formatData<IFilterProduct>(reducerProduct, action.payload);
 
     yield put(setIsLoading(true));
     yield put(loadFilters(filter));

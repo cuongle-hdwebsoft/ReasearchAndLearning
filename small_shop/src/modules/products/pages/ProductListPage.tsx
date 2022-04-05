@@ -28,14 +28,14 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useTranslation, Trans } from "react-i18next";
 
-import CardHeaderPage from "../common/components/CardHeaderPage";
-import { useProductReducerHook } from "../modules/products/hook";
-import { deleteProductActionSaga } from "../modules/products/actions";
-import FilterProducts from "../common/components/FilterProducts";
-import FakeTableLoading from "../common/components/FakeTableLoading";
-import useModal from "../common/hooks/useModal";
-import useTableProduct from "../common/hooks/useTableProduct";
-import useQueryProduct from "../common/hooks/useQueryProduct";
+import CardHeaderPage from "../../../common/components/CardHeaderPage";
+import { useProductReducerHook } from "../hook";
+import { deleteProductActionSaga } from "../actions";
+import FilterProducts from "../../../common/components/FilterProducts";
+import FakeTableLoading from "../../../common/components/FakeTableLoading";
+import useModal from "../../../common/hooks/useModal";
+import useTableProduct from "../../../common/hooks/useTableProduct";
+import useQueryProduct from "../../../common/hooks/useQueryProduct";
 
 export default function ProductListPage() {
   const { t } = useTranslation();

@@ -1,17 +1,7 @@
 import queryString from "query-string";
+import { IBaseFilter, IBaseLoad } from "../../modules/products/constant";
 
-export default function formatData<F>(
-  prevQuery: {
-    page: number;
-    limit: number;
-    filter: F | undefined;
-  },
-  newQuery: {
-    page: number | undefined;
-    limit: number | undefined;
-    filter: F | undefined;
-  },
-) {
+export default function formatData<F>(prevQuery: IBaseLoad<F>, newQuery: IBaseLoad<F>) {
   let page = typeof newQuery.page === "string" ? parseInt(newQuery.page) : newQuery.page;
   let limit = typeof newQuery.limit === "string" ? parseInt(newQuery.limit) : newQuery.limit;
 
@@ -23,7 +13,7 @@ export default function formatData<F>(
     ...newQuery.filter,
   };
 
-  const params: { _limit: number; _page: number; [value: string]: number | string | boolean } = {
+  const params: { _limit: number; _page: number } & IBaseFilter = {
     ...filter,
     _limit: limit,
     _page: page + 1,

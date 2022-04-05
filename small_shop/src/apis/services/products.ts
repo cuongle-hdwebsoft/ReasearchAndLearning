@@ -1,9 +1,9 @@
 import { AxiosResponse } from "axios";
 import { fetchAuth } from "../../common/utils/fetch";
-import { IFormProduct, IProduct } from "../../modules/products/constant";
+import { IBaseFilter, IFormProduct, IProduct } from "../../modules/products/constant";
 
 export default class ProductApi {
-  public static getAll(params: { _limit: number; _page: number; [value: string]: number | string | boolean }) {
+  public static getAll(params: { _limit: number; _page: number } & IBaseFilter) {
     return fetchAuth("GET", "/products", null, {
       params,
     }).then((result: AxiosResponse<IProduct[]>) => {

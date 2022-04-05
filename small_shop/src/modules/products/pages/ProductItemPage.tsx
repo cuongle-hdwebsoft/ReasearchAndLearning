@@ -2,20 +2,20 @@
 import { Card, Typography, Button, Stack, useTheme, Breadcrumbs } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
-import CustomTextInput from "../common/components/CustomTextInput";
+import CustomTextInput from "../../../common/components/CustomTextInput";
 import { css } from "@emotion/react";
-import CustomRadio from "../common/components/CustomRadio";
-import CustomSelect from "../common/components/CustomSelect";
+import CustomRadio from "../../../common/components/CustomRadio";
+import CustomSelect from "../../../common/components/CustomSelect";
 import { Link, useHistory, useParams } from "react-router-dom";
-import CardHeaderPage from "../common/components/CardHeaderPage";
+import CardHeaderPage from "../../../common/components/CardHeaderPage";
 
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ICategory, IFormProduct } from "../modules/products/constant";
+import { ICategory, IFormProduct } from "../constant";
 import { useDispatch } from "react-redux";
-import { createProductActionSaga, editProductActionSaga } from "../modules/products/actions";
-import { fetchAuth } from "../common/utils/fetch";
-import { errorActionSaga } from "../modules/app/actions";
+import { createProductActionSaga, editProductActionSaga } from "../actions";
+import { fetchAuth } from "../../../common/utils/fetch";
+import { errorActionSaga } from "../../app/actions";
 import { AxiosResponse } from "axios";
 
 const schema = yup.object({

@@ -14,8 +14,8 @@ export default function useAuth(handler: IHandler) {
         const result = await handler.getMe();
         if (result) {
           setIsLogin(true);
+          setAccount(result);
         }
-        setAccount(result);
       } catch (error) {
         setError(error);
       } finally {

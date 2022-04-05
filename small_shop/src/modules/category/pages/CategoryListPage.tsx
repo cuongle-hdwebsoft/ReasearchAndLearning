@@ -23,11 +23,11 @@ import { css } from "@emotion/react";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
-import CardHeaderPage from "../common/components/CardHeaderPage";
+import CardHeaderPage from "../../../common/components/CardHeaderPage";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { fetchAuth } from "../common/utils/fetch";
-import { ICategory } from "../modules/products/constant";
+import { fetchAuth } from "../../../common/utils/fetch";
+import { ICategory } from "../../products/constant";
 
 export default function CategoryListPage() {
   const theme = useTheme();

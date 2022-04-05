@@ -619,6 +619,16 @@
       "imageUrl": "image",
       "isActive": true,
       "id": 62
+    },
+    {
+      "imageUrl": "test",
+      "productName": "test",
+      "price": 5,
+      "inStock": true,
+      "amount": 10,
+      "categoryName": "Infiniti",
+      "isActive": true,
+      "id": 63
     }
   ],
   "categories": [

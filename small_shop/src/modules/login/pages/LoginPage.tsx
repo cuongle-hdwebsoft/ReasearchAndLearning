@@ -1,43 +1,11 @@
 import * as yup from "yup";
-import styled from "@emotion/styled";
 import { Button, Card, useTheme } from "@mui/material";
-import CustomTextInput from "../common/components/CustomTextInput";
+import { WrapLoginPageStyle } from "../components/WrapLoginPageStyle";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { FormProvider, useForm } from "react-hook-form";
-import useLogin from "../common/hooks/useLogin";
-import Loading from "../common/components/Loading";
-
-const WrapLoginPageStyle = styled("div")`
-  .wrap-form-login {
-    position: absolute;
-    transform: translateX(-50%);
-    top: 200px;
-    left: 50%;
-
-    & .form-login {
-      width: 600px;
-      padding: 50px;
-      border-radius: 4px;
-
-      &__title {
-        text-align: center;
-        color: ${(props) => (props.theme == "light" ? "#111" : "#fff")};
-      }
-
-      &__input {
-        width: 100%;
-      }
-
-      &__form-item {
-        margin-bottom: 30px;
-      }
-
-      &__button {
-        width: 100%;
-      }
-    }
-  }
-`;
+import useLogin from "../../../common/hooks/useLogin";
+import Loading from "../../../common/components/Loading";
+import CustomTextInput from "../../../common/components/CustomTextInput";
 
 interface IFormValue {
   username: string;
