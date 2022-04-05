@@ -41,9 +41,9 @@ import ProductApi from "../../apis/services/products";
 
 export function* createProductSaga(action: ICreateProductAction) {
   try {
-    const result: AxiosResponse<IProduct> = yield call(fetchAuth, "POST", "/products", action.payload);
+    const { error } = yield call(ProductApi.create, action.payload);
 
-    if (result && result.status === 201) {
+    if (!error) {
       yield put(createProductSuccessActionSaga());
       yield put(historyActionSaga("/products"));
     } else {
@@ -56,14 +56,9 @@ export function* createProductSaga(action: ICreateProductAction) {
 
 export function* editProductSaga(action: IEditProductAction) {
   try {
-    const result: AxiosResponse<IProduct> = yield call(
-      fetchAuth,
-      "PUT",
-      "/products/" + action.payload.id,
-      action.payload,
-    );
+    const { error } = yield call(ProductApi.edit, action.payload);
 
-    if (result && result.status === 200) {
+    if (!error) {
       yield put(editProductSuccessActionSaga());
       yield put(historyActionSaga("/products"));
     } else {
@@ -76,9 +71,9 @@ export function* editProductSaga(action: IEditProductAction) {
 
 export function* deleteProductSaga(action: IDeleteProductAction) {
   try {
-    const result: AxiosResponse<IProduct> = yield call(fetchAuth, "DELETE", "/products/" + action.payload.idProduct);
+    const { error } = yield call(ProductApi.delete, action.payload.idProduct);
 
-    if (result.status === 200) {
+    if (!error) {
       yield all([put(deleteProductSuccessActionSaga()), put(loadProductsActionSaga({}))]);
     } else {
       yield put(deleteProductFailActionSaga());

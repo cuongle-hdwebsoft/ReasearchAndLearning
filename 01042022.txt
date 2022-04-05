@@ -8,13 +8,13 @@ Hook
 - Nếu có quá nhiều useEffect thì sẽ move vào Custom Hook => Code clean, chạy vẫn y chang.
 - Có 1 thư viện để dùng với i18n...
 - Có thể lưu các filter trên redux, còn products thì mình dùng custom hook lắng nghe filter để query và lấy dữ liệu về bằng React Query sau đó hiển thị lên mà không
-- Không bọc Public utils, code bọc không dc ổn
-- Modal của MUI đã có Hook để dùng rồi không cần sử dụng cái Provider Context kia, có thể tạo 1 Hook?? làm s
-- Handle ngoài cái data đẩy vào saga, saga đẩy vào là clear
-- Viết 1 server handle cái error products thay vì gọi fetch như kia rườm rà để handle error
-- Extract các hàm Auth từ Provider để các Component con sử dụng.
+- Không bọc Public utils, code bọc không dc ổn  => done
+- Modal của MUI đã có Hook để dùng rồi không cần sử dụng cái Provider Context kia, có thể tạo 1 Hook?? làm s  => done
+- Handle ngoài cái data đẩy vào saga, saga đẩy vào là clear  => done
+- Viết 1 server handle cái error products thay vì gọi fetch như kia rườm rà để handle error  => done
+- Extract các hàm Auth từ Provider để các Component con sử dụng.  => done
 - Viết độc lập Component với API để flexible
-- Replace url liền luôn
+- Replace url liền luôn  => done
 - Refector code
 - useDeboucing của BM
 - Delete all problem solved BE

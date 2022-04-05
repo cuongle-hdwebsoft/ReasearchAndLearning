@@ -24,7 +24,7 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CircleIcon from "@mui/icons-material/Circle";
 import { Link, useHistory } from "react-router-dom";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useTranslation, Trans } from "react-i18next";
 
@@ -34,9 +34,8 @@ import { deleteProductActionSaga } from "../modules/products/actions";
 import FilterProducts from "../common/components/FilterProducts";
 import FakeTableLoading from "../common/components/FakeTableLoading";
 import useModal from "../common/hooks/useModal";
-import useQuery from "../common/hooks/useQuery";
-import { IFilterProduct } from "../modules/products/constant";
 import useTableProduct from "../common/hooks/useTableProduct";
+import useQueryProduct from "../common/hooks/useQueryProduct";
 
 export default function ProductListPage() {
   const { t } = useTranslation();
@@ -45,11 +44,11 @@ export default function ProductListPage() {
   const { products, totalProducts, limit, page, isLoading } = useProductReducerHook();
   const dispatch = useDispatch();
   const modalContext = useModal();
-  const { query } = useQuery<IFilterProduct>();
+  const queryProduct = useQueryProduct();
   const table = useTableProduct();
 
   useEffect(() => {
-    table.init(query);
+    table.init(queryProduct.query);
   }, []);
 
   const handleDeleteProduct = (id: string | number) => {
@@ -95,7 +94,7 @@ export default function ProductListPage() {
         >
           <Typography variant="h4">{t("ProductPage")}</Typography>
           <Breadcrumbs
-            separator="U+203a"
+            separator=">"
             css={css`
               margin-left: 10px;
             `}

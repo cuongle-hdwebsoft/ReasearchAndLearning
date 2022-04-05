@@ -1,11 +1,13 @@
 import { SelectChangeEvent } from "@mui/material";
 import { useDispatch } from "react-redux";
+import { IBaseLoadUnknown } from "../../modules/products/constant";
+import formatQueryToPagination from "../utils/formatQueryToPagination";
 
 interface IProps<T> {
   actionLoad: (value: T) => { type: string; payload: T };
 }
 
-export default function useTable<T>(props: IProps<T>) {
+export default function useTable<T = IBaseLoadUnknown>(props: IProps<T>) {
   const dispatch = useDispatch();
 
   const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, nextPage: number) => {
@@ -36,8 +38,11 @@ export default function useTable<T>(props: IProps<T>) {
     );
   };
 
-  const init = (query?: T) => {
-    if (query) dispatch(props.actionLoad(query));
+  const init = (query?: any) => {
+    if (query) {
+      const formatQuery = formatQueryToPagination<T>(query);
+      dispatch(props.actionLoad(formatQuery as unknown as T));
+    }
   };
 
   return {

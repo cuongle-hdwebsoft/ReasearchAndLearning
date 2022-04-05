@@ -591,16 +591,6 @@
       "id": 57
     },
     {
-      "imageUrl": "2",
-      "productName": "cuong 500 do la",
-      "price": 50000,
-      "inStock": true,
-      "amount": 50,
-      "categoryName": "Maserati",
-      "isActive": true,
-      "id": 58
-    },
-    {
       "categoryName": "Maserati",
       "amount": 12,
       "inStock": true,
