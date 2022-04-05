@@ -73,39 +73,38 @@ function App() {
             >
               <BrowserRouter>
                 <ModalProvider>
-                  <PublicUtils>
-                    <Suspense fallback={<Loading></Loading>}>
-                      <Switch>
-                        <AuthRoutes path="/" loginPage={<LoginPage></LoginPage>}>
-                          <Route path="/" exact={true}>
-                            <MainLayout>
-                              <DashboardPage></DashboardPage>
-                            </MainLayout>
-                          </Route>
-                          <Route path="/category" exact={true}>
-                            <MainLayout>
-                              <CategoryListPage></CategoryListPage>
-                            </MainLayout>
-                          </Route>
-                          <Route path="/products" exact={true}>
-                            <MainLayout>
-                              <ProductListPage></ProductListPage>
-                            </MainLayout>
-                          </Route>
-                          <Route path="/products/:id" exact={true}>
-                            <MainLayout>
-                              <ProductItemPage></ProductItemPage>
-                            </MainLayout>
-                          </Route>
-                          <Route path="*">
-                            <MainLayout>
-                              <NotFound></NotFound>
-                            </MainLayout>
-                          </Route>
-                        </AuthRoutes>
-                      </Switch>
-                    </Suspense>
-                  </PublicUtils>
+                  <PublicUtils></PublicUtils>
+                  <Suspense fallback={<Loading></Loading>}>
+                    <Switch>
+                      <AuthRoutes path="/" loginPage={<LoginPage></LoginPage>}>
+                        <Route path="/" exact={true}>
+                          <MainLayout>
+                            <DashboardPage></DashboardPage>
+                          </MainLayout>
+                        </Route>
+                        <Route path="/category" exact={true}>
+                          <MainLayout>
+                            <CategoryListPage></CategoryListPage>
+                          </MainLayout>
+                        </Route>
+                        <Route path="/products" exact={true}>
+                          <MainLayout>
+                            <ProductListPage></ProductListPage>
+                          </MainLayout>
+                        </Route>
+                        <Route path="/products/:id" exact={true}>
+                          <MainLayout>
+                            <ProductItemPage></ProductItemPage>
+                          </MainLayout>
+                        </Route>
+                        <Route path="*">
+                          <MainLayout>
+                            <NotFound></NotFound>
+                          </MainLayout>
+                        </Route>
+                      </AuthRoutes>
+                    </Switch>
+                  </Suspense>
                 </ModalProvider>
               </BrowserRouter>
             </SnackbarProvider>

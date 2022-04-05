@@ -619,6 +619,16 @@
       "categoryName": "Hyundai",
       "isActive": true,
       "id": 61
+    },
+    {
+      "categoryName": "Buick",
+      "amount": 50000,
+      "inStock": false,
+      "price": 20000,
+      "productName": "name",
+      "imageUrl": "image",
+      "isActive": true,
+      "id": 62
     }
   ],
   "categories": [

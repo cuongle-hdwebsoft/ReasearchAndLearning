@@ -1,35 +1,20 @@
 import { useProductReducerHook } from "../../modules/products/hook";
 import { useDispatch } from "react-redux";
-import { ICategory, IFilterProduct } from "../../modules/products/constant";
-import { loadProductsActionSaga } from "../../modules/products/actions";
+import { ICategory } from "../../modules/products/constant";
 import { useEffect, useState } from "react";
-import { FormControl, InputLabel, MenuItem, Select, SelectChangeEvent, Stack, TextField } from "@mui/material";
+import { FormControl, InputLabel, MenuItem, Select, Stack, TextField } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { fetchAuth } from "../utils/fetch";
 import { AxiosResponse } from "axios";
 import { errorActionSaga } from "../../modules/app/actions";
+import useTableProduct from "../hooks/useTableProduct";
 
 export default function FilterProducts() {
   const { filter } = useProductReducerHook();
   const dispatch = useDispatch();
   const [categories, setCategories] = useState<ICategory[]>([]);
   const { t } = useTranslation();
-
-  const handleChangeInput = (key: keyof IFilterProduct) => (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(
-      loadProductsActionSaga({
-        [key]: e.target.value,
-      }),
-    );
-  };
-
-  const handleChangeSelect = (key: keyof IFilterProduct) => (e: SelectChangeEvent<string>) => {
-    dispatch(
-      loadProductsActionSaga({
-        [key]: e.target.value,
-      }),
-    );
-  };
+  const table = useTableProduct();
 
   useEffect(() => {
     const getData = async () => {
@@ -53,7 +38,7 @@ export default function FilterProducts() {
     <>
       <Stack direction={"row"} spacing={4}>
         <TextField
-          onChange={handleChangeInput("productName")}
+          onChange={table.handleFilterInput("productName")}
           InputLabelProps={{ shrink: true }}
           size="small"
           label={t("ProductName")}
@@ -63,7 +48,7 @@ export default function FilterProducts() {
           <InputLabel>{t("Category")}</InputLabel>
           <Select
             value={filter?.categoryName ? filter?.categoryName : ""}
-            onChange={handleChangeSelect("categoryName")}
+            onChange={table.handleFilterSelect("categoryName")}
           >
             <MenuItem value="">All</MenuItem>
             {categories.map((item) => (

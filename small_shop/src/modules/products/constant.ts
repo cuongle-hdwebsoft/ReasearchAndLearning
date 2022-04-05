@@ -42,11 +42,7 @@ export interface IReducerApp {
   page: number;
   limit: number;
   isLoading: boolean;
-  filter?: {
-    productName?: string;
-    inStock?: boolean;
-    categoryName?: string;
-  };
+  filter?: IFilterProduct;
 }
 
 export interface ICreateProductAction {
@@ -66,9 +62,10 @@ export interface IFilterProduct {
   [key: string]: string | number | unknown;
 }
 
-export interface ILoadProductParams extends IFilterProduct {
+export interface ILoadProductParams {
   page?: number;
   limit?: number;
+  filter?: IFilterProduct;
 }
 
 export interface ILoadProductAction {

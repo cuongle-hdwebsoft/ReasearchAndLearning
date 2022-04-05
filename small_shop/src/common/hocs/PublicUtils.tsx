@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { useAppReducerHook } from "../../modules/app/hook";
 
 interface IProps {
-  children: React.ReactElement | React.ReactElement[];
+  children?: React.ReactElement | React.ReactElement[];
 }
 
 export default function PublicUtils(props: IProps) {

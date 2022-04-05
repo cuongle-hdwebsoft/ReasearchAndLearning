@@ -8,7 +8,6 @@ export default function useAuth(handler: IHandler) {
   const [error, setError] = useState<unknown>();
 
   useEffect(() => {
-    console.log(window.location.href);
     (async function () {
       try {
         setIsLoading(true);

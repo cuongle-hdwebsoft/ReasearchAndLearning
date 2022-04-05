@@ -35,8 +35,9 @@ import {
 } from "./constant";
 import { loadFilters, loadProducts, setIsLoading } from "./reducer";
 import { loadProductsActionSaga } from "./actions";
-import queryString from "query-string";
 import { RootState } from "../hook";
+import formatData from "../../common/utils/formatData";
+import ProductApi from "../../apis/services/products";
 
 export function* createProductSaga(action: ICreateProductAction) {
   try {
@@ -89,64 +90,38 @@ export function* deleteProductSaga(action: IDeleteProductAction) {
 
 export function* loadProductsSaga(action: ILoadProductAction) {
   try {
-    let page = typeof action.payload.page === "string" ? parseInt(action.payload.page) : action.payload.page;
-    let limit = typeof action.payload.limit === "string" ? parseInt(action.payload.limit) : action.payload.limit;
     const reducerProduct: IReducerApp = yield select((state: RootState) => state.APP_PRODUCT);
-
-    page = page || 0;
-    limit = limit || reducerProduct.limit || 10;
-
-    const params: IFilterProduct & { _limit?: number; _page?: number } = {
-      ...reducerProduct.filter,
-      _limit: limit,
-      _page: page + 1,
-      ...action.payload,
-    };
-
-    Object.keys(params).forEach((key) => {
-      if (params[key] === "") {
-        delete params[key];
-      }
-    });
+    const { page, limit, filter, params, url } = formatData<IFilterProduct>(
+      {
+        limit: reducerProduct.limit,
+        page: reducerProduct.page,
+        filter: reducerProduct.filter,
+      },
+      {
+        limit: action.payload.limit,
+        page: action.payload.page,
+        filter: action.payload.filter,
+      },
+    );
 
     yield put(setIsLoading(true));
-    yield put(loadFilters({ productName: params.productName, categoryName: params.categoryName }));
+    yield put(loadFilters(filter));
+    window.history.replaceState(null, "", "/products?".concat(url));
     yield delay(500);
 
-    const result: AxiosResponse<IProduct[]> = yield call(fetchAuth, "GET", "/products", null, {
-      params: params,
-    });
-
-    if (result.status === 200) {
-      const totalProducts = parseInt(result.headers["x-total-count"]);
-
+    const { data, totalProducts, error } = yield call(ProductApi.getAll, params);
+    if (error) {
+      yield put(loadProductsFailActionSaga());
+    } else {
       yield put(
         loadProducts({
-          products: result.data,
+          products: data,
           totalProducts,
           limit: limit,
           page: page,
         }),
       );
-
-      delete params._limit;
-      delete params._page;
-
-      window.history.replaceState(
-        null,
-        "",
-        "/products?".concat(
-          queryString.stringify({
-            ...params,
-            limit: limit,
-            page: page,
-          }),
-        ),
-      );
-    } else {
-      yield put(loadProductsFailActionSaga());
     }
-
     yield put(setIsLoading(false));
   } catch (error) {
     yield put(errorActionSaga({ type: "error", message: "Something wrong" }));

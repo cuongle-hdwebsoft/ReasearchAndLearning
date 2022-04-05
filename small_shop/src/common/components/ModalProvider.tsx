@@ -38,10 +38,10 @@ export const ModalCustomContext = createContext<IModalCustomContext>({
 
 export default function ModalProvider(props: IProps) {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [component, setComponent] = useState<React.ReactElement>(<></>);
+  const [component, setComponent] = useState<JSX.Element>(<></>);
   const theme = useTheme();
 
-  const open = (c: React.ReactElement) => {
+  const open = (c: JSX.Element) => {
     setComponent(c);
     setIsOpen(true);
   };
@@ -55,9 +55,7 @@ export default function ModalProvider(props: IProps) {
       <Modal onClose={close} open={isOpen}>
         <CenterBox bg={theme.palette.background.paper}>{component}</CenterBox>
       </Modal>
-      {React.useMemo(() => {
-        return props.children;
-      }, [])}
+      {props.children}
     </ModalCustomContext.Provider>
   );
 }

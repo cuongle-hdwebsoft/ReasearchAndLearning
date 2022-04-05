@@ -94,8 +94,9 @@ export default function ProductItemPage() {
     if (id == "null") {
       getData();
     } else {
-      getProduct();
-      getData();
+      (function () {
+        Promise.all([getProduct(), getData()]);
+      })();
     }
   }, []);
 

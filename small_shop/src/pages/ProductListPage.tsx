@@ -24,38 +24,33 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CircleIcon from "@mui/icons-material/Circle";
 import { Link, useHistory } from "react-router-dom";
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
-import queryString from "query-string";
 import { useTranslation, Trans } from "react-i18next";
 
 import CardHeaderPage from "../common/components/CardHeaderPage";
 import { useProductReducerHook } from "../modules/products/hook";
-import { deleteProductActionSaga, loadProductsActionSaga } from "../modules/products/actions";
+import { deleteProductActionSaga } from "../modules/products/actions";
 import FilterProducts from "../common/components/FilterProducts";
 import FakeTableLoading from "../common/components/FakeTableLoading";
-import { ModalCustomContext } from "../common/components/ModalProvider";
+import useModal from "../common/hooks/useModal";
+import useQuery from "../common/hooks/useQuery";
+import { IFilterProduct } from "../modules/products/constant";
+import useTableProduct from "../common/hooks/useTableProduct";
 
 export default function ProductListPage() {
+  const { t } = useTranslation();
   const history = useHistory();
   const theme = useTheme();
   const { products, totalProducts, limit, page, isLoading } = useProductReducerHook();
   const dispatch = useDispatch();
-  const modalContext = useContext(ModalCustomContext);
-  const { t } = useTranslation();
+  const modalContext = useModal();
+  const { query } = useQuery<IFilterProduct>();
+  const table = useTableProduct();
 
   useEffect(() => {
-    const { query } = queryString.parseUrl(window.location.href);
-    dispatch(loadProductsActionSaga(query));
+    table.init(query);
   }, []);
-
-  const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, nextPage: number) => {
-    dispatch(loadProductsActionSaga({ page: nextPage, limit: limit }));
-  };
-
-  const handleChangeRowPerPage = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
-    dispatch(loadProductsActionSaga({ page: 0, limit: parseInt(event.target.value) }));
-  };
 
   const handleDeleteProduct = (id: string | number) => {
     modalContext.open(
@@ -100,7 +95,7 @@ export default function ProductListPage() {
         >
           <Typography variant="h4">{t("ProductPage")}</Typography>
           <Breadcrumbs
-            separator="›"
+            separator="U+203a"
             css={css`
               margin-left: 10px;
             `}
@@ -229,8 +224,8 @@ export default function ProductListPage() {
           </Table>
         </TableContainer>
         <TablePagination
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowPerPage}
+          onPageChange={table.handleChangePage}
+          onRowsPerPageChange={table.handleChangeRowPerPage}
           component={"div"}
           count={totalProducts}
           rowsPerPage={limit}
