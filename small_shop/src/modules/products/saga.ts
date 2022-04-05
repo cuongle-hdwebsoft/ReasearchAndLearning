@@ -19,8 +19,6 @@ import {
   LOAD_PRODUCT_SUCCESS,
   LOAD_PRODUCTS,
   ILoadProductAction,
-  IReducerApp,
-  IFilterProduct,
   EDIT_PRODUCT_ACTION,
   EDIT_PRODUCT_SUCCESS_ACTION,
   EDIT_PRODUCT_FAIL_ACTION,
@@ -32,8 +30,6 @@ import {
 } from "./constant";
 import { loadFilters, loadProducts, setIsLoading } from "./reducer";
 import { loadProductsActionSaga } from "./actions";
-import { RootState } from "../hook";
-import formatData from "../../common/utils/formatData";
 import ProductApi from "../../apis/services/products";
 
 export function* createProductSaga(action: ICreateProductAction) {
@@ -82,8 +78,7 @@ export function* deleteProductSaga(action: IDeleteProductAction) {
 
 export function* loadProductsSaga(action: ILoadProductAction) {
   try {
-    const reducerProduct: IReducerApp = yield select((state: RootState) => state.APP_PRODUCT);
-    const { page, limit, filter, params, url } = formatData<IFilterProduct>(reducerProduct, action.payload);
+    const { page = 0, limit = 10, filter = {}, params, url = "" } = action.payload;
 
     yield put(setIsLoading(true));
     yield put(loadFilters(filter));

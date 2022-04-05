@@ -1,5 +1,9 @@
-export default function formatQueryToPagination<T>(query: { [key: string]: string | number | boolean }) {
-  const result: { limit?: number; page?: number; filter?: T } = {};
+import { IBaseFilter } from "../../modules/products/constant";
+
+export default function formatQueryToPagination<F>(query: {
+  [key: string]: string | number | boolean;
+}): IBaseFilter<F> {
+  const result: { limit?: number; page?: number; filter?: F } = {};
 
   if (query.page) {
     Object.defineProperty(result, "page", {

@@ -55,26 +55,6 @@ export interface IEditProductAction {
   payload: IFormProduct & { id: string | number };
 }
 
-export interface IBaseFilter {
-  [key: string]: string | number | unknown;
-}
-
-export interface IBaseLoad<T> {
-  page?: number;
-  limit?: number;
-  filter?: T;
-}
-
-export interface IFilterProduct extends IBaseFilter {
-  productName?: string;
-  inStock?: boolean;
-  categoryName?: string;
-}
-
-export type ILoadProductParams = IBaseLoad<IFilterProduct>;
-export type IBaseLoadAny = IBaseLoad<any>;
-export type IBaseLoadUnknown = IBaseLoad<unknown>;
-
 export interface ILoadProductAction {
   type: string;
   payload: ILoadProductParams;
@@ -86,3 +66,29 @@ export interface IDeleteProductAction {
     idProduct: string;
   };
 }
+
+export interface IBaseFilter<T> {
+  page?: number;
+  limit?: number;
+  filter?: T;
+  [key: string]: number | string | T | undefined;
+}
+
+export interface IBaseLoad<T> {
+  page?: number;
+  limit?: number;
+  filter?: T;
+  params?: IParams;
+  url?: string;
+  [key: string]: number | string | T | IParams | undefined;
+}
+
+export interface IFilterProduct {
+  productName?: string;
+  inStock?: boolean;
+  categoryName?: string;
+  [key: string]: string | number | unknown;
+}
+
+export type ILoadProductParams = IBaseLoad<IFilterProduct>;
+export type IParams = { _limit: number; _page: number } & { [key: string]: string | number | unknown };
