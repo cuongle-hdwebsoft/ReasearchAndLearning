@@ -21,274 +21,24 @@
   ],
   "products": [
     {
-      "id": 1,
-      "categoryName": "Maserati",
-      "productName": "228",
-      "imageUrl": "http://dummyimage.com/183x100.png/cc0000/ffffff",
-      "isActive": true,
-      "amount": 98,
-      "inStock": true,
-      "price": 1287
-    },
-    {
-      "id": 2,
-      "categoryName": "Buick",
-      "productName": "Skyhawk",
-      "imageUrl": "http://dummyimage.com/123x100.png/cc0000/ffffff",
-      "isActive": false,
-      "amount": 57,
-      "inStock": true,
-      "price": 3509
-    },
-    {
-      "id": 3,
-      "categoryName": "Infiniti",
-      "productName": "FX",
-      "imageUrl": "http://dummyimage.com/178x100.png/ff4444/ffffff",
-      "isActive": false,
-      "amount": 90,
-      "inStock": false,
-      "price": 1291
-    },
-    {
-      "id": 4,
-      "categoryName": "Porsche",
-      "productName": "Cayenne",
-      "imageUrl": "http://dummyimage.com/180x100.png/dddddd/000000",
-      "isActive": false,
-      "amount": 45,
-      "inStock": true,
-      "price": 2411
-    },
-    {
-      "id": 5,
-      "categoryName": "Isuzu",
-      "productName": "Amigo",
-      "imageUrl": "http://dummyimage.com/165x100.png/ff4444/ffffff",
-      "isActive": true,
-      "amount": 22,
-      "inStock": true,
-      "price": 2573
-    },
-    {
-      "id": 6,
-      "categoryName": "Hyundai",
-      "productName": "Elantra",
-      "imageUrl": "http://dummyimage.com/243x100.png/cc0000/ffffff",
-      "isActive": true,
-      "amount": 34,
-      "inStock": false,
-      "price": 2104
-    },
-    {
-      "id": 7,
-      "categoryName": "Kia",
-      "productName": "Rio",
-      "imageUrl": "http://dummyimage.com/214x100.png/ff4444/ffffff",
-      "isActive": false,
-      "amount": 21,
-      "inStock": false,
-      "price": 4810
-    },
-    {
-      "id": 8,
-      "categoryName": "Dodge",
-      "productName": "Ram 1500",
-      "imageUrl": "http://dummyimage.com/244x100.png/ff4444/ffffff",
-      "isActive": false,
-      "amount": 4,
-      "inStock": false,
-      "price": 4523
-    },
-    {
-      "id": 9,
-      "categoryName": "Dodge",
-      "productName": "Ram Van B250",
-      "imageUrl": "http://dummyimage.com/149x100.png/cc0000/ffffff",
-      "isActive": true,
-      "amount": 35,
-      "inStock": false,
-      "price": 3140
-    },
-    {
-      "id": 10,
-      "categoryName": "Ford",
-      "productName": "Tempo",
-      "imageUrl": "http://dummyimage.com/250x100.png/cc0000/ffffff",
-      "isActive": false,
-      "amount": 6,
-      "inStock": true,
-      "price": 2010
-    },
-    {
-      "id": 11,
-      "categoryName": "Buick",
-      "productName": "LeSabre",
-      "imageUrl": "http://dummyimage.com/191x100.png/cc0000/ffffff",
-      "isActive": false,
-      "amount": 1,
-      "inStock": false,
-      "price": 4525
-    },
-    {
-      "id": 12,
-      "categoryName": "Hyundai",
-      "productName": "Elantra",
-      "imageUrl": "http://dummyimage.com/170x100.png/ff4444/ffffff",
-      "isActive": true,
-      "amount": 77,
-      "inStock": false,
-      "price": 2281
-    },
-    {
-      "id": 13,
-      "categoryName": "Infiniti",
-      "productName": "Q",
-      "imageUrl": "http://dummyimage.com/177x100.png/5fa2dd/ffffff",
-      "isActive": true,
-      "amount": 64,
-      "inStock": false,
-      "price": 2091
-    },
-    {
-      "id": 14,
-      "categoryName": "Lexus",
-      "productName": "SC",
-      "imageUrl": "http://dummyimage.com/245x100.png/5fa2dd/ffffff",
-      "isActive": true,
-      "amount": 48,
-      "inStock": false,
-      "price": 2034
-    },
-    {
-      "id": 15,
-      "categoryName": "Maserati",
-      "productName": "Quattroporte",
-      "imageUrl": "http://dummyimage.com/168x100.png/cc0000/ffffff",
-      "isActive": true,
-      "amount": 81,
-      "inStock": true,
-      "price": 2513
-    },
-    {
-      "id": 16,
-      "categoryName": "Dodge",
-      "productName": "Dakota",
-      "imageUrl": "http://dummyimage.com/193x100.png/ff4444/ffffff",
-      "isActive": false,
-      "amount": 47,
-      "inStock": false,
-      "price": 2396
-    },
-    {
-      "id": 17,
-      "categoryName": "Volkswagen",
-      "productName": "Passat",
-      "imageUrl": "http://dummyimage.com/195x100.png/5fa2dd/ffffff",
-      "isActive": false,
-      "amount": 28,
-      "inStock": false,
-      "price": 1023
-    },
-    {
-      "id": 18,
-      "categoryName": "Jeep",
-      "productName": "Commander",
-      "imageUrl": "http://dummyimage.com/161x100.png/dddddd/000000",
-      "isActive": true,
-      "amount": 71,
-      "inStock": false,
-      "price": 1321
-    },
-    {
-      "id": 19,
-      "categoryName": "Land Rover",
-      "productName": "Discovery",
-      "imageUrl": "http://dummyimage.com/165x100.png/dddddd/000000",
-      "isActive": false,
-      "amount": 81,
-      "inStock": false,
-      "price": 4540
-    },
-    {
-      "id": 20,
-      "categoryName": "Lamborghini",
-      "productName": "Diablo",
-      "imageUrl": "http://dummyimage.com/212x100.png/ff4444/ffffff",
-      "isActive": false,
-      "amount": 41,
-      "inStock": false,
-      "price": 1673
-    },
-    {
-      "id": 21,
-      "categoryName": "Suzuki",
-      "productName": "XL7",
-      "imageUrl": "http://dummyimage.com/230x100.png/dddddd/000000",
-      "isActive": false,
-      "amount": 36,
-      "inStock": false,
-      "price": 2729
-    },
-    {
-      "id": 22,
-      "categoryName": "Lotus",
-      "productName": "Exige",
-      "imageUrl": "http://dummyimage.com/123x100.png/dddddd/000000",
-      "isActive": false,
-      "amount": 3,
-      "inStock": true,
-      "price": 3985
-    },
-    {
-      "id": 23,
-      "categoryName": "Ford",
-      "productName": "F-Series Super Duty",
-      "imageUrl": "http://dummyimage.com/132x100.png/dddddd/000000",
-      "isActive": true,
-      "amount": 80,
-      "inStock": true,
-      "price": 2607
-    },
-    {
-      "id": 24,
-      "categoryName": "Buick",
-      "productName": "Roadmaster",
-      "imageUrl": "http://dummyimage.com/132x100.png/dddddd/000000",
-      "isActive": false,
-      "amount": 48,
-      "inStock": true,
-      "price": 1190
-    },
-    {
-      "id": 25,
-      "categoryName": "Honda",
-      "productName": "Pilot",
-      "imageUrl": "http://dummyimage.com/196x100.png/ff4444/ffffff",
-      "isActive": true,
-      "amount": 13,
-      "inStock": false,
-      "price": 2382
-    },
-    {
-      "id": 26,
-      "categoryName": "Lexus",
-      "productName": "GX",
       "imageUrl": "http://dummyimage.com/181x100.png/cc0000/ffffff",
-      "isActive": false,
-      "amount": 21,
+      "productName": "GX",
+      "price": 3970,
       "inStock": true,
-      "price": 3970
+      "amount": 21,
+      "categoryName": "Lexus",
+      "isActive": false,
+      "id": 26
     },
     {
-      "id": 27,
-      "categoryName": "Volkswagen",
-      "productName": "Touareg 2",
       "imageUrl": "http://dummyimage.com/217x100.png/5fa2dd/ffffff",
-      "isActive": true,
-      "amount": 62,
+      "productName": "Touareg",
+      "price": 4376,
       "inStock": false,
-      "price": 4376
+      "amount": 62,
+      "categoryName": "Volkswagen",
+      "isActive": true,
+      "id": 27
     },
     {
       "id": 28,
@@ -359,16 +109,6 @@
       "amount": 44,
       "inStock": true,
       "price": 2019
-    },
-    {
-      "id": 35,
-      "categoryName": "Jaguar",
-      "productName": "XK",
-      "imageUrl": "http://dummyimage.com/196x100.png/cc0000/ffffff",
-      "isActive": false,
-      "amount": 5,
-      "inStock": true,
-      "price": 4146
     },
     {
       "id": 36,

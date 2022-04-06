@@ -15,34 +15,32 @@ import {
   Stack,
   Button,
   Avatar,
-  Breadcrumbs,
-  useTheme,
 } from "@mui/material";
 import { css } from "@emotion/react";
 import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CircleIcon from "@mui/icons-material/Circle";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { useTranslation, Trans } from "react-i18next";
 
 import CardHeaderPage from "../../../common/components/CardHeaderPage";
 import { useProductReducerHook } from "../hook";
-import { deleteProductActionSaga } from "../actions";
 import FilterProducts from "../../../common/components/FilterProducts";
 import FakeTableLoading from "../../../common/components/FakeTableLoading";
 import useModal from "../../../common/hooks/useModal";
 import useTableProduct from "../../../common/hooks/useTableProduct";
 import useQueryProduct from "../../../common/hooks/useQueryProduct";
+import ProductListBreadCrums from "../components/ProductListBreadCrums";
+import FormDeleteProduct from "../components/FormDeleteProduct";
 
 export default function ProductListPage() {
   const { t } = useTranslation();
   const history = useHistory();
-  const theme = useTheme();
+
   const { products, totalProducts, limit, page, isLoading } = useProductReducerHook();
-  const dispatch = useDispatch();
+
   const modalContext = useModal();
   const queryProduct = useQueryProduct();
   const table = useTableProduct();
@@ -52,34 +50,7 @@ export default function ProductListPage() {
   }, []);
 
   const handleDeleteProduct = (id: string | number) => {
-    modalContext.open(
-      <Box>
-        <h3
-          css={css`
-            color: ${theme.palette.text.primary};
-            text-align: center;
-            font-weight: bold;
-          `}
-        >
-          Are you sure to delete this item?
-        </h3>
-        <Stack justifyContent={"space-around"} direction={"row"} spacing="4">
-          <Button onClick={modalContext.close} variant="contained" color="error">
-            Cancel
-          </Button>
-          <Button
-            onClick={() => {
-              dispatch(deleteProductActionSaga(String(id)));
-              modalContext.close();
-            }}
-            variant="contained"
-            color="primary"
-          >
-            Yes! Sure
-          </Button>
-        </Stack>
-      </Box>,
-    );
+    modalContext.open(<FormDeleteProduct id={id}></FormDeleteProduct>);
   };
 
   return (
@@ -93,31 +64,7 @@ export default function ProductListPage() {
           alignItems="center"
         >
           <Typography variant="h4">{t("ProductPage")}</Typography>
-          <Breadcrumbs
-            separator=">"
-            css={css`
-              margin-left: 10px;
-            `}
-          >
-            <Link
-              to="/"
-              css={css`
-                color: ${theme.palette.text.secondary};
-                text-decoration: none;
-              `}
-            >
-              {t("Dashboard")}
-            </Link>
-            <Link
-              css={css`
-                color: ${theme.palette.text.secondary};
-                font-weight: bold;
-              `}
-              to="/products"
-            >
-              {t("Products")}
-            </Link>
-          </Breadcrumbs>
+          <ProductListBreadCrums></ProductListBreadCrums>
         </Stack>
         <Box sx={{ display: "flex", alignItems: "center" }}>
           <FilterProducts></FilterProducts>

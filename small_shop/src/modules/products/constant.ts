@@ -43,6 +43,7 @@ export interface IReducerApp {
   limit: number;
   isLoading: boolean;
   filter?: IFilterProduct;
+  isDeleting: boolean;
 }
 
 export interface ICreateProductAction {

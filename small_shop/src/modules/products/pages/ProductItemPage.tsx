@@ -1,6 +1,6 @@
 /** @jsxImportSource @emotion/react */
 import { Card, Typography, Button, Stack, useTheme, Breadcrumbs } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import CustomTextInput from "../../../common/components/CustomTextInput";
 import { css } from "@emotion/react";
@@ -11,12 +11,11 @@ import CardHeaderPage from "../../../common/components/CardHeaderPage";
 
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { ICategory, IFormProduct } from "../constant";
-import { useDispatch } from "react-redux";
-import { createProductActionSaga, editProductActionSaga } from "../actions";
-import { fetchAuth } from "../../../common/utils/fetch";
-import { errorActionSaga } from "../../app/actions";
-import { AxiosResponse } from "axios";
+import { IFormProduct } from "../constant";
+import useCategory from "../hooks/useCategory";
+import useGetProductItem from "../hooks/useGetProductItem";
+import useEdit from "../hooks/useEdit";
+import useCreate from "../hooks/useCreate";
 
 const schema = yup.object({
   imageUrl: yup.string().required(),
@@ -42,10 +41,12 @@ export default function ProductItemPage() {
   });
   const theme = useTheme();
   const history = useHistory();
-  const dispatch = useDispatch();
   const params = useParams<{ id: string }>();
   const id = params.id;
-  const [categories, setCategories] = useState<ICategory[]>([]);
+  const { isLoading: isLoadingCategories, categories } = useCategory();
+  const { isLoading: isLoadingProduct, product } = useGetProductItem(id);
+  const { handleEdit } = useEdit();
+  const { handleCreate } = useCreate();
 
   const handleCancel = () => {
     history.goBack();
@@ -53,54 +54,25 @@ export default function ProductItemPage() {
 
   const onSubmit = (value: IFormProduct) => {
     if (id == "null") {
-      dispatch(createProductActionSaga(value));
+      handleCreate(value);
     } else {
-      dispatch(editProductActionSaga({ ...value, id: params.id }));
+      handleEdit(value, id);
     }
   };
 
   useEffect(() => {
-    const getData = async () => {
-      try {
-        const rs: AxiosResponse<ICategory[]> = await fetchAuth("GET", "/categories");
-
-        if (rs.status === 200) {
-          setCategories(rs.data);
-        } else {
-          dispatch(errorActionSaga({ type: "error", message: "Fail to load categories" }));
-        }
-      } catch (error) {
-        dispatch(errorActionSaga({ type: "error", message: "Something wrong" }));
-      }
-    };
-
-    const getProduct = async () => {
-      try {
-        const rs: AxiosResponse<ICategory[]> = await fetchAuth("GET", "/products/" + params.id);
-
-        if (rs.status === 200) {
-          Object.keys(rs.data).forEach((key: any) => {
-            methods.setValue(key, rs.data[key]);
-          });
-        } else {
-          dispatch(errorActionSaga({ type: "error", message: "Fail to load product" }));
-          history.goBack();
-        }
-      } catch (error) {
-        dispatch(errorActionSaga({ type: "error", message: "Something wrong" }));
-      }
-    };
-
-    if (id == "null") {
-      getData();
-    } else {
-      (function () {
-        Promise.all([getProduct(), getData()]);
-      })();
+    if (id !== "null" && !isLoadingProduct && product) {
+      Object.keys(product).forEach((key: any) => {
+        methods.setValue(key, product[key]);
+      });
     }
-  }, []);
+  }, [isLoadingProduct, product, id]);
 
-  console.log("render");
+  // console.log(isLoadingCategories, isLoadingProduct);
+
+  if (isLoadingCategories || isLoadingProduct) {
+    return null;
+  }
 
   return (
     <Card

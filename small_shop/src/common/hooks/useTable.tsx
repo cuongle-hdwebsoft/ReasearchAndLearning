@@ -41,11 +41,9 @@ export default function useTable<F>(props: IProps<F>) {
   };
 
   const init = (query?: any) => {
-    if (query) {
-      const formatQuery = formatQueryToPagination<F>(query);
-      const payload = formatData<F>(props.prevQuery, formatQuery);
-      dispatch(props.actionLoad(payload));
-    }
+    const formatQuery = formatQueryToPagination<F>(query);
+    const payload = formatData<F>(props.prevQuery, formatQuery);
+    dispatch(props.actionLoad(payload));
   };
 
   return {

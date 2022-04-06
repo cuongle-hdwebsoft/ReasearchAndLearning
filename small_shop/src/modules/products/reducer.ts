@@ -10,6 +10,7 @@ const initialState: IReducerApp = {
   limit: 10,
   filter: {},
   isLoading: false,
+  isDeleting: false,
 };
 
 export const reducer = createSlice({
@@ -55,7 +56,10 @@ export const reducer = createSlice({
     setIsLoading: function (state, action: PayloadAction<boolean>) {
       state.isLoading = action.payload;
     },
+    setDeleting: function (state, action: PayloadAction<boolean>) {
+      state.isDeleting = action.payload;
+    },
   },
 });
 
-export const { createProduct, loadProducts, loadFilters, setIsLoading } = reducer.actions;
+export const { createProduct, loadProducts, loadFilters, setIsLoading, setDeleting } = reducer.actions;

@@ -1,4 +1,4 @@
-import { all, call, delay, put, takeEvery, takeLatest } from "redux-saga/effects";
+import { call, delay, put, takeEvery, takeLatest } from "redux-saga/effects";
 import { errorActionSaga, historyActionSaga } from "../app/actions";
 import { watchNotification } from "../app/saga";
 import {
@@ -28,8 +28,7 @@ import {
   DELETE_PRODUCT_FAIL_ACTION,
   IDeleteProductAction,
 } from "./constant";
-import { loadFilters, loadProducts, setIsLoading } from "./reducer";
-import { loadProductsActionSaga } from "./actions";
+import { loadFilters, loadProducts, setDeleting, setIsLoading } from "./reducer";
 import ProductApi from "../../apis/services/products";
 
 export function* createProductSaga(action: ICreateProductAction) {
@@ -64,13 +63,15 @@ export function* editProductSaga(action: IEditProductAction) {
 
 export function* deleteProductSaga(action: IDeleteProductAction) {
   try {
+    yield put(setDeleting(true));
     const { error } = yield call(ProductApi.delete, action.payload.idProduct);
 
     if (!error) {
-      yield all([put(deleteProductSuccessActionSaga()), put(loadProductsActionSaga({}))]);
+      yield put(deleteProductSuccessActionSaga());
     } else {
       yield put(deleteProductFailActionSaga());
     }
+    yield put(setDeleting(false));
   } catch (error) {
     yield put(errorActionSaga({ type: "error", message: "Something wrong" }));
   }

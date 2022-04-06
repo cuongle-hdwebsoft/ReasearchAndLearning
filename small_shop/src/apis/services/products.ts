@@ -70,4 +70,20 @@ export default class ProductApi {
       };
     });
   }
+
+  public static getById(id: string) {
+    return fetchAuth("GET", "/products/" + id, null).then((result) => {
+      if (result.status !== 200) {
+        return {
+          error: "Fetch product fail",
+          data: null,
+        };
+      }
+
+      return {
+        error: null,
+        data: result.data,
+      };
+    });
+  }
 }
