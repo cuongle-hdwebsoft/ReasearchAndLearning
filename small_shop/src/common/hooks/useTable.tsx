@@ -40,7 +40,7 @@ export default function useTable<F>(props: IProps<F>) {
     dispatch(props.actionLoad(payload));
   };
 
-  const init = (query?: any) => {
+  const init = (query: { [key: string]: string | number | boolean } = {}) => {
     const formatQuery = formatQueryToPagination<F>(query);
     const payload = formatData<F>(props.prevQuery, formatQuery);
     dispatch(props.actionLoad(payload));
