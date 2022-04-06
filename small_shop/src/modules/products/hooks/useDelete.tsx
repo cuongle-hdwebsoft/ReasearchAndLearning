@@ -12,7 +12,7 @@ export default function useDelete() {
   const table = useTableProduct();
   const [isLoading, setIsLoading] = useState(false);
 
-  console.log("useDelete", isDeleting, isLoading);
+  // console.log("useDelete", isDeleting, isLoading);
 
   const handleDelete = (id: string | number) => {
     setIsLoading(true);

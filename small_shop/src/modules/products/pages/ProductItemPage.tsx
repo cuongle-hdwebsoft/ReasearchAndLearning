@@ -68,7 +68,13 @@ export default function ProductItemPage() {
     }
   }, [isLoadingProduct, product, id]);
 
-  // console.log(isLoadingCategories, isLoadingProduct);
+  // console.log(
+  //   "isLoadingCategories, isLoadingProduct, categories, product",
+  //   isLoadingCategories,
+  //   isLoadingProduct,
+  //   categories,
+  //   product,
+  // );
 
   if (isLoadingCategories || isLoadingProduct) {
     return null;
