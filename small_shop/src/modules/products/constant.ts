@@ -17,9 +17,9 @@ export const DELETE_PRODUCT_SUCCESS_ACTION = "DELETE_PRODUCT_SUCCESS_ACTION";
 export const DELETE_PRODUCT_FAIL_ACTION = "DELETE_PRODUCT_FAIL_ACTION";
 
 export interface ICategory {
-  name: string;
-  id: string;
-  value: string;
+  name?: string;
+  id?: string;
+  value?: string;
 }
 
 export interface IProduct {
@@ -88,6 +88,11 @@ export interface IFilterProduct {
   productName?: string;
   inStock?: boolean;
   categoryName?: string;
+  [key: string]: string | number | unknown;
+}
+
+export interface IFitlerCategory {
+  name?: string;
   [key: string]: string | number | unknown;
 }
 

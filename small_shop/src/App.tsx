@@ -31,12 +31,18 @@ const ProductItemPage = React.lazy(() => import("./modules/products/pages/Produc
 import "./common/i18n/index";
 import AuthContextProvider, { handler } from "./common/hocs/AuthContextProvider";
 
+import { QueryClientProvider, QueryClient } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
+import CategoryItemPage from "./modules/category/pages/CategoryItemPage";
+
 const defaultTheme = (themeMode: "light" | "dark") =>
   createTheme({
     palette: {
       mode: themeMode || "dark",
     },
   });
+
+const queryClient = new QueryClient();
 
 function App() {
   const [theme, setTheme] = useState<"light" | "dark">("dark");
@@ -63,54 +69,69 @@ function App() {
 
   return (
     <Provider store={store}>
-      <AppContext.Provider value={{ theme, toggleTheme, toggleLang, lang }}>
-        <AuthContextProvider handlers={handler}>
-          <ThemeProvider theme={defaultTheme(theme)}>
-            <SnackbarProvider
-              maxSnack={5}
-              autoHideDuration={1000}
-              anchorOrigin={{ horizontal: "center", vertical: "top" }}
-            >
-              <BrowserRouter>
-                <ModalProvider>
-                  <PublicUtils></PublicUtils>
-                  <Suspense fallback={<Loading></Loading>}>
-                    <Switch>
-                      <AuthRoutes path="/" loginPage={<LoginPage></LoginPage>}>
-                        <Route path="/" exact={true}>
-                          <MainLayout>
-                            <DashboardPage></DashboardPage>
-                          </MainLayout>
-                        </Route>
-                        <Route path="/category" exact={true}>
-                          <MainLayout>
-                            <CategoryListPage></CategoryListPage>
-                          </MainLayout>
-                        </Route>
-                        <Route path="/products" exact={true}>
-                          <MainLayout>
-                            <ProductListPage></ProductListPage>
-                          </MainLayout>
-                        </Route>
-                        <Route path="/products/:id" exact={true}>
-                          <MainLayout>
-                            <ProductItemPage></ProductItemPage>
-                          </MainLayout>
-                        </Route>
-                        <Route path="*">
-                          <MainLayout>
-                            <NotFound></NotFound>
-                          </MainLayout>
-                        </Route>
-                      </AuthRoutes>
-                    </Switch>
-                  </Suspense>
-                </ModalProvider>
-              </BrowserRouter>
-            </SnackbarProvider>
-          </ThemeProvider>
-        </AuthContextProvider>
-      </AppContext.Provider>
+      <QueryClientProvider client={queryClient}>
+        <AppContext.Provider value={{ theme, toggleTheme, toggleLang, lang }}>
+          <AuthContextProvider handlers={handler}>
+            <ThemeProvider theme={defaultTheme(theme)}>
+              <SnackbarProvider
+                maxSnack={5}
+                autoHideDuration={1000}
+                anchorOrigin={{ horizontal: "center", vertical: "top" }}
+              >
+                <BrowserRouter>
+                  <ModalProvider>
+                    <PublicUtils></PublicUtils>
+                    <Suspense fallback={<Loading></Loading>}>
+                      <Switch>
+                        <AuthRoutes path="/" loginPage={<LoginPage></LoginPage>}>
+                          <Route path="/" exact={true}>
+                            <MainLayout>
+                              <DashboardPage></DashboardPage>
+                            </MainLayout>
+                          </Route>
+                          <Route path="/category" exact={true}>
+                            <MainLayout>
+                              <CategoryListPage></CategoryListPage>
+                            </MainLayout>
+                          </Route>
+                          <Route path="/category/:id" exact={true}>
+                            <MainLayout>
+                              <CategoryItemPage></CategoryItemPage>
+                            </MainLayout>
+                          </Route>
+                          <Route path="/products" exact={true}>
+                            <MainLayout>
+                              <ProductListPage></ProductListPage>
+                            </MainLayout>
+                          </Route>
+                          <Route path="/products/:id" exact={true}>
+                            <MainLayout>
+                              <ProductItemPage></ProductItemPage>
+                            </MainLayout>
+                          </Route>
+                          <Route path="*">
+                            <MainLayout>
+                              <NotFound></NotFound>
+                            </MainLayout>
+                          </Route>
+                        </AuthRoutes>
+                      </Switch>
+                    </Suspense>
+                  </ModalProvider>
+                </BrowserRouter>
+              </SnackbarProvider>
+            </ThemeProvider>
+          </AuthContextProvider>
+        </AppContext.Provider>
+        <ReactQueryDevtools
+          panelProps={{
+            style: {
+              width: 900,
+              left: 10,
+            },
+          }}
+        ></ReactQueryDevtools>
+      </QueryClientProvider>
     </Provider>
   );
 }

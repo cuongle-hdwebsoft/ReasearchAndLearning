@@ -24,31 +24,31 @@ import AddIcon from "@mui/icons-material/Add";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import CardHeaderPage from "../../../common/components/CardHeaderPage";
-import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { fetchAuth } from "../../../common/utils/fetch";
-import { ICategory } from "../../products/constant";
+import { Link, useHistory } from "react-router-dom";
+import useGetCategories from "../hooks/useGetCategories";
+import FakeTableLoading from "../../../common/components/FakeTableLoading";
+import useFilterCategory from "../hooks/useFilterCategory";
+import useDebounce from "../../../common/hooks/useDebounce";
+import useModal from "../../../common/hooks/useModal";
+import FormDeleteCategory from "../components/FormDeleteCategory";
 
 export default function CategoryListPage() {
   const theme = useTheme();
-  const [categories, setCategories] = useState<ICategory[]>([]);
+  const history = useHistory();
+  const { handleFilterInput, handleChangePage, limit, page, filter } = useFilterCategory();
+  const debounceFilter = useDebounce(filter, 500);
+  const { data, status, isError, error } = useGetCategories({ limit, page, filter: debounceFilter });
+  const modal = useModal();
 
-  useEffect(() => {
-    const getData = async () => {
-      const rs = await fetchAuth("GET", "/categories", null, {
-        params: {
-          _limit: 10,
-          page: 1,
-        },
-      });
+  if (isError) {
+    return <div>{error}</div>;
+  }
 
-      if (rs.status === 200) {
-        setCategories(rs.data);
-      }
-    };
-
-    getData();
-  }, []);
+  const handleOpenModalDelete = (id: string | undefined) => {
+    if (id) {
+      modal.open(<FormDeleteCategory id={id}></FormDeleteCategory>);
+    }
+  };
 
   return (
     <div>
@@ -61,7 +61,7 @@ export default function CategoryListPage() {
             direction={"row"}
             alignItems="center"
           >
-            <Typography variant="h4">Category page</Typography>
+            <Typography variant="h4">Category page </Typography>
             <Breadcrumbs
               separator="›"
               css={css`
@@ -89,13 +89,22 @@ export default function CategoryListPage() {
             </Breadcrumbs>
           </Stack>
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <TextField InputLabelProps={{ shrink: true }} size="small" label="Name category"></TextField>
+            <TextField
+              onChange={handleFilterInput("name")}
+              InputLabelProps={{ shrink: true }}
+              size="small"
+              label="Name category"
+            ></TextField>
             <Stack
               css={css`
                 margin-left: auto;
               `}
             >
-              <Button variant="contained" startIcon={<AddIcon></AddIcon>}>
+              <Button
+                onClick={() => history.push("/category/null")}
+                variant="contained"
+                startIcon={<AddIcon></AddIcon>}
+              >
                 Add new
               </Button>
             </Stack>
@@ -108,39 +117,54 @@ export default function CategoryListPage() {
                 <TableRow>
                   <TableCell>ID</TableCell>
                   <TableCell>Name</TableCell>
+                  <TableCell>Value</TableCell>
                   <TableCell align="right">Action</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
-                {categories.map((item) => {
-                  return (
-                    <TableRow key={item.id}>
-                      <TableCell>{item.id}</TableCell>
-                      <TableCell>{item.name}</TableCell>
-                      <TableCell align="right">
-                        <Stack direction={"row"} spacing={2} justifyContent="right">
-                          <Button size="small" variant="outlined" startIcon={<EditIcon></EditIcon>}>
-                            Edit
-                          </Button>
-                          <Button size="small" variant="outlined" color="error" startIcon={<DeleteIcon></DeleteIcon>}>
-                            Delete
-                          </Button>
-                        </Stack>
-                      </TableCell>
-                    </TableRow>
-                  );
-                })}
+                {status === "loading" ? (
+                  <FakeTableLoading cols={4}></FakeTableLoading>
+                ) : (
+                  data?.data.map((item) => {
+                    return (
+                      <TableRow key={item.id}>
+                        <TableCell>{item.id}</TableCell>
+                        <TableCell>{item.name}</TableCell>
+                        <TableCell>{item.value}</TableCell>
+                        <TableCell align="right">
+                          <Stack direction={"row"} spacing={2} justifyContent="right">
+                            <Button
+                              onClick={() => history.push("/category/" + item.id)}
+                              size="small"
+                              variant="outlined"
+                              startIcon={<EditIcon></EditIcon>}
+                            >
+                              Edit
+                            </Button>
+                            <Button
+                              onClick={() => handleOpenModalDelete(item.id)}
+                              size="small"
+                              variant="outlined"
+                              color="error"
+                              startIcon={<DeleteIcon></DeleteIcon>}
+                            >
+                              Delete
+                            </Button>
+                          </Stack>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })
+                )}
               </TableBody>
             </Table>
           </TableContainer>
           <TablePagination
-            onPageChange={() => {
-              console.log(1);
-            }}
+            onPageChange={handleChangePage}
             component={"div"}
-            count={11}
-            rowsPerPage={10}
-            page={1}
+            count={data && data.total ? data.total : 0}
+            rowsPerPage={limit}
+            page={status === "loading" ? 0 : page}
           ></TablePagination>
         </Card>
       </Box>

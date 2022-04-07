@@ -1,4 +1,4 @@
-import Axios, { AxiosRequestConfig, Method } from "axios";
+import Axios, { AxiosRequestConfig, AxiosResponse, Method } from "axios";
 
 const baseUrl = "http://localhost:3001";
 

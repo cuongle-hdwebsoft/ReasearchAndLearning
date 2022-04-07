@@ -1,15 +1,17 @@
 import queryString from "query-string";
-import React from "react";
 
 export default function useQuery<T extends object>() {
   const url = window.location.href;
   const parser = queryString.parseUrl(url);
 
-  return React.useMemo(
-    () => ({
-      query: parser.query as unknown as T & { limit: number; page: number },
-      url,
-    }),
-    [window.location.href],
-  );
+  const updateUrlShallow = (query: { [key: string]: string | number | boolean }) => {
+    const newUrl = queryString.stringifyUrl({ url: parser.url, query });
+    window.history.replaceState(null, "", newUrl);
+  };
+
+  return {
+    query: parser.query as unknown as T,
+    updateUrlShallow,
+    url,
+  };
 }

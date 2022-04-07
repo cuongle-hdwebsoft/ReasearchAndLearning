@@ -31,7 +31,7 @@ import FilterProducts from "../../../common/components/FilterProducts";
 import FakeTableLoading from "../../../common/components/FakeTableLoading";
 import useModal from "../../../common/hooks/useModal";
 import useTableProduct from "../../../common/hooks/useTableProduct";
-import useQueryProduct from "../../../common/hooks/useQueryProduct";
+import useQueryProduct from "../hooks/useQueryProduct";
 import ProductListBreadCrums from "../components/ProductListBreadCrums";
 import FormDeleteProduct from "../components/FormDeleteProduct";
 

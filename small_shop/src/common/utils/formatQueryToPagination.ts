@@ -1,7 +1,7 @@
 import { IBaseFilter } from "../../modules/products/constant";
 
 export default function formatQueryToPagination<F>(query: {
-  [key: string]: string | number | boolean;
+  [key: string]: string | number | boolean | unknown;
 }): IBaseFilter<F> {
   const result: { limit?: number; page?: number; filter?: F } = {};
 

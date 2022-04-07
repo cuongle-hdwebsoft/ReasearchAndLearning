@@ -185,7 +185,7 @@ export default function ProductItemPage() {
 
           <div className="form-item">
             <CustomSelect
-              items={categories.map((c) => ({ value: c.value, name: c.name }))}
+              items={categories.map((c) => ({ value: c.value || "", name: c.name || "" }))}
               label="Category"
               name="categoryName"
               muiProps={{ sx: { minWidth: 500 } }}
