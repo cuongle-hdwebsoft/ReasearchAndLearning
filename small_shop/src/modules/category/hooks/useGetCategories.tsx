@@ -1,5 +1,5 @@
 import { useSnackbar } from "notistack";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useQuery } from "react-query";
 import CategoryApi from "../../../apis/services/category";
 import { ICategory } from "../../products/constant";

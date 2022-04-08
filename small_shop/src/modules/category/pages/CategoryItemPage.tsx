@@ -12,7 +12,6 @@ import useCreate from "../hooks/useCreate";
 import useEdit from "../hooks/useEdit";
 import useGetCategoryItem from "../hooks/useGetCategoryItem";
 import { useEffect } from "react";
-import { ICategory } from "../../products/constant";
 
 const schema = yup.object({
   name: yup.string().required(),
