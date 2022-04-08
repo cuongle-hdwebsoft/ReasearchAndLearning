@@ -94,6 +94,7 @@ export default function CategoryListPage() {
               InputLabelProps={{ shrink: true }}
               size="small"
               label="Name category"
+              value={filter["name"] || ""}
             ></TextField>
             <Stack
               css={css`
@@ -164,7 +165,7 @@ export default function CategoryListPage() {
             component={"div"}
             count={data && data.total ? data.total : 0}
             rowsPerPage={limit}
-            page={status === "loading" ? 0 : page}
+            page={!data?.total ? 0 : page}
           ></TablePagination>
         </Card>
       </Box>

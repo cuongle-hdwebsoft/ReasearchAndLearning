@@ -9,8 +9,8 @@ export default function useGetCategories({
   page = 0,
   filter,
 }: {
-  limit: number;
-  page: number;
+  limit?: number;
+  page?: number;
   filter?: ICategory;
 }) {
   const { data, status, error, isLoading, isError, ...rest } = useQuery(

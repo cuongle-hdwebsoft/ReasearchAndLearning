@@ -17,7 +17,7 @@ export default function useCreate() {
 
   useEffect(() => {
     if (isError) {
-      enqueueSnackbar("Fail to create");
+      enqueueSnackbar("Fail to create", { variant: "error" });
     }
   }, [isError]);
 

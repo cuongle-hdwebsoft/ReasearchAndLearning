@@ -5,6 +5,7 @@ export default function useQuery<T extends object>() {
   const parser = queryString.parseUrl(url);
 
   const updateUrlShallow = (query: { [key: string]: string | number | boolean }) => {
+    console.log(query);
     const newUrl = queryString.stringifyUrl({ url: parser.url, query });
     window.history.replaceState(null, "", newUrl);
   };

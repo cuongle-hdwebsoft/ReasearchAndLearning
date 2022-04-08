@@ -7,14 +7,6 @@ export default class ProductApi {
     return fetchAuth("GET", "/products", null, {
       params,
     }).then((result: AxiosResponse<IProduct[]>) => {
-      if (result.status !== 200) {
-        return {
-          data: [],
-          totalProducts: 0,
-          error: "Load fail",
-        };
-      }
-
       return {
         data: result.data,
         totalProducts: parseInt(result.headers["x-total-count"]),
@@ -25,13 +17,6 @@ export default class ProductApi {
 
   public static create(data: IFormProduct) {
     return fetchAuth("POST", "/products", data).then((result: AxiosResponse<IProduct>) => {
-      if (result.status !== 201) {
-        return {
-          data: null,
-          error: "Create fail",
-        };
-      }
-
       return {
         data: result.data,
         error: null,
@@ -41,13 +26,6 @@ export default class ProductApi {
 
   public static edit(data: IFormProduct & { id: string | number }) {
     return fetchAuth("PUT", "/products/" + data.id, data).then((result: AxiosResponse<IProduct>) => {
-      if (result.status !== 200) {
-        return {
-          data: null,
-          error: "Edit fail",
-        };
-      }
-
       return {
         data: result.data,
         error: null,
@@ -56,14 +34,7 @@ export default class ProductApi {
   }
 
   public static delete(id: string | number) {
-    return fetchAuth("DELETE", "/products/" + id, null).then((result: AxiosResponse<IProduct>) => {
-      if (result.status !== 200) {
-        return {
-          data: null,
-          error: "Delete fail",
-        };
-      }
-
+    return fetchAuth("DELETE", "/products/" + id, null).then(() => {
       return {
         data: null,
         error: null,
@@ -73,13 +44,6 @@ export default class ProductApi {
 
   public static getById(id: string) {
     return fetchAuth("GET", "/products/" + id, null).then((result) => {
-      if (result.status !== 200) {
-        return {
-          error: "Fetch product fail",
-          data: null,
-        };
-      }
-
       return {
         error: null,
         data: result.data,

@@ -17,7 +17,7 @@ export default function useEdit() {
 
   useEffect(() => {
     if (isError) {
-      enqueueSnackbar("Fail to edit");
+      enqueueSnackbar("Fail to edit", { variant: "error" });
     }
   }, [isError]);
 
