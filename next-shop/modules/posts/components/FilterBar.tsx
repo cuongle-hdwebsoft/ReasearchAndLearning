@@ -1,7 +1,24 @@
-import { MenuItem, Select, Stack, TextField } from "@mui/material";
-import React from "react";
+import {
+  MenuItem,
+  Select,
+  SelectChangeEvent,
+  Stack,
+  TextField,
+} from "@mui/material";
+import React, { ChangeEvent } from "react";
+import { IFilterPost } from "../interface/post";
 
-export default function FilterBar() {
+interface IProps {
+  handleChangeInputFilter: (
+    key: string
+  ) => (e: ChangeEvent<HTMLInputElement>) => void;
+  handleChangeSelectFilter: (
+    key: string
+  ) => (event: SelectChangeEvent<string>) => void;
+  filter: IFilterPost;
+}
+
+export default function FilterBar(props: IProps) {
   return (
     <div
       style={{
@@ -16,10 +33,18 @@ export default function FilterBar() {
           label="Post name"
           placeholder="Post name"
           size="small"
+          onChange={props.handleChangeInputFilter("q")}
+          value={props.filter.q || ""}
         ></TextField>
-        <Select placeholder="Category" size="small" style={{ width: 300 }}>
+        <Select
+          onChange={props.handleChangeSelectFilter("tags.id")}
+          placeholder="Category"
+          size="small"
+          style={{ width: 300 }}
+          value={(props.filter["tags.id"] as string) || ""}
+        >
           <MenuItem value="">All</MenuItem>
-          <MenuItem value="Categories 1">Categories 1</MenuItem>
+          <MenuItem value="5979a779df093500228e9587">Fiction</MenuItem>
         </Select>
         <p>Total items: 12 (items)</p>
       </Stack>

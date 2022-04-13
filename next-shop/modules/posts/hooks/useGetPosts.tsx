@@ -1,19 +1,26 @@
 import React from "react";
 import { useQuery } from "react-query";
 import PostApi from "../../../services/posts";
-import { IPost } from "../interface/post";
+import { IFilterPost, IPost } from "../interface/post";
 
 interface IProps {
   limit?: number;
   page?: number;
-  initialPost?: IPost[];
+  filter: IFilterPost;
 }
 
 export default function useGetPosts(props: IProps) {
   const { data, isError, error, isFetching } = useQuery({
-    queryKey: ["posts", { limit: props.limit, page: props.page }],
+    queryKey: [
+      "posts",
+      { limit: props.limit, page: props.page, ...props.filter },
+    ],
     queryFn: function () {
-      return PostApi.getAll({ _limit: props.limit, _page: props.page });
+      return PostApi.getAll({
+        _limit: props.limit,
+        _page: props.page,
+        filter: props.filter,
+      });
     },
     staleTime: 10000,
     keepPreviousData: true,

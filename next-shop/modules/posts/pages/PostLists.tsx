@@ -6,8 +6,21 @@ import useFilterPost from "../hooks/useFilterPost";
 import useGetPosts from "../hooks/useGetPosts";
 
 const PostList = () => {
-  const { limit, page, handleChangePage, handleChangePerRow } = useFilterPost();
-  const { data, isError } = useGetPosts({ limit, page });
+  const {
+    limit,
+    page,
+    handleChangePage,
+    handleChangePerRow,
+    handleChangeInputFilter,
+    handleChangeSelectFilter,
+    filter,
+    debounceFilter,
+  } = useFilterPost();
+  const { data, isError } = useGetPosts({
+    limit,
+    page,
+    filter: debounceFilter,
+  });
 
   if (isError) {
     return <div>Error</div>;
@@ -16,7 +29,11 @@ const PostList = () => {
   return (
     <div>
       <h1 style={{ paddingLeft: 15 }}>Post List</h1>
-      <FilterBar></FilterBar>
+      <FilterBar
+        handleChangeInputFilter={handleChangeInputFilter}
+        handleChangeSelectFilter={handleChangeSelectFilter}
+        filter={filter}
+      ></FilterBar>
       <div className="d-flex flex-wrap">
         {data.data.map((post) => {
           return <Post key={post.id} post={post} />;
