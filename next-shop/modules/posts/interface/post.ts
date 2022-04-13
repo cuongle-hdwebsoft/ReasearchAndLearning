@@ -1,5 +1,11 @@
 import { IBaseFilter, IBasePagination } from "../../../common/interface";
 
+export interface ICategory {
+  id: string;
+  name: string;
+  slug: string;
+}
+
 export interface IPost {
   id: string;
   uuid: string;
@@ -10,11 +16,7 @@ export interface IPost {
   visibility: string;
   created_at: string;
   updated_at: string;
-  tags: {
-    id: string;
-    name: string;
-    slug: string;
-  };
+  tags: ICategory;
   authors: string;
   excerpt: string;
 }

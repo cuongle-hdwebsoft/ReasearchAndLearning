@@ -1,33 +1,25 @@
 import { GetServerSideProps } from "next";
 import { dehydrate, QueryClient } from "react-query";
+import getFilters from "../../common/utils/getFilters";
 import { IFilterPost } from "../../modules/posts/interface/post";
 import PostList from "../../modules/posts/pages/PostLists";
+import prefetchCategories from "../../modules/posts/queries/prefetchCategories";
+import prefetchPosts from "../../modules/posts/queries/prefetchPosts";
 import PostApi from "../../services/posts";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   try {
     const limit = (ctx.query.limit as unknown as number) || 8;
     const page = (ctx.query.page as unknown as number) || 1;
-    const filter: IFilterPost =
-      {
-        "tags.id": ctx.query["tags.id"]?.toString(),
-        q: ctx.query.q?.toString(),
-      } || {};
+    // const order = (ctx.query.page as unknown as number) ||
+    const filter: IFilterPost = getFilters(ctx.query, ["tags.id", "q"]);
+
     const queryClient = new QueryClient();
 
-    await queryClient.prefetchQuery(
-      [
-        "posts",
-        {
-          limit: parseInt(String(limit)),
-          page: parseInt(String(page)),
-          filter,
-        },
-      ],
-      function () {
-        return PostApi.getAll({ _limit: limit, _page: page, filter });
-      }
-    );
+    await Promise.all([
+      prefetchPosts(queryClient, limit, page, filter),
+      prefetchCategories(queryClient),
+    ]);
 
     return {
       props: {

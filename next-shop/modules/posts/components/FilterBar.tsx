@@ -1,4 +1,5 @@
 import {
+  Button,
   MenuItem,
   Select,
   SelectChangeEvent,
@@ -6,6 +7,7 @@ import {
   TextField,
 } from "@mui/material";
 import React, { ChangeEvent } from "react";
+import useGetCacheCategories from "../hooks/useGetCacheCategories";
 import { IFilterPost } from "../interface/post";
 
 interface IProps {
@@ -15,10 +17,14 @@ interface IProps {
   handleChangeSelectFilter: (
     key: string
   ) => (event: SelectChangeEvent<string>) => void;
+  handleClearFilter: () => void;
   filter: IFilterPost;
+  total?: number;
 }
 
 export default function FilterBar(props: IProps) {
+  const { categories } = useGetCacheCategories();
+
   return (
     <div
       style={{
@@ -29,6 +35,9 @@ export default function FilterBar(props: IProps) {
       }}
     >
       <Stack direction={"row"} spacing={2} alignItems="center">
+        <Button onClick={props.handleClearFilter} variant="outlined">
+          Clear filter
+        </Button>
         <TextField
           label="Post name"
           placeholder="Post name"
@@ -38,15 +47,22 @@ export default function FilterBar(props: IProps) {
         ></TextField>
         <Select
           onChange={props.handleChangeSelectFilter("tags.id")}
-          placeholder="Category"
           size="small"
           style={{ width: 300 }}
           value={(props.filter["tags.id"] as string) || ""}
         >
           <MenuItem value="">All</MenuItem>
-          <MenuItem value="5979a779df093500228e9587">Fiction</MenuItem>
+          {categories.map((category) => {
+            return (
+              <MenuItem key={category.id} value={category.id}>
+                {category.name}
+              </MenuItem>
+            );
+          })}
         </Select>
-        <p>Total items: 12 (items)</p>
+        <p style={{ fontWeight: "bold" }}>
+          Total items: {props.total || 0} (items)
+        </p>
       </Stack>
     </div>
   );
