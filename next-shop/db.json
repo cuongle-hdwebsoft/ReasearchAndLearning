@@ -270,5 +270,27 @@
       "authors": "Ram4GB",
       "excerpt": "Fourscore and seven years ago our fathers brought forth on this continent, a new\nnation, conceived in Liberty, and dedicated to the proposition that all men are\ncreated equal.\n\nNow we are engaged in a great civil war, testing whether that nation, or any\nnation so conceived and so dedicated, can long endure. We are met on a great\nbattle-field of that war. We have come to dedicate a portion of that field, as a\nfinal resting place for those who here gave their lives that that nation might\nlive. It "
     }
+  ],
+  "categories": [
+    {
+      "id": "59799bbd6ebb2f00243a33db",
+      "name": "Getting Started",
+      "slug": "Getting Started"
+    },
+    {
+      "id": "5979a779df093500228e958a",
+      "name": "Fables",
+      "slug": "Fables"
+    },
+    {
+      "id": "5979a779df093500228e9587",
+      "name": "Fiction",
+      "slug": "fiction"
+    },
+    {
+      "id": "5979a779df093500228e958b",
+      "name": "Speeches",
+      "slug": "Speeches"
+    }
   ]
 }

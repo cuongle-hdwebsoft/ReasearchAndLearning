@@ -26,6 +26,14 @@
   font-weight: bold;
   font-size: 1.3rem;
   margin-bottom: 10px;
+  height: 100px;
+  text-overflow: ellipsis;
+}
+
+.post .post__content .post__author span,
+.post .post__content .post__category span {
+  font-weight: bold;
+  color: blue;
 }
 
 .post .post__content .post__description {

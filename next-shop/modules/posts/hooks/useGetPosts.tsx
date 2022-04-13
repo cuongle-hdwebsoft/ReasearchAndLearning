@@ -13,7 +13,7 @@ export default function useGetPosts(props: IProps) {
   const { data, isError, error, isFetching } = useQuery({
     queryKey: [
       "posts",
-      { limit: props.limit, page: props.page, ...props.filter },
+      { limit: props.limit, page: props.page, filter: props.filter },
     ],
     queryFn: function () {
       return PostApi.getAll({

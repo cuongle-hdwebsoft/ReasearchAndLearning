@@ -55,6 +55,12 @@ export default function useFilterPost() {
       );
     };
 
+  const handleClearFilter = () => {
+    setFilter({});
+    setLimit(8);
+    setPage(1);
+  };
+
   useEffect(() => {
     updateUrlShallow({ page, limit, ...filter });
   }, [limit, page, filter]);
@@ -65,6 +71,7 @@ export default function useFilterPost() {
     filter,
     debounceFilter,
     handleChangePage,
+    handleClearFilter,
     handleChangePerRow,
     handleChangeInputFilter,
     handleChangeSelectFilter,

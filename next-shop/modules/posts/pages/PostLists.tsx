@@ -3,6 +3,7 @@ import { useQueryClient } from "react-query";
 import FilterBar from "../components/FilterBar";
 import Post from "../components/Post";
 import useFilterPost from "../hooks/useFilterPost";
+import useGetCacheCategories from "../hooks/useGetCacheCategories";
 import useGetPosts from "../hooks/useGetPosts";
 
 const PostList = () => {
@@ -10,6 +11,7 @@ const PostList = () => {
     limit,
     page,
     handleChangePage,
+    handleClearFilter,
     handleChangePerRow,
     handleChangeInputFilter,
     handleChangeSelectFilter,
@@ -32,7 +34,9 @@ const PostList = () => {
       <FilterBar
         handleChangeInputFilter={handleChangeInputFilter}
         handleChangeSelectFilter={handleChangeSelectFilter}
+        handleClearFilter={handleClearFilter}
         filter={filter}
+        total={data.total}
       ></FilterBar>
       <div className="d-flex flex-wrap">
         {data.data.map((post) => {
