@@ -1,13 +1,24 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import MainLayout from "../common/hocs/MainLayout";
+import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
+import { useState } from "react";
 
 function MyApp({ Component, pageProps }: AppProps) {
-  console.log("MyApp");
+  const [queryClient] = useState(new QueryClient());
+
+  console.log("pageProps.dehydratedState", pageProps.dehydratedState);
+
   return (
-    <MainLayout>
-      <Component {...pageProps} />
-    </MainLayout>
+    <QueryClientProvider client={queryClient}>
+      <Hydrate state={pageProps.dehydratedState}>
+        <MainLayout>
+          <Component {...pageProps} />
+        </MainLayout>
+        <ReactQueryDevtools></ReactQueryDevtools>
+      </Hydrate>
+    </QueryClientProvider>
   );
 }
 

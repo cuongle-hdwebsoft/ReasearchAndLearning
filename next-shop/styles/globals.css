@@ -1,12 +1,26 @@
-@import url("https://fonts.googleapis.com/css2?family=Space+Mono&display=swap");
+/* @import url("https://fonts.googleapis.com/css2?family=Space+Mono&display=swap"); */
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono&family=Work+Sans:wght@400;700&display=swap");
+
+@import "../modules/posts/styles/posts.css";
 
 html,
 body {
   padding: 0;
   margin: 0;
+  background-color: rgb(235, 235, 235);
+  line-height: 1.3;
 }
 
 * {
   box-sizing: border-box;
   font-family: "Space Mono", monospace !important;
+  /* font-family: "Work Sans", sans-serif !important; */
+}
+
+.d-flex {
+  display: flex;
+}
+
+.flex-wrap {
+  flex-wrap: wrap;
 }
