@@ -8,10 +8,12 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     if (ctx.params && ctx.params.id) {
       result = await PostApi.getById(ctx.params.id as string);
     }
+
     return {
       props: {
         post: result,
       },
+      revalidate: 10,
     };
   } catch (error) {
     return {
