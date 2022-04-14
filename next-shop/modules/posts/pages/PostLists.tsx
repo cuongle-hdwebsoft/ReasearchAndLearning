@@ -1,9 +1,7 @@
 import { TablePagination } from "@mui/material";
-import { useQueryClient } from "react-query";
 import FilterBar from "../components/FilterBar";
 import Post from "../components/Post";
 import useFilterPost from "../hooks/useFilterPost";
-import useGetCacheCategories from "../hooks/useGetCacheCategories";
 import useGetPosts from "../hooks/useGetPosts";
 
 const PostList = () => {
@@ -17,11 +15,16 @@ const PostList = () => {
     handleChangeSelectFilter,
     filter,
     debounceFilter,
+    order,
+    sort,
+    handleSortFilter,
   } = useFilterPost();
   const { data, isError } = useGetPosts({
     limit,
     page,
     filter: debounceFilter,
+    sort,
+    order,
   });
 
   if (isError) {
@@ -37,6 +40,9 @@ const PostList = () => {
         handleClearFilter={handleClearFilter}
         filter={filter}
         total={data.total}
+        handleSortFilter={handleSortFilter}
+        order={order}
+        sort={sort}
       ></FilterBar>
       <div className="d-flex flex-wrap">
         {data.data.map((post) => {

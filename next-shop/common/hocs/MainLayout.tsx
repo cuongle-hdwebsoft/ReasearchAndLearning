@@ -8,17 +8,20 @@ import {
   Typography,
 } from "@mui/material";
 import logo from "../../public/vercel.svg";
+import { useRouter } from "next/router";
 
 interface IProps {
   children: React.ReactElement | React.ReactElement[];
 }
 
 export default function MainLayout(props: IProps) {
+  const { push } = useRouter();
+
   return (
     <div>
       <AppBar position="static" style={{ display: "flex" }}>
         <Toolbar>
-          <IconButton>
+          <IconButton onClick={() => push("/")}>
             <Avatar src="https://pbs.twimg.com/profile_images/1252532485973577728/8Zy0Z8yV_400x400.jpg" />
           </IconButton>
           <Typography>My Blog</Typography>

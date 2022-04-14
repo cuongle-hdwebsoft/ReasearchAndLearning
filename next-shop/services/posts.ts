@@ -1,21 +1,26 @@
 import axios from "axios";
-import { IPost } from "../modules/posts/interface/post";
+import removeEmpty from "../common/utils/removeEmpty";
+import { IFilterPost, IPost } from "../modules/posts/interface/post";
 
 export default class PostApi {
   public static getAll(params: {
     _limit?: number;
     _page?: number;
-    filter?: any;
+    filter?: IFilterPost;
+    _sort?: string;
+    _order?: string;
   }) {
     console.log(params.filter);
     return axios({
       method: "GET",
       url: "http://localhost:3001/posts",
-      params: {
+      params: removeEmpty({
         _limit: params._limit,
         _page: params._page,
+        _sort: params._sort,
+        _order: params._order,
         ...params.filter,
-      },
+      }),
     }).then((rs) => {
       return {
         data: rs.data as unknown as IPost[],

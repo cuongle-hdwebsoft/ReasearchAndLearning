@@ -11,13 +11,14 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   try {
     const limit = (ctx.query.limit as unknown as number) || 8;
     const page = (ctx.query.page as unknown as number) || 1;
-    // const order = (ctx.query.page as unknown as number) ||
+    const sort = (ctx.query.sort as string) || "";
+    const order = (ctx.query.order as string) || "";
     const filter: IFilterPost = getFilters(ctx.query, ["tags.id", "q"]);
 
     const queryClient = new QueryClient();
 
     await Promise.all([
-      prefetchPosts(queryClient, limit, page, filter),
+      prefetchPosts(queryClient, limit, page, filter, sort, order),
       prefetchCategories(queryClient),
     ]);
 

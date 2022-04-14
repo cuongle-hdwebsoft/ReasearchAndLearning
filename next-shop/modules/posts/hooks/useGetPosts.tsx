@@ -1,25 +1,36 @@
 import React from "react";
 import { useQuery } from "react-query";
+import removeEmpty from "../../../common/utils/removeEmpty";
 import PostApi from "../../../services/posts";
-import { IFilterPost, IPost } from "../interface/post";
+import { IFilterPost } from "../interface/post";
 
 interface IProps {
   limit?: number;
   page?: number;
   filter: IFilterPost;
+  sort?: string;
+  order?: string;
 }
 
 export default function useGetPosts(props: IProps) {
   const { data, isError, error, isFetching } = useQuery({
     queryKey: [
       "posts",
-      { limit: props.limit, page: props.page, filter: props.filter },
+      {
+        limit: props.limit,
+        page: props.page,
+        filter: props.filter,
+        sort: props.sort,
+        order: props.order,
+      },
     ],
     queryFn: function () {
       return PostApi.getAll({
         _limit: props.limit,
         _page: props.page,
-        filter: props.filter,
+        filter: removeEmpty(props.filter),
+        _sort: props.sort,
+        _order: props.order,
       });
     },
     staleTime: 10000,
