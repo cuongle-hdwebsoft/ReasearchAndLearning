@@ -23,7 +23,7 @@ const PostList = (props: IProps) => {
     order,
     sort,
     handleSortFilter,
-  } = useFilterPost({ dehydratedState: props.dehydratedState });
+  } = useFilterPost();
   const { data, isError } = useGetPosts({
     limit,
     page,

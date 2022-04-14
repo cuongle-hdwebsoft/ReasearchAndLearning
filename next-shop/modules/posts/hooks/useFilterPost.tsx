@@ -7,11 +7,7 @@ import { IFilterPost } from "../interface/post";
 import useHydrateContext from "./useHydrateContext";
 import useQueryParamPost from "./useQueryParamPost";
 
-interface IProps {
-  dehydratedState: DehydratedState;
-}
-
-export default function useFilterPost(props: IProps) {
+export default function useFilterPost() {
   const postsDehydrate = useHydrateContext("posts");
   const {
     queryKey: [_key, _query],

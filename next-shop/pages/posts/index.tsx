@@ -9,6 +9,7 @@ import PostApi from "../../services/posts";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   try {
+    console.log(ctx.req.headers.cookie);
     const limit = (ctx.query.limit as unknown as number) || 8;
     const page = (ctx.query.page as unknown as number) || 1;
     const sort = (ctx.query.sort as string) || "";

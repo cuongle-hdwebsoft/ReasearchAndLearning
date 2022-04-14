@@ -10,16 +10,21 @@
     "server": "json-server --watch db.json --port 3001 --delay 500"
   },
   "dependencies": {
+    "@hookform/resolvers": "^2.8.8",
     "@mui/material": "^5.6.1",
     "@mui/styled-engine-sc": "^5.6.1",
     "axios": "^0.26.1",
+    "cookies-next": "^2.0.4",
     "json-server": "^0.17.0",
     "next": "12.1.4",
+    "notistack": "^1.0.10",
     "query-string": "^7.1.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
+    "react-hook-form": "^7.29.0",
     "react-query": "^3.34.19",
-    "styled-components": "^5.3.5"
+    "styled-components": "^5.3.5",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@emotion/react": "^11.9.0",

@@ -94,3 +94,7 @@ Trước tiên server sẽ chạy getServerSideProps sau đó trả về props c
 <strong>hydrate và useHydrate y chang nhau nên dùng cái nào cũng được để apply cái dehydratedState vào cache</strong>
 
 <pre>new QueryClient()</pre> sẽ tạo những instance khác nhau và lưu cache khác nhau
+
+## Render giữa \_app và \_document
+
+My App -> My Document
