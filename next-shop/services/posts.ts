@@ -10,7 +10,6 @@ export default class PostApi {
     _sort?: string;
     _order?: string;
   }) {
-    console.log(params.filter);
     return axios({
       method: "GET",
       url: "http://localhost:3001/posts",

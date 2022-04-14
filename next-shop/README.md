@@ -40,3 +40,57 @@ SSR (Server site rendering)
 - Render lại mỗi lần user request
 
 CSR (Client site rendering)
+
+## Luồng đi NextJS
+
+Server: getServerSideProps -> MyApp -> Post List
+Client: MyApp -> Post List -> MyApp -> Post List ...
+
+Server xong rôi xuống client
+
+## Vấn đề
+
+### Vấn đề 1
+
+<pre>
+const query = useQueryClient();
+const queryCache = query.getQueryCache();
+const {
+  queryKey: [_key, _query],
+} = queryCache.find("posts", {
+  exact: false,
+}) as any;
+</pre>
+
+Vấn đề đặt ra là làm sao có thể nhớ được chính xác queryKey để khi từ post detail quay lại thì nó lấy được.
+
+## Hydrate
+
+### dehydrate
+
+dehydrate creates a frozen representation of a cache that can later be hydrated with Hydrate, useHydrate, or hydrate. This is useful for passing prefetched queries from server to client or persisting queries to localStorage or other persistent locations.
+
+### hydrate
+
+Nó sẽ add cái dehydratedState vào cache để sử dụng trong cache, nếu như state ở Hydrate có state = rỗng. Quá trình này diễn ra trên server.
+
+### useHydrate
+
+Nó sẽ add cái dehydratedState vào queryClient để sử dụng trong cache, nếu như state ở Hydrate có state = rỗng. Quá trình này diễn ra trên server.
+
+### Hydrate
+
+- nó sẽ cho phép dùng useHydrate
+- state này sẽ lưu vào cache để sử dụng, để không phải dùng useHydrate
+
+Trước tiên server sẽ chạy getServerSideProps sau đó trả về props cho MyApp
+
+- Nếu có xài Hydrate
+  - Có thê dùng hook useHydrate
+  - Lưu state vào cache ở props tstae. Nếu mình không bỏ gì thì cache rỗng
+    - Nếu state = {} Dưới Post List nên apply dehydrate bằng cách dùng useDehydrate
+    - Nếu có state = props.dehydratedState thì dùng luôn trong cache
+
+<strong>hydrate và useHydrate y chang nhau nên dùng cái nào cũng được để apply cái dehydratedState vào cache</strong>
+
+<pre>new QueryClient()</pre> sẽ tạo những instance khác nhau và lưu cache khác nhau

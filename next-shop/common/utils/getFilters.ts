@@ -5,8 +5,6 @@ export default function getFilters(
   let obj = {} as any;
 
   acceptedKeys.forEach((key) => {
-    console.log(query[key]);
-    console.log(key);
     if (query[key]) {
       obj[key] = query[key];
     }
