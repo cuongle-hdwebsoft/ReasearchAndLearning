@@ -15,15 +15,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   console.log("pageProps", pageProps);
   console.log("pageProps.dehydratedState", pageProps.dehydratedState);
-  // useEffect(() => {
-  //   hydrate(queryClient, pageProps.dehydratedState, {
-  //     defaultOptions: {
-  //       queries: {
-  //         cacheTime: Infinity,
-  //       },
-  //     },
-  //   });
-  // }, [pageProps.dehydratedState, queryClient]);
 
   return (
     <QueryClientProvider client={queryClient}>
