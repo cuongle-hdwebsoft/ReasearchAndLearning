@@ -98,3 +98,7 @@ Trước tiên server sẽ chạy getServerSideProps sau đó trả về props c
 ## Render giữa \_app và \_document
 
 My App -> My Document
+
+## References
+
+https://github.com/vercel/next.js/discussions/10925

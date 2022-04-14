@@ -1,16 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   AppBar,
   Avatar,
   Box,
   IconButton,
+  ListItemIcon,
+  ListItemText,
+  Menu,
+  MenuItem,
   Stack,
   Toolbar,
   Typography,
 } from "@mui/material";
-import logo from "../../public/vercel.svg";
+import logo from "../images/8264.jpg";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import useApp from "../hooks/useApp";
+import PersonIcon from "@mui/icons-material/Person";
+import LogoutIcon from "@mui/icons-material/Logout";
+import useLogout from "../../modules/users/hooks/useLogout";
 
 interface IProps {
   children: React.ReactElement | React.ReactElement[];
@@ -18,6 +26,17 @@ interface IProps {
 
 export default function MainLayout(props: IProps) {
   const { push } = useRouter();
+  const { user } = useApp();
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const { handleLogout } = useLogout();
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleAvatar = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
 
   return (
     <div>
@@ -30,10 +49,57 @@ export default function MainLayout(props: IProps) {
 
           <div style={{ marginLeft: "auto" }}>
             <Stack>
-              <Link href={"/login"} passHref>
-                <span style={{ color: "#fff", cursor: "pointer" }}>Login</span>
-              </Link>
+              {!user ? (
+                <Link href={"/login"} passHref>
+                  <span style={{ color: "#fff", cursor: "pointer" }}>
+                    Login
+                  </span>
+                </Link>
+              ) : (
+                <Avatar
+                  src={logo as unknown as string}
+                  onClick={handleAvatar}
+                ></Avatar>
+              )}
             </Stack>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorEl}
+              anchorOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "right",
+              }}
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              <MenuItem
+                onClick={() => {
+                  handleClose();
+                  push("/users/me");
+                }}
+              >
+                <ListItemIcon>
+                  <PersonIcon></PersonIcon>
+                </ListItemIcon>
+                <ListItemText>My profile</ListItemText>
+              </MenuItem>
+              <MenuItem
+                onClick={() => {
+                  handleLogout();
+                  handleClose();
+                }}
+              >
+                <ListItemIcon>
+                  <LogoutIcon></LogoutIcon>
+                </ListItemIcon>
+                <ListItemText>Logout</ListItemText>
+              </MenuItem>
+            </Menu>
           </div>
         </Toolbar>
       </AppBar>

@@ -292,5 +292,13 @@
       "name": "Speeches",
       "slug": "Speeches"
     }
+  ],
+  "users": [
+    {
+      "id": 1,
+      "username": "leminhcuong",
+      "password": "123",
+      "displayName": "Ram4GB"
+    }
   ]
 }
