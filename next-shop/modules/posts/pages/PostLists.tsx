@@ -1,10 +1,15 @@
 import { TablePagination } from "@mui/material";
+import { DehydratedState } from "react-query";
 import FilterBar from "../components/FilterBar";
 import Post from "../components/Post";
 import useFilterPost from "../hooks/useFilterPost";
 import useGetPosts from "../hooks/useGetPosts";
 
-const PostList = () => {
+interface IProps {
+  dehydratedState: DehydratedState;
+}
+
+const PostList = (props: IProps) => {
   const {
     limit,
     page,
@@ -18,7 +23,7 @@ const PostList = () => {
     order,
     sort,
     handleSortFilter,
-  } = useFilterPost();
+  } = useFilterPost({ dehydratedState: props.dehydratedState });
   const { data, isError } = useGetPosts({
     limit,
     page,
@@ -55,7 +60,7 @@ const PostList = () => {
           component="div"
           count={data.total}
           rowsPerPage={limit}
-          rowsPerPageOptions={[4, 8, 16, 24]}
+          rowsPerPageOptions={[1, 2, 4, 8, 16, 24]}
           page={page ? page - 1 : 0}
           onPageChange={handleChangePage}
           onRowsPerPageChange={handleChangePerRow}

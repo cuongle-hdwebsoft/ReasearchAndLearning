@@ -3,7 +3,7 @@ import CategoryApi from "../../../services/category";
 
 export default async function prefetchCategories(queryClient: QueryClient) {
   await queryClient.prefetchQuery(
-    "categories",
+    ["categories"],
     function () {
       return CategoryApi.getAll();
     },

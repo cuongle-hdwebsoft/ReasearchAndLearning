@@ -1,17 +1,10 @@
-import { useEffect } from "react";
-import { useQueryClient } from "react-query";
 import { ICategory } from "../interface/post";
+import useHydrateContext from "./useHydrateContext";
 
 export default function useGetCacheCategories() {
-  const query = useQueryClient();
-  const queryCache = query.getQueryCache();
-  const {
-    state: { data },
-  } = queryCache.find("categories", {
-    exact: false,
-  }) as any;
+  const data = useHydrateContext("categories");
 
   return {
-    categories: data as ICategory[],
+    categories: (data?.state.data as unknown as ICategory[]) || [],
   };
 }

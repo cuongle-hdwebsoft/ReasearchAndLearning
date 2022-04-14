@@ -1,19 +1,21 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { ChangeEvent, useEffect, useState } from "react";
-import { useQueryClient } from "react-query";
+import { DehydratedState, useQueryClient } from "react-query";
 import useDebounce from "../../../common/hooks/useDebounce";
 import removeEmpty from "../../../common/utils/removeEmpty";
-import { IFilterPost, IPostPaginationFilter } from "../interface/post";
+import { IFilterPost } from "../interface/post";
+import useHydrateContext from "./useHydrateContext";
 import useQueryParamPost from "./useQueryParamPost";
 
-export default function useFilterPost() {
-  const query = useQueryClient();
-  const queryCache = query.getQueryCache();
+interface IProps {
+  dehydratedState: DehydratedState;
+}
+
+export default function useFilterPost(props: IProps) {
+  const postsDehydrate = useHydrateContext("posts");
   const {
     queryKey: [_key, _query],
-  } = queryCache.find("posts", {
-    exact: false,
-  }) as any;
+  } = postsDehydrate as any;
   const [page, setPage] = useState(parseInt(String(_query.page)) || 1);
   const [limit, setLimit] = useState(parseInt(String(_query.limit)) || 8);
   const [filter, setFilter] = useState<IFilterPost>(_query.filter || {});
@@ -75,16 +77,6 @@ export default function useFilterPost() {
   useEffect(() => {
     updateUrlShallow(removeEmpty({ page, limit, ...filter, sort, order }));
   }, [limit, page, filter, sort, order]);
-
-  console.log(
-    "render filter",
-    page,
-    limit,
-    filter,
-    sort,
-    order,
-    debounceFilter
-  );
 
   return {
     page: parseInt(String(page)),
