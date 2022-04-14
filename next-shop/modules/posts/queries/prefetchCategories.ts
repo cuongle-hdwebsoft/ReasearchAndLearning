@@ -9,6 +9,7 @@ export default async function prefetchCategories(queryClient: QueryClient) {
     },
     {
       staleTime: Infinity,
+      cacheTime: Infinity,
     }
   );
 }
