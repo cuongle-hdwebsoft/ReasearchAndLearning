@@ -2,10 +2,13 @@ import { Avatar, Paper } from "@mui/material";
 import React from "react";
 import { IPost } from "../interface/post";
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 export default function Post(props: { post: IPost }) {
+  const route = useRouter();
+
   return (
-    <div className="post">
+    <div onClick={() => route.push("/posts/" + props.post.id)} className="post">
       <Paper sx={{ padding: 1 }}>
         <div className="post__wrap-img">
           <Avatar

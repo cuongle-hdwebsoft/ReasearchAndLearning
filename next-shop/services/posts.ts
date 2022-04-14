@@ -28,4 +28,17 @@ export default class PostApi {
       };
     });
   }
+
+  public static async getById(id: string) {
+    return axios({
+      method: "GET",
+      url: "http://localhost:3001/posts/" + id,
+    }).then((rs) => {
+      if (rs && rs.data) {
+        return rs.data;
+      } else {
+        throw new Error("id not found");
+      }
+    });
+  }
 }

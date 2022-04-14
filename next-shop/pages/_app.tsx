@@ -13,16 +13,17 @@ import { useEffect, useState } from "react";
 function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(new QueryClient());
 
+  console.log("pageProps", pageProps);
   console.log("pageProps.dehydratedState", pageProps.dehydratedState);
-  useEffect(() => {
-    hydrate(queryClient, pageProps.dehydratedState, {
-      defaultOptions: {
-        queries: {
-          cacheTime: Infinity,
-        },
-      },
-    });
-  }, [pageProps.dehydratedState, queryClient]);
+  // useEffect(() => {
+  //   hydrate(queryClient, pageProps.dehydratedState, {
+  //     defaultOptions: {
+  //       queries: {
+  //         cacheTime: Infinity,
+  //       },
+  //     },
+  //   });
+  // }, [pageProps.dehydratedState, queryClient]);
 
   return (
     <QueryClientProvider client={queryClient}>
