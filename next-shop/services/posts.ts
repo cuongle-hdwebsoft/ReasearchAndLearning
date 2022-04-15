@@ -1,5 +1,6 @@
 import axios from "axios";
 import removeEmpty from "../common/utils/removeEmpty";
+import { IComment } from "../modules/posts/interface/comment";
 import { IFilterPost, IPost } from "../modules/posts/interface/post";
 
 export default class PostApi {
@@ -38,6 +39,35 @@ export default class PostApi {
       } else {
         throw new Error("id not found");
       }
+    });
+  }
+
+  public static async getCommentsByPostId(
+    postId: string,
+    params: {
+      _limit?: number;
+      _page?: number;
+    }
+  ) {
+    return axios({
+      method: "GET",
+      url: "http://localhost:3001/comments?postId=" + postId,
+      params: {
+        // _limit: params._limit,
+        // _page: params._page,
+        _sort: "dateTime",
+        _order: "desc",
+      },
+    }).then((rs) => {
+      return rs.data as IComment[];
+    });
+  }
+
+  public static async postCommentByPostId(data: Omit<IComment, "id">) {
+    return axios({
+      method: "POST",
+      data: data,
+      url: "http://localhost:3001/comments",
     });
   }
 }

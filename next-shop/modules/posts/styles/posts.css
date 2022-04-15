@@ -56,3 +56,17 @@
   display: block;
   margin: auto;
 }
+
+.comment {
+  margin-bottom: 5px;
+  padding: 10px;
+}
+
+.comment__wrap-avata {
+  display: flex;
+  align-items: center;
+}
+
+.comment__author {
+  margin-left: 5px;
+}

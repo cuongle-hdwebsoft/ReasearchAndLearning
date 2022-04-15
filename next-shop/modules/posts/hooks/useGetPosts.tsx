@@ -37,7 +37,7 @@ export default function useGetPosts(props: IProps) {
     keepPreviousData: true,
     retry: 3,
     retryDelay: (time: number) => time * 10000,
-    refetchOnWindowFocus: false,
+    refetchOnWindowFocus: true,
   });
 
   return {

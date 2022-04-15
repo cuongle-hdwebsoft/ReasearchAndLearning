@@ -306,5 +306,55 @@
       "address": "HCM City",
       "gender": "male"
     }
+  ],
+  "comments": [
+    {
+      "idAuthor": 1,
+      "authorName": "Ram4GB",
+      "dateTime": "Fri, 15 Apr 2022 05:12:20 GMT",
+      "comment": "asd",
+      "postId": "605360bbce93e1003bd6ddd6",
+      "id": 1
+    },
+    {
+      "idAuthor": 1,
+      "authorName": "Ram4GB",
+      "dateTime": "Fri, 15 Apr 2022 05:12:27 GMT",
+      "comment": "asdasda",
+      "postId": "605360bbce93e1003bd6ddd6",
+      "id": 2
+    },
+    {
+      "idAuthor": 1,
+      "authorName": "Ram4GB",
+      "dateTime": "Fri, 15 Apr 2022 05:40:29 GMT",
+      "comment": "xin chào",
+      "postId": "605360bbce93e1003bd6ddd6",
+      "id": 3
+    },
+    {
+      "idAuthor": 1,
+      "authorName": "Ram4GB",
+      "dateTime": "Fri, 15 Apr 2022 05:40:43 GMT",
+      "comment": "mình tên là Lê Minh Cường",
+      "postId": "605360bbce93e1003bd6ddd6",
+      "id": 4
+    },
+    {
+      "idAuthor": 1,
+      "authorName": "Ram4GB",
+      "dateTime": "Fri, 15 Apr 2022 05:41:24 GMT",
+      "comment": "vô lý",
+      "postId": "605360bbce93e1003bd6ddd6",
+      "id": 5
+    },
+    {
+      "idAuthor": 1,
+      "authorName": "Ram4GB",
+      "dateTime": "Fri, 15 Apr 2022 05:41:34 GMT",
+      "comment": "quá xạo đi",
+      "postId": "605360bbce93e1003bd6ddd6",
+      "id": 6
+    }
   ]
 }
