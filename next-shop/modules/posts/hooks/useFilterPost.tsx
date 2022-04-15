@@ -4,7 +4,7 @@ import { DehydratedState, useQueryClient } from "react-query";
 import useDebounce from "../../../common/hooks/useDebounce";
 import removeEmpty from "../../../common/utils/removeEmpty";
 import { IFilterPost } from "../interface/post";
-import useHydrateContext from "./useHydrateContext";
+import useHydrateContext from "../../../common/hooks/useHydrateContext";
 import useQueryParamPost from "./useQueryParamPost";
 
 export default function useFilterPost() {

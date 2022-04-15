@@ -1,5 +1,5 @@
 import { ICategory } from "../interface/post";
-import useHydrateContext from "./useHydrateContext";
+import useHydrateContext from "../../../common/hooks/useHydrateContext";
 
 export default function useGetCacheCategories() {
   const data = useHydrateContext("categories");

@@ -5,7 +5,6 @@ import { IFilterPost } from "../../modules/posts/interface/post";
 import PostList from "../../modules/posts/pages/PostLists";
 import prefetchCategories from "../../modules/posts/queries/prefetchCategories";
 import prefetchPosts from "../../modules/posts/queries/prefetchPosts";
-import PostApi from "../../services/posts";
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
   try {

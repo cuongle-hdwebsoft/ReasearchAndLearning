@@ -8,7 +8,7 @@ export default function Profile() {
   const router = useRouter();
 
   if (isError) {
-    return "Fail to load";
+    return <div>Fail to load</div>;
   }
 
   return (
