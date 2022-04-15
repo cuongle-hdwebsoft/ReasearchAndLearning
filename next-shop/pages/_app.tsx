@@ -14,8 +14,6 @@ import AppContextProvider from "../common/hocs/AppContextProvider";
 function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(new QueryClient());
 
-  console.log("MyApp", typeof window === "undefined");
-
   return (
     <QueryClientProvider client={queryClient}>
       <Hydrate state={pageProps.dehydratedState}>
@@ -24,7 +22,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <AppContextProvider>
               <SnackbarProvider
                 maxSnack={5}
-                anchorOrigin={{ vertical: "top", horizontal: "right" }}
+                anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
                 autoHideDuration={1000}
               >
                 <MainLayout>

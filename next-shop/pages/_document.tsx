@@ -18,8 +18,6 @@ class MyDocument extends Document {
 
     const initialProps = await Document.getInitialProps(ctx);
 
-    console.log(ctx.renderPage);
-
     return initialProps;
   }
 

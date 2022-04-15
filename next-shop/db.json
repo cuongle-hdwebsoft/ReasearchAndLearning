@@ -298,7 +298,13 @@
       "id": 1,
       "username": "leminhcuong",
       "password": "123",
-      "displayName": "Ram4GB"
+      "displayName": "Ram4GB",
+      "firstName": "Cường",
+      "lastName": "Lê Minh",
+      "age": 23,
+      "mail": "leminhcuong@yahoo.com.vn",
+      "address": "HCM City",
+      "gender": "male"
     }
   ]
 }

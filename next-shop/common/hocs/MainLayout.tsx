@@ -12,13 +12,14 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import logo from "../images/8264.jpg";
+import avataLogo from "../images/shin.jpg";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import useApp from "../hooks/useApp";
 import PersonIcon from "@mui/icons-material/Person";
 import LogoutIcon from "@mui/icons-material/Logout";
 import useLogout from "../../modules/users/hooks/useLogout";
+import Image from "next/image";
 
 interface IProps {
   children: React.ReactElement | React.ReactElement[];
@@ -56,10 +57,13 @@ export default function MainLayout(props: IProps) {
                   </span>
                 </Link>
               ) : (
-                <Avatar
-                  src={logo as unknown as string}
+                <Image
+                  width={50}
+                  height={50}
+                  src={avataLogo as unknown as string}
                   onClick={handleAvatar}
-                ></Avatar>
+                  alt=""
+                ></Image>
               )}
             </Stack>
             <Menu

@@ -2,6 +2,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { unstable_batchedUpdates } from "react-dom";
 import useAuthContext from "../hooks/useAuthContext";
+import NotPermission from "../pages/NotPermission";
 
 interface IProps {
   children: JSX.Element;
@@ -20,22 +21,21 @@ export default function PrivatePage(props: IProps) {
         unstable_batchedUpdates(() => {
           setIsLogin(true);
           setIsLoading(false);
-          console.log(123);
         });
       } catch (error) {
-        console.log(error);
         setIsLogin(false);
+        setIsLoading(false);
       }
     })();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (isLoading) {
-    return <div>You dont have permission to view this </div>;
+    return null;
   }
 
-  if (isLoading && !isLogin) {
-    router.push("/login");
+  if (!isLoading && !isLogin) {
+    return <NotPermission></NotPermission>;
   }
 
   return props.children;

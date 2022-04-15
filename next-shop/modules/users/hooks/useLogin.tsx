@@ -30,9 +30,9 @@ export default function useLogin() {
       setUser(user as unknown as IUser);
       localStorage.setItem("user", JSON.stringify(user));
       enqueueSnackbar("Login successfully", { variant: "success" });
-      router.push("/");
+
+      router.back();
     } catch (error) {
-      console.log(error);
       enqueueSnackbar("Login fail", { variant: "error" });
     }
   };

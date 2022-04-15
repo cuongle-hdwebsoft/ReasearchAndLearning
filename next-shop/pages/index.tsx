@@ -1,9 +1,8 @@
 import { Button } from "@mui/material";
 import type { NextPage } from "next";
-import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import img from "../common/images/photo-1432821596592-e2c18b78144f.jpg";
+import img from "../common/images/photo.jpg";
 
 const Home: NextPage = () => {
   const route = useRouter();
