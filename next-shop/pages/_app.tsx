@@ -1,7 +1,12 @@
 import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import MainLayout from "../common/hocs/MainLayout";
-import { Hydrate, QueryClient, QueryClientProvider } from "react-query";
+import {
+  hydrate,
+  Hydrate,
+  QueryClient,
+  QueryClientProvider,
+} from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 import { useState } from "react";
 import { SnackbarProvider } from "notistack";
@@ -13,6 +18,8 @@ import AppContextProvider from "../common/hocs/AppContextProvider";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [queryClient] = useState(new QueryClient());
+
+  // hydrate(queryClient, pageProps.dehydratedState);
 
   return (
     <QueryClientProvider client={queryClient}>
