@@ -29,8 +29,6 @@ export default function useCommentsPost(props: { postId: string }) {
       }
     );
 
-  console.log(data);
-
   return {
     pages: (data?.pages as unknown as { data: IComment[] }[]) || [],
     isError,

@@ -39,12 +39,10 @@ export default function usePostComment() {
     mutate(data, {
       onSuccess: function () {
         cb("");
-        console.log(123);
         enqueueSnackbar("Post comment successfully", { variant: "success" });
         queryClient.invalidateQueries("comments", { exact: true });
       },
       onError: function (error: any) {
-        console.log(error);
         enqueueSnackbar("Post comment fail", { variant: "error" });
       },
     });
