@@ -53,13 +53,23 @@ export default class PostApi {
       method: "GET",
       url: "http://localhost:3001/comments?postId=" + postId,
       params: {
-        // _limit: params._limit,
-        // _page: params._page,
+        _limit: params._limit,
+        _page: params._page,
         _sort: "dateTime",
         _order: "desc",
       },
     }).then((rs) => {
-      return rs.data as IComment[];
+      const limit = parseInt(params._limit as unknown as string);
+      const page = parseInt(params._page as unknown as string);
+      const total = parseInt(rs.headers["x-total-count"]);
+
+      return {
+        data: rs.data as IComment[],
+        total,
+        limit,
+        page,
+        nextPage: page * limit < total ? page + 1 : undefined,
+      };
     });
   }
 

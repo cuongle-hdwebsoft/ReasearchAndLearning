@@ -14,10 +14,10 @@ import Comment from "../components/Comment";
 import { useRouter } from "next/router";
 import CommentForm from "../components/CommentForm";
 import useCommentsPost from "../hooks/useCommentsPost";
+import CommentList from "../components/CommentList";
 
 const PostDetail = ({ post }: { post: IPost }) => {
   const router = useRouter();
-  const { comments } = useCommentsPost({ postId: post.id });
 
   return (
     <div style={{ padding: 10 }}>
@@ -46,12 +46,7 @@ const PostDetail = ({ post }: { post: IPost }) => {
         <div style={{ marginBottom: 10 }}>
           <CommentForm postId={post.id}></CommentForm>
         </div>
-        {comments.map((comment) => (
-          <Comment key={comment.id} comment={comment} />
-        ))}
-        <div style={{ textAlign: "center" }}>
-          <Button>Load more</Button>
-        </div>
+        <CommentList postId={post.id}></CommentList>
       </div>
 
       <Button type="button" variant="outlined" onClick={() => router.push("/")}>

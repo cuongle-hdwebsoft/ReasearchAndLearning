@@ -9,21 +9,21 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     const queryClient = new QueryClient();
     if (ctx.params && ctx.params.id) {
       post = await PostApi.getById(ctx.params.id as string);
-      await queryClient.prefetchQuery(
-        ["comments", { limit: 4, page: 1, postId: ctx?.params?.id }],
-        function () {
-          return PostApi.getCommentsByPostId(ctx?.params?.id as string, {
-            _limit: 4,
-            _page: 1,
-          });
-        }
-      );
+      await queryClient.prefetchInfiniteQuery(["comments"], function () {
+        return PostApi.getCommentsByPostId(ctx?.params?.id as string, {
+          _limit: 4,
+          _page: 1,
+        });
+      });
     }
+
+    // seriablize data if nextjs do not seriabize its data
+    // https://github.com/vercel/next.js/discussions/11209
 
     return {
       props: {
         post: post,
-        dehydratedState: dehydrate(queryClient),
+        dehydratedState: JSON.stringify(dehydrate(queryClient)),
       },
       revalidate: 10,
     };
@@ -31,6 +31,7 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
     return {
       props: {
         post: null,
+        dehydratedState: null,
       },
     };
   }

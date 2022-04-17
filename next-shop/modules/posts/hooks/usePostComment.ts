@@ -41,7 +41,7 @@ export default function usePostComment() {
         cb("");
         console.log(123);
         enqueueSnackbar("Post comment successfully", { variant: "success" });
-        queryClient.invalidateQueries("comments", { exact: false });
+        queryClient.invalidateQueries("comments", { exact: true });
       },
       onError: function (error: any) {
         console.log(error);
