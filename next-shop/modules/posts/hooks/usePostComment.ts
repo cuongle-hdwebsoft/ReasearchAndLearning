@@ -24,6 +24,7 @@ export default function usePostComment() {
     cb: (value: string) => void
   ) => {
     if (!user) {
+      enqueueSnackbar("User not found", { variant: "error" });
       return;
     }
 
@@ -38,6 +39,7 @@ export default function usePostComment() {
     mutate(data, {
       onSuccess: function () {
         cb("");
+        console.log(123);
         enqueueSnackbar("Post comment successfully", { variant: "success" });
         queryClient.invalidateQueries("comments", { exact: false });
       },

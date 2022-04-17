@@ -1,14 +1,17 @@
 import { Button, TextareaAutosize } from "@mui/material";
+import { useRouter } from "next/router";
 import React, { ChangeEvent, useState } from "react";
+import useApp from "../../../common/hooks/useApp";
 import usePostComment from "../hooks/usePostComment";
 
 export default function CommentForm(props: { postId: string }) {
   const { handlePostComment } = usePostComment();
   const [value, setValue] = useState("");
+  const { user } = useApp();
+  const router = useRouter();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(123);
     handlePostComment(value, props.postId, setValue);
   };
 
@@ -21,9 +24,19 @@ export default function CommentForm(props: { postId: string }) {
         style={{ width: "100%", padding: 10 }}
         value={value}
       ></TextareaAutosize>
-      <Button type="submit" variant="contained">
-        Post
-      </Button>
+      {user ? (
+        <Button type="submit" variant="contained">
+          Post
+        </Button>
+      ) : (
+        <Button
+          onClick={() => router.push("/login")}
+          type="button"
+          variant="contained"
+        >
+          Post
+        </Button>
+      )}
     </form>
   );
 }

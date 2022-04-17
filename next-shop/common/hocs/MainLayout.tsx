@@ -20,6 +20,7 @@ import PersonIcon from "@mui/icons-material/Person";
 import LogoutIcon from "@mui/icons-material/Logout";
 import useLogout from "../../modules/users/hooks/useLogout";
 import Image from "next/image";
+import CustomLink from "../components/CustomLink";
 
 interface IProps {
   children: React.ReactElement | React.ReactElement[];
@@ -49,7 +50,10 @@ export default function MainLayout(props: IProps) {
           <Typography>My Blog</Typography>
 
           <div style={{ marginLeft: "auto" }}>
-            <Stack>
+            <Stack direction={"row"} alignItems="center" spacing={10}>
+              <CustomLink href="/posts">Posts</CustomLink>
+              <CustomLink href="/news">News</CustomLink>
+              <CustomLink href="/contact">Contact</CustomLink>
               {!user ? (
                 <Link href={"/login"} passHref>
                   <span style={{ color: "#fff", cursor: "pointer" }}>

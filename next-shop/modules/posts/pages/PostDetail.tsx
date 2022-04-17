@@ -12,7 +12,6 @@ import InsertCommentIcon from "@mui/icons-material/InsertComment";
 import ArrowCircleUpIcon from "@mui/icons-material/ArrowCircleUp";
 import Comment from "../components/Comment";
 import { useRouter } from "next/router";
-import { IComment } from "../interface/comment";
 import CommentForm from "../components/CommentForm";
 import useCommentsPost from "../hooks/useCommentsPost";
 
@@ -41,7 +40,6 @@ const PostDetail = ({ post }: { post: IPost }) => {
 
       <div id="cmt">
         <h2>Comments</h2>
-
         {/* {Array.from({ length: 6 }).map((cmt, index) => (
           <Comment  key={index}></Comment>
         ))} */}
@@ -51,7 +49,6 @@ const PostDetail = ({ post }: { post: IPost }) => {
         {comments.map((comment) => (
           <Comment key={comment.id} comment={comment} />
         ))}
-
         <div style={{ textAlign: "center" }}>
           <Button>Load more</Button>
         </div>
@@ -62,7 +59,6 @@ const PostDetail = ({ post }: { post: IPost }) => {
       </Button>
 
       <SpeedDial
-        open={true}
         ariaLabel="SpeedDial basic example"
         sx={{ position: "fixed", bottom: 16, right: 16 }}
         icon={<SpeedDialIcon />}
