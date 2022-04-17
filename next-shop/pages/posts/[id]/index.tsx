@@ -17,10 +17,13 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
       });
     }
 
+    // seriablize data if nextjs do not seriabize its data
+    // https://github.com/tannerlinsley/react-query/issues/1458
+
     return {
       props: {
         post: post,
-        dehydratedState: dehydrate(queryClient),
+        dehydratedState: JSON.stringify(dehydrate(queryClient)),
       },
       revalidate: 10,
     };
