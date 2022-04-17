@@ -10,7 +10,7 @@ export default function Post(props: { post: IPost }) {
   return (
     <div className="post">
       <CustomLink href={"/posts/" + props.post.id}>
-        <Paper elevation={3} sx={{ padding: 1 }}>
+        <Paper elevation={4} sx={{ padding: 1 }}>
           <div className="post__wrap-img">
             <Avatar
               className="post__img"

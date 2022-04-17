@@ -42,7 +42,14 @@ export default function FilterBar(props: IProps) {
         marginBottom: 10,
       }}
     >
-      <Stack direction={"row"} spacing={2} alignItems="center">
+      <Stack
+        direction={"row"}
+        spacing={2}
+        alignItems="center"
+        flexWrap={"wrap"}
+        justifyContent="center"
+        className="filter-bar"
+      >
         <Button onClick={props.handleClearFilter} variant="outlined">
           Clear filter
         </Button>
