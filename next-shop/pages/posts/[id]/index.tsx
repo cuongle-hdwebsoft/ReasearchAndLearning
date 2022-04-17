@@ -17,13 +17,10 @@ export const getStaticProps: GetStaticProps = async (ctx) => {
       });
     }
 
-    // seriablize data if nextjs do not seriabize its data
-    // https://github.com/vercel/next.js/discussions/11209
-
     return {
       props: {
         post: post,
-        dehydratedState: JSON.stringify(dehydrate(queryClient)),
+        dehydratedState: dehydrate(queryClient),
       },
       revalidate: 10,
     };

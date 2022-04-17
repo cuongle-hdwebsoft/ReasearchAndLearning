@@ -99,6 +99,17 @@ Trước tiên server sẽ chạy getServerSideProps sau đó trả về props c
 
 My App -> My Document
 
+## useInfiniteQuery
+
+- data
+  - data.pages: Chứa tất cả page được fetch về là 1 array các response từ server theo page. Vd [responsePage1, responsePage2, responsePage3,...]
+  - data.pageParams: Chứa tất cả các page được fetch về [undefined, 1, 2,...]
+- fetchNextPage hàm để fetch page kế tiếp
+- fetchPreviousPage hàm để fetch page sau
+- getNextPageParam: khi 1 response của page được trả về, RQ sẽ chạy hàm này. Ở đây có 2 tham số lastPage, allPages. lastPage là page cuối cùng, allPages là tất cả các pages. Chúng ta sẽ return lastPage.nextPage, với giá trị này thì RQ sẽ set hasNextPage = true, ngc lại nếu return undefined, RQ sẽ set hasNextPage = false. Nhờ đó mà hiển thị load tiếp hay không. Khi return lastPage.nextPage nó sẽ trở thành pageParam để khi gọi fetchNextPage, nó sẽ lấy giá trị lastPage.nextPage này mà xài.
+- Các tham số khác hoạt động giống useQuery
+- Khi bị lỗi seriablize thì nên stringify giá trị queryClient
+
 ## References
 
 https://github.com/vercel/next.js/discussions/10925
