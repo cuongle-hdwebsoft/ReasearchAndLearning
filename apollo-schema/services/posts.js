@@ -1,14 +1,14 @@
-import axios from "axios";
-import removeEmpty from "../utils/removeEmpty";
+const axios = require("axios");
+const removeEmpty = require("../utils/removeEmpty");
 
-export default class PostApi {
+class PostApi {
   static getAll(params) {
     return axios({
       method: "GET",
       url: "http://localhost:3001/posts",
       params: removeEmpty({
-        _limit: params._limit,
-        _page: params._page,
+        _limit: params._limit || 10,
+        _page: params._page || 1,
         _sort: params._sort,
         _order: params._order,
         ...params.filter,
@@ -66,4 +66,14 @@ export default class PostApi {
       url: "http://localhost:3001/comments",
     });
   }
+
+  static async createPost(data) {
+    return axios({
+      method: "POST",
+      data: data,
+      url: "http://localhost:3001/posts",
+    }).then((rs) => rs.data);
+  }
 }
+
+module.exports = PostApi;

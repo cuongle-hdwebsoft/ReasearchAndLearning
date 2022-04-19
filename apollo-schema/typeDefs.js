@@ -1,33 +1,58 @@
 module.exports.typeDefs = `
-  enum GENDER {
-    MALE,
-    FEMALE
+  type Category {
+    id: ID!
+    name: String
+    slug: String
   }
 
-  type Author {
+  type Post {
     id: ID!
-    firstName: String
-    lastName: String
-    books: [Book]
-    gender: GENDER
-    friends(top: Int): [String]
-  }
-
-  type Book {
-    id: ID!
+    uuid: String
     title: String
-    author: Author
-    votes: Int!
+    slug: String
+    html: String
+    feature_image: String
+    visibility: String
+    created_at: String
+    updated_at: String
+    tags: Category
+    authors: String
+    excerpt: String
+  }
+
+  input IPostBody {
+    title: String
+    slug: String
+    html: String
+    feature_image: String
+    authors: String
+    excerpt: String
+  }
+
+  input IFilterPaginationPostParams {
+    _limit: Int 
+    _page: Int 
+    _sort: String 
+    _order: String 
+    q: String
+  }
+
+  input CategoryParam {
+    id: ID!
+    name: String
+    slug: String
+  }
+
+  type IPostResult {
+    data: [Post!]! 
+    total: Int!
   }
 
   type Query {
-    books: [Book]
-    authors: [Author]
-    getBookById(bookId: ID!): Book
-    topFavoriteBook(n: Int!): [Book!]!
+    getPosts(params: IFilterPaginationPostParams): IPostResult
   }
 
   type Mutation {
-    createAuthor(firstName: String, lastName: String, gender: GENDER): Author
+    createPost(post: IPostBody, tags: CategoryParam): Post
   }
 `;
