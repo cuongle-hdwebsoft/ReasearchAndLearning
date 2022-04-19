@@ -1,24 +1,28 @@
-const { resolvers } = require("./resolvers");
 const express = require("express");
+const app = express();
 const http = require("http");
-const { typeDefs } = require("./typeDefs");
 const cors = require("cors");
+const httpServer = http.createServer(app);
 
+const { typeDefs } = require("./typeDefs");
+const { resolvers } = require("./resolvers");
 const { ApolloServer } = require("apollo-server-express");
 
-async function startApolloServer() {
-  const app = express();
-  app.use(cors());
-  const httpServer = http.createServer(app);
-  const server = new ApolloServer({
-    typeDefs,
-    resolvers,
+app.use(cors());
+
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+});
+
+server
+  .start()
+  .then(() => {
+    server.applyMiddleware({ app });
+    return new Promise((resolve) => httpServer.listen({ port: 4000 }, resolve));
+  })
+  .then(() => {
+    console.log(
+      `🚀 Server ready at http://localhost:4000${server.graphqlPath}`
+    );
   });
-
-  await server.start();
-  server.applyMiddleware({ app });
-  await new Promise((resolve) => httpServer.listen({ port: 4000 }, resolve));
-  console.log(`🚀 Server ready at http://localhost:4000${server.graphqlPath}`);
-}
-
-startApolloServer();

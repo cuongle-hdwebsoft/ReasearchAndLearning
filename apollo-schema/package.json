@@ -4,16 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server": "json-server --watch db.json --port 3001 --delay 500"
   },
   "author": "Ram4GB",
   "license": "ISC",
   "dependencies": {
     "apollo-server-express": "^3.6.7",
+    "axios": "^0.26.1",
     "cors": "^2.8.5",
     "express": "^4.17.3",
     "graphql-tools": "^8.2.7",
     "http": "^0.0.1-security",
+    "json-server": "^0.17.0",
     "lodash": "^4.17.21"
   }
 }
