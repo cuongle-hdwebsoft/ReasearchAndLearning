@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono&display=swap");
+
+body {
+  font-family: "Space Mono", monospace !important;
+}
+
+.post {
+  padding: 10px;
+  cursor: pointer;
+  width: 25%;
+}
+
+.d-flex {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
