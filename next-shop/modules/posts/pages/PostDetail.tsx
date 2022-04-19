@@ -49,7 +49,7 @@ const PostDetail = ({ post }: { post: IPost }) => {
         <CommentList postId={post.id}></CommentList>
       </div>
 
-      <Button type="button" variant="outlined" onClick={() => router.push("/")}>
+      <Button type="button" variant="outlined" onClick={() => router.back()}>
         Back
       </Button>
 
