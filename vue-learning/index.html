@@ -19,13 +19,16 @@
       <div v-else>Writing something plz</div>
       <div>
         Likes:
-        <ul>
+        <ul ref="heh">
           <li v-for="like in likes" v-if="like.length > 5 ? false : true">
             {{ like }}
           </li>
         </ul>
       </div>
-      <button-component :title="'xin chào'"></button-component>
+      <button-component
+        ref="button-component"
+        :title="'xin chào'"
+      ></button-component>
       <div>
         <h2>Render list post</h2>
         <blog-post
@@ -63,7 +66,24 @@
 
       Vue.component("button-component", {
         props: ["title"],
-        template: "<button>{{ title }}</button>",
+        data: function () {
+          return {
+            count: 0,
+          };
+        },
+        template: "<button>{{ title }} {{ count }}</button>",
+        beforeCreate: function () {
+          console.log("button-component beforeCreate");
+        },
+        created: function () {
+          console.log("button-component created");
+        },
+        beforeMount: function () {
+          console.log("button-component beforeMount");
+        },
+        mounted: function () {
+          console.log("button-component mounted");
+        },
       });
 
       Vue.component("blog-post", {
@@ -83,7 +103,7 @@
           console.log("blog-post updated");
         },
         mounted: function () {
-          console.log(this);
+          // console.log(this);
         },
       });
 
@@ -117,9 +137,9 @@
         },
         template: `
           <div class='form-item'>
-            <input 
-              :value='value' 
-              placeholder='this is a custom-component' 
+            <input
+              :value='value'
+              placeholder='this is a custom-component'
               v-on:input='$emit("input", $event.target.value)'
             />
           </div>
@@ -130,19 +150,23 @@
         data: data,
         el: "#app",
         beforeCreate: function () {
-          console.log("beforeCreate");
+          console.log("App beforeCreate");
         },
         created: function () {
-          console.log("created");
+          console.log("App created");
         },
         beforeMount: function () {
-          console.log("beforeMount");
+          console.log("App beforeMount");
         },
         mounted: function () {
-          console.log("mounted");
+          console.log("App mounted");
+
+          // this.$refs["button-component"].count ref xong thay đổi luôn data
+          // this.$refs["button-component"].count =
+          //   this.$refs["button-component"].count + 1;
         },
         updated: function () {
-          console.log("app updated");
+          console.log("App supdated");
         },
         computed: {
           calculateYear: function () {
