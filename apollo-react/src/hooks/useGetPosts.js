@@ -1,6 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 
-const GET_BOOKS = gql`
+export const GET_BOOKS = gql`
   query getPosts($params: IFilterPaginationPostParams) {
     getPosts(params: $params) {
       data {
@@ -42,10 +42,8 @@ export default function useGetPosts(limit, page) {
     notifyOnNetworkStatusChange: true,
 
     // Used for first execution
-    fetchPolicy: "network-only",
-
-    // Used for subsequent executions
-    nextFetchPolicy: "cache-first",
+    // https://www.apollographql.com/docs/react/data/queries#cache-first
+    fetchPolicy: "cache-first",
   });
 
   return {
