@@ -35,6 +35,7 @@
           :key="post.id"
         ></blog-post>
       </div>
+      <custom-component v-model="customInputValue"></custom-component>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
@@ -51,6 +52,7 @@
           author: "Author" + index,
           description: "Description" + index,
         })),
+        customInputValue: "",
       };
 
       // data is mutation
@@ -102,6 +104,25 @@
         },
         template: `
           <button @click='handleIncrease'>{{ count }}</button>
+        `,
+      });
+
+      Vue.component("custom-component", {
+        props: {
+          value: String,
+        },
+        model: {
+          props: "value",
+          event: "input",
+        },
+        template: `
+          <div class='form-item'>
+            <input 
+              :value='value' 
+              placeholder='this is a custom-component' 
+              v-on:input='$emit("input", $event.target.value)'
+            />
+          </div>
         `,
       });
 
