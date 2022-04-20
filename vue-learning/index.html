@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <div>name = {{ name }}</div>
+      <div>age = {{ calculateYear }}</div>
+      <div>ageMethod = {{ calculateYearMethod() }}</div>
+      <div>
+        <input v-model="name" />
+        <input type="text" v-on:input="alertMe" />
+      </div>
+      <div v-if="name.length > 5">Too long</div>
+      <div v-else>Writing something plz</div>
+      <div>
+        Likes:
+        <ul>
+          <li v-for="like in likes" v-if="like.length > 5 ? false : true">
+            {{ like }}
+          </li>
+        </ul>
+      </div>
+      <button-component :title="'xin chào'"></button-component>
+      <div>
+        <h2>Render list post</h2>
+        <blog-post
+          v-on:alert-post="alertMe($event)"
+          v-for="post in posts"
+          :post="post"
+          :key="post.id"
+        ></blog-post>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+      var data = {
+        name: "Lê Minh Cường",
+        age: 23,
+        gender: "male",
+        likes: ["milk", "soda", "cookies"],
+        typeAge: "year",
+        posts: Array.from({ length: 6 }).map((_, index) => ({
+          id: index,
+          title: "Title" + index,
+          author: "Author" + index,
+          description: "Description" + index,
+        })),
+      };
+
+      // data is mutation
+      // change data.a -> vm.a was also changed
+
+      // When this data changes, the view will re-render.
+      // It should be noted that properties in data are only reactive if they existed when the instance was created
+
+      Vue.component("button-component", {
+        props: ["title"],
+        template: "<button>{{ title }}</button>",
+      });
+
+      Vue.component("blog-post", {
+        props: ["post"],
+        template: `
+          <div class='post'>
+            <span class='post__title'>{{ post.title }}</span>
+            <span class='post__author'>{{ post.author }}</span>
+            <span class='post__description'>{{ post.description }}</span>
+            <button @click="$emit('alert-post', post.id)">click</button>
+            <button @click="post.title = '123123123'">click</button>
+
+            <some-where-on-earth></some-where-on-earth>
+          </div>
+        `,
+        updated: function () {
+          console.log("blog-post updated");
+        },
+        mounted: function () {
+          console.log(this);
+        },
+      });
+
+      Vue.component("some-where-on-earth", {
+        data: function () {
+          return {
+            count: 0,
+          };
+        },
+        mounted: function () {
+          // console.log(this.$root);
+          // console.log(this.$parent);
+        },
+        methods: {
+          handleIncrease: function () {
+            this.count++;
+          },
+        },
+        template: `
+          <button @click='handleIncrease'>{{ count }}</button>
+        `,
+      });
+
+      var vm = new Vue({
+        data: data,
+        el: "#app",
+        beforeCreate: function () {
+          console.log("beforeCreate");
+        },
+        created: function () {
+          console.log("created");
+        },
+        beforeMount: function () {
+          console.log("beforeMount");
+        },
+        mounted: function () {
+          console.log("mounted");
+        },
+        updated: function () {
+          console.log("app updated");
+        },
+        computed: {
+          calculateYear: function () {
+            return new Date().getFullYear() - this.age;
+          },
+        },
+        methods: {
+          calculateYearMethod: function () {
+            return new Date().getFullYear() - this.age;
+          },
+          alertMe: function (id) {
+            console.log(id);
+            console.log(event);
+            // alert("alert post id = " + id);
+          },
+        },
+        watch: {
+          name: function (newValue, preValue) {
+            console.log("watching name");
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
