@@ -53,6 +53,6 @@ module.exports.typeDefs = `
   }
 
   type Mutation {
-    createPost(post: IPostBody, tags: CategoryParam): Post
+    createPost(post: IPostBody): Post
   }
 `;

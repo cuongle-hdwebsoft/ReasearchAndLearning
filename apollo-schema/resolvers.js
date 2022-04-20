@@ -9,10 +9,15 @@ const resolvers = {
     },
   },
   Mutation: {
-    createPost: async function (parent, { post, tags }) {
+    createPost: async function (parent, { post }) {
+      console.log(post);
       let rs = await PostApi.createPost({
         ...post,
-        tags: tags,
+        tags: {
+          id: "59799bbd6ebb2f00243a33db",
+          name: "Getting Started",
+          slug: "Getting Started",
+        },
         uuid: v4(),
         visibility: "true",
         created_at: new Date().toUTCString().toString(),
