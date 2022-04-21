@@ -7,6 +7,9 @@ import AboutPage from "./pages/AboutPage.vue";
 import NewsPage from "./pages/NewsPage.vue";
 import LoginPage from "./pages/LoginPage.vue";
 import BlogPage from "./pages/BlogPage.vue";
+import PostDetailPage from "./pages/PostDetailPage.vue";
+import PostDetail from "./pages/PostDetail.vue";
+import PostEdit from "./pages/PostEdit.vue";
 import NotFound from "./pages/NotFound.vue";
 
 Vue.config.productionTip = false;
@@ -32,6 +35,20 @@ const router = new VueRouter({
     {
       path: "/blogs",
       component: BlogPage,
+    },
+    {
+      path: "/blogs/:id",
+      component: PostDetailPage,
+      children: [
+        {
+          path: "",
+          component: PostDetail,
+        },
+        {
+          path: "edit",
+          component: PostEdit,
+        },
+      ],
     },
     {
       path: "*",

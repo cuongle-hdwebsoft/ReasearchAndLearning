@@ -27,4 +27,23 @@ export default class PostApi {
         error: "Load posts fail",
       }));
   }
+
+  static getPostById(id) {
+    return instance({
+      method: "GET",
+      url: "/posts/" + id,
+    })
+      .then((rs) => {
+        return {
+          isError: false,
+          error: "",
+          data: rs.data,
+        };
+      })
+      .catch(() => ({
+        isError: false,
+        error: "",
+        data: null,
+      }));
+  }
 }

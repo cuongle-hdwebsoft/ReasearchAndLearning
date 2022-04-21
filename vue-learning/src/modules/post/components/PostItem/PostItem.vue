@@ -1,5 +1,5 @@
 <template>
-  <div class="post">
+  <div @click="$router.push('/blogs/' + post.id)" class="post">
     <div class="post__img">
       <img :src="post.feature_image" alt="" />
     </div>
