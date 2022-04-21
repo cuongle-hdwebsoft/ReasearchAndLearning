@@ -1,14 +1,24 @@
 <template>
   <div class="filter-bar">
+    <button
+      title="remove all filters"
+      @click="$emit('removeFilter')"
+      style="margin-right: 5px"
+    >
+      remove filters
+    </button>
+
     <input
+      title="search filter by name"
       @keyup="handleChangeInput('q', $event)"
       style="margin-right: 5px"
       class="filter-bar__search-input"
       type="text"
-      placeholder="search post..."
+      placeholder="search post name..."
     />
 
     <select
+      title="filter by tags"
       @change="handleChangeInput('tags.id', $event)"
       style="margin-right: 5px"
       class="filter-bar__search-categories"

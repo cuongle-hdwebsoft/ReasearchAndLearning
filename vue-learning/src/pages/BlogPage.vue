@@ -4,6 +4,7 @@
     <SearchFilterBar
       :total="total"
       @getFilters="filter = $event"
+      @removeFilter="handleRemoveFilter"
     ></SearchFilterBar>
     <div class="row">
       <div v-for="post in posts" :key="post.id" class="col-3">
@@ -62,6 +63,11 @@ export default {
     handleChangeLimit(limit) {
       this.limit = limit;
       this.page = 1;
+    },
+    handleRemoveFilter() {
+      this.limit = 8;
+      this.page = 1;
+      this.filter = {};
     },
   },
   mounted: function () {
