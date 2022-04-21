@@ -1,0 +1,28 @@
+.header {
+  padding: 8px 30px;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+
+  &__img {
+    width: 50px;
+    height: 50px;
+  }
+
+  &__nav-bar {
+    display: flex;
+    list-style: none;
+    margin-left: auto;
+  }
+
+  &__nav-bar-link {
+    padding: 8px 15px;
+    text-decoration: none;
+    color: #111;
+
+    &:hover {
+      text-decoration: underline;
+      font-weight: bold;
+    }
+  }
+}

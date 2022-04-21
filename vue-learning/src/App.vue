@@ -1,7 +1,19 @@
 <template>
-  <div>123</div>
+  <MainLayout>
+    <router-view></router-view>
+  </MainLayout>
 </template>
 
 <script>
-export default {};
+import MainLayout from "./components/layout/MainLayout.vue";
+import "./assets/scss/index.scss";
+
+export default {
+  components: {
+    MainLayout,
+  },
+  mounted: function() {
+    // console.log(this)
+  }
+};
 </script>

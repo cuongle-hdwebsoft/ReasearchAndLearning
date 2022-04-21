@@ -1,0 +1,51 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono&display=swap");
+
+$green: #42b983;
+
+* {
+  font-family: "Space Mono", monospace;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.container {
+  width: 90%;
+  margin: auto;
+  padding: 10px;
+
+  @media screen and (max-width: 1024px) {
+    width: 90%;
+  }
+
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
+}
+
+.d-flex {
+  display: flex;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@for $i from 1 through 12 {
+  .col-#{$i} {
+    width: 100 * $i / 12 * 1%;
+  }
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-flex-end {
+  justify-content: flex-end;
+}
