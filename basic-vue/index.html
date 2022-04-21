@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      <div>name = {{ name }}</div>
+      <div>age = {{ calculateYear }}</div>
+      <div>ageMethod = {{ calculateYearMethod() }}</div>
+      <div>
+        <input v-model="name" />
+        <input type="text" v-on:input="alertMe" />
+      </div>
+      <div v-if="name.length > 5">Too long</div>
+      <div v-else>Writing something plz</div>
+      <div>
+        Likes:
+        <ul ref="hehe">
+          <li v-for="like in likes" v-if="like.length > 5 ? false : true">
+            {{ like }}
+          </li>
+        </ul>
+      </div>
+      <button-component
+        ref="button-component"
+        :title="'xin chào'"
+      ></button-component>
+      <div>
+        <h2>Render list post</h2>
+        <blog-post
+          v-on:alert-post="alertMe($event)"
+          v-for="post in posts"
+          :post="post"
+          :key="post.id"
+        ></blog-post>
+      </div>
+      <custom-component
+        v-global-directive
+        v-model="customInputValue"
+      ></custom-component>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.js"></script>
+    <script>
+      // data is mutation
+      // change data.a -> vm.a was also changed
+
+      // When this data changes, the view will re-render.
+      // It should be noted that properties in data are only reactive if they existed when the instance was created
+
+      var data = {
+        name: "Lê Minh Cường",
+        age: 23,
+        gender: "male",
+        likes: ["milk", "soda", "cookies"],
+        typeAge: "year",
+        posts: Array.from({ length: 6 }).map((_, index) => ({
+          id: index,
+          title: "Title" + index,
+          author: "Author" + index,
+          description: "Description" + index,
+        })),
+        customInputValue: "",
+      };
+    </script>
+    <script src="./directive.js"></script>
+
+    <script src="./button-component.js"></script>
+    <script src="./blog-post.js"></script>
+    <script src="./some-where-on-earth.js"></script>
+    <script src="./custom-component.js"></script>
+    <script src="./index.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
