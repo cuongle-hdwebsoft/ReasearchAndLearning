@@ -24,6 +24,11 @@
           >
         </li>
         <li class="header__nav-bar-item">
+          <router-link :to="'/form-vuelidate'" class="header__nav-bar-link"
+            >Form vuelidate</router-link
+          >
+        </li>
+        <li class="header__nav-bar-item">
           <router-link :to="'/login'" class="header__nav-bar-link"
             >Login</router-link
           >

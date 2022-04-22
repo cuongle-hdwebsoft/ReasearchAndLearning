@@ -2,6 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import VueRouter from "vue-router";
 import VueMoment from "vue-moment";
+import VueCompositionAPI from "@vue/composition-api";
 
 import HomePage from "./pages/HomePage.vue";
 import AboutPage from "./pages/AboutPage.vue";
@@ -12,6 +13,7 @@ import PostDetailPage from "./modules/pages/PostDetailPage.vue";
 import PostDetail from "./modules/pages/PostDetail.vue";
 import PostEdit from "./modules/pages/PostEdit.vue";
 import CustomFormPage from "./pages/CustomFormPage.vue";
+import FormVuelidatePage from "./pages/FormVuelidatePage";
 import NotFound from "./pages/NotFound.vue";
 
 // directive
@@ -63,6 +65,10 @@ const router = new VueRouter({
       component: CustomFormPage,
     },
     {
+      path: "/form-vuelidate",
+      component: FormVuelidatePage,
+    },
+    {
       path: "*",
       component: NotFound,
     },
@@ -72,6 +78,7 @@ const router = new VueRouter({
 
 Vue.use(VueRouter);
 Vue.use(VueMoment);
+Vue.use(VueCompositionAPI);
 
 Vue.directive("validator", validator);
 
