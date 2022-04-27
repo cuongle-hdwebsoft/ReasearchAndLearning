@@ -11,15 +11,27 @@ export const useGetProducts = function (page, limit, filter) {
   const isLoadingProducts = computed(
     () => store.state.products.isLoadingProducts
   );
+  let t;
 
   watch(
     [page, limit, filter],
-    function ([newPage, newLimit, newFilter]) {
-      store.dispatch("handleLoadProducts", {
-        limit: newLimit,
-        page: newPage,
-        filter: newFilter,
+    // eslint-disable-next-line no-unused-vars
+    function ([newPage, newLimit, newFilter], oldValue, onCleanup) {
+      onCleanup(function () {
+        console.log("clean");
+        if (t) {
+          clearTimeout(t);
+        }
       });
+
+      t = setTimeout(() => {
+        store.dispatch("handleLoadProducts", {
+          limit: newLimit,
+          page: newPage,
+          filter: newFilter,
+        });
+      }, 1000);
+
       window.history.replaceState(
         {},
         null,

@@ -41,8 +41,6 @@ export function useGetProductFilter() {
   onBeforeMount(function () {
     const query = parse(window.location.href.split("/#")[1]);
 
-    console.log(query);
-
     if (query.limit) {
       limit.value = parseInt(query.limit);
     }
