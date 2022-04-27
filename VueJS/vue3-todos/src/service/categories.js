@@ -1,7 +1,7 @@
 import instance from "./fetch";
 
 export default class CategoryApi {
-  static getCategories() {
+  static getAll() {
     return instance({
       method: "GET",
       url: "/categories",

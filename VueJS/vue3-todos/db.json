@@ -31,6 +31,26 @@
       "id": 26
     },
     {
+      "imageUrl": "http://dummyimage.com/181x100.png/cc0000/ffffff",
+      "productName": "Maserati Car 1",
+      "price": 3970,
+      "inStock": true,
+      "amount": 21,
+      "categoryName": "Maserati",
+      "isActive": false,
+      "id": 46
+    },
+    {
+      "imageUrl": "http://dummyimage.com/181x100.png/cc0000/ffffff",
+      "productName": "Maserati Car 2",
+      "price": 3970,
+      "inStock": true,
+      "amount": 21,
+      "categoryName": "Maserati",
+      "isActive": false,
+      "id": 47
+    },
+    {
       "imageUrl": "http://dummyimage.com/217x100.png/5fa2dd/ffffff",
       "productName": "Touareg",
       "price": 4376,

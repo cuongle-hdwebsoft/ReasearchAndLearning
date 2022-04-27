@@ -1,24 +1,7 @@
-# todos
+# Bugs phải xài ref thay vì reactive ở script setup
 
-## Project setup
-```
-npm install
-```
+https://vuejs.org/guide/reusability/composables.html#conventions-and-best-practices
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+# Bugs vuetify buộc dùng ref thay vì reactive ở script setup cho v-model text input
 
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+# Bugs watch đã reactive object rồi [object] nhưng mà nó vẫn không deep cho mình phải ghi explicy nó ms ra

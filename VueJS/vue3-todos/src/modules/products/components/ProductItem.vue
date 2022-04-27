@@ -57,6 +57,8 @@ export default {};
       color: #fff;
       border: none;
       padding: 5px;
+      border-radius: 5px;
+      font-size: 0.9rem;
 
       cursor: pointer;
     }
