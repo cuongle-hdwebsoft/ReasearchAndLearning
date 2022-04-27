@@ -1,0 +1,336 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "firstName": "John",
+      "lastName": "Weekend",
+      "age": "23",
+      "gender": "male",
+      "username": "admin",
+      "password": "12345678"
+    },
+    {
+      "id": 2,
+      "firstName": "John",
+      "lastName": "Annie",
+      "age": "23",
+      "gender": "female",
+      "username": "user1",
+      "password": "12345678"
+    }
+  ],
+  "products": [
+    {
+      "imageUrl": "http://dummyimage.com/181x100.png/cc0000/ffffff",
+      "productName": "GX",
+      "price": 3970,
+      "inStock": true,
+      "amount": 21,
+      "categoryName": "Lexus",
+      "isActive": false,
+      "id": 26
+    },
+    {
+      "imageUrl": "http://dummyimage.com/217x100.png/5fa2dd/ffffff",
+      "productName": "Touareg",
+      "price": 4376,
+      "inStock": false,
+      "amount": 62,
+      "categoryName": "Volkswagen",
+      "isActive": true,
+      "id": 27
+    },
+    {
+      "id": 28,
+      "categoryName": "Honda",
+      "productName": "S2000",
+      "imageUrl": "http://dummyimage.com/194x100.png/dddddd/000000",
+      "isActive": false,
+      "amount": 70,
+      "inStock": true,
+      "price": 3643
+    },
+    {
+      "id": 29,
+      "categoryName": "Dodge",
+      "productName": "Dakota",
+      "imageUrl": "http://dummyimage.com/244x100.png/5fa2dd/ffffff",
+      "isActive": true,
+      "amount": 72,
+      "inStock": false,
+      "price": 1493
+    },
+    {
+      "id": 30,
+      "categoryName": "Chrysler",
+      "productName": "Sebring",
+      "imageUrl": "http://dummyimage.com/140x100.png/5fa2dd/ffffff",
+      "isActive": false,
+      "amount": 57,
+      "inStock": true,
+      "price": 3167
+    },
+    {
+      "id": 31,
+      "categoryName": "Volvo",
+      "productName": "V90",
+      "imageUrl": "http://dummyimage.com/243x100.png/ff4444/ffffff",
+      "isActive": true,
+      "amount": 43,
+      "inStock": false,
+      "price": 3035
+    },
+    {
+      "id": 32,
+      "categoryName": "Jeep",
+      "productName": "Liberty",
+      "imageUrl": "http://dummyimage.com/213x100.png/cc0000/ffffff",
+      "isActive": true,
+      "amount": 81,
+      "inStock": true,
+      "price": 1518
+    },
+    {
+      "id": 33,
+      "categoryName": "Ford",
+      "productName": "Escort",
+      "imageUrl": "http://dummyimage.com/180x100.png/5fa2dd/ffffff",
+      "isActive": false,
+      "amount": 42,
+      "inStock": true,
+      "price": 4042
+    },
+    {
+      "id": 34,
+      "categoryName": "Chevrolet",
+      "productName": "Silverado 1500",
+      "imageUrl": "http://dummyimage.com/122x100.png/ff4444/ffffff",
+      "isActive": false,
+      "amount": 44,
+      "inStock": true,
+      "price": 2019
+    },
+    {
+      "id": 36,
+      "categoryName": "Toyota",
+      "productName": "Previa",
+      "imageUrl": "http://dummyimage.com/101x100.png/dddddd/000000",
+      "isActive": true,
+      "amount": 41,
+      "inStock": true,
+      "price": 1191
+    },
+    {
+      "id": 37,
+      "categoryName": "Dodge",
+      "productName": "Ram Wagon B250",
+      "imageUrl": "http://dummyimage.com/178x100.png/dddddd/000000",
+      "isActive": true,
+      "amount": 31,
+      "inStock": false,
+      "price": 2130
+    },
+    {
+      "id": 38,
+      "categoryName": "Mazda",
+      "productName": "B2600",
+      "imageUrl": "http://dummyimage.com/171x100.png/ff4444/ffffff",
+      "isActive": false,
+      "amount": 12,
+      "inStock": false,
+      "price": 3146
+    },
+    {
+      "id": 39,
+      "categoryName": "Chevrolet",
+      "productName": "Monte Carlo",
+      "imageUrl": "http://dummyimage.com/135x100.png/dddddd/000000",
+      "isActive": true,
+      "amount": 43,
+      "inStock": false,
+      "price": 4216
+    },
+    {
+      "id": 40,
+      "categoryName": "Buick",
+      "productName": "Lucerne",
+      "imageUrl": "http://dummyimage.com/230x100.png/5fa2dd/ffffff",
+      "isActive": true,
+      "amount": 48,
+      "inStock": true,
+      "price": 3983
+    },
+    {
+      "id": 41,
+      "categoryName": "GMC",
+      "productName": "Savana 2500",
+      "imageUrl": "http://dummyimage.com/236x100.png/ff4444/ffffff",
+      "isActive": true,
+      "amount": 48,
+      "inStock": false,
+      "price": 4775
+    },
+    {
+      "id": 42,
+      "categoryName": "Ford",
+      "productName": "Focus",
+      "imageUrl": "http://dummyimage.com/217x100.png/ff4444/ffffff",
+      "isActive": true,
+      "amount": 1,
+      "inStock": true,
+      "price": 2682
+    },
+    {
+      "id": 43,
+      "categoryName": "Jeep",
+      "productName": "Grand Cherokee",
+      "imageUrl": "http://dummyimage.com/166x100.png/cc0000/ffffff",
+      "isActive": true,
+      "amount": 5,
+      "inStock": false,
+      "price": 1930
+    },
+    {
+      "id": 44,
+      "categoryName": "Ford",
+      "productName": "Mustang",
+      "imageUrl": "http://dummyimage.com/150x100.png/dddddd/000000",
+      "isActive": false,
+      "amount": 73,
+      "inStock": true,
+      "price": 4813
+    },
+    {
+      "id": 45,
+      "categoryName": "Toyota",
+      "productName": "Solara",
+      "imageUrl": "http://dummyimage.com/185x100.png/cc0000/ffffff",
+      "isActive": true,
+      "amount": 35,
+      "inStock": false,
+      "price": 2960
+    }
+  ],
+  "categories": [
+    {
+      "id": 1,
+      "name": "Maserati",
+      "value": "Maserati"
+    },
+    {
+      "id": 2,
+      "name": "Buick",
+      "value": "Buick"
+    },
+    {
+      "id": 3,
+      "name": "Infiniti",
+      "value": "Infiniti"
+    },
+    {
+      "id": 4,
+      "name": "Porsche",
+      "value": "Porsche"
+    },
+    {
+      "id": 5,
+      "name": "Isuzu",
+      "value": "Isuzu"
+    },
+    {
+      "id": 6,
+      "name": "Hyundai",
+      "value": "Hyundai"
+    },
+    {
+      "id": 7,
+      "name": "Kia",
+      "value": "Kia"
+    },
+    {
+      "id": 8,
+      "name": "Dodge",
+      "value": "Dodge"
+    },
+    {
+      "id": 9,
+      "name": "Ford",
+      "value": "Ford"
+    },
+    {
+      "id": 10,
+      "name": "Lexus",
+      "value": "Lexus"
+    },
+    {
+      "id": 11,
+      "name": "Volkswagen",
+      "value": "Volkswagen"
+    },
+    {
+      "id": 12,
+      "name": "Jeep",
+      "value": "Jeep"
+    },
+    {
+      "id": 13,
+      "name": "Land Rover",
+      "value": "Land Rover"
+    },
+    {
+      "id": 14,
+      "name": "Lamborghini",
+      "value": "Lamborghini"
+    },
+    {
+      "id": 15,
+      "name": "Suzuki",
+      "value": "Suzuki"
+    },
+    {
+      "id": 16,
+      "name": "Lotus",
+      "value": "Lotus"
+    },
+    {
+      "id": 17,
+      "name": "Honda",
+      "value": "Honda"
+    },
+    {
+      "id": 18,
+      "name": "Chrysler",
+      "value": "Chrysler"
+    },
+    {
+      "id": 19,
+      "name": "Volvo",
+      "value": "Volvo"
+    },
+    {
+      "id": 20,
+      "name": "Chevrolet",
+      "value": "Chevrolet"
+    },
+    {
+      "id": 21,
+      "name": "Jaguar",
+      "value": "Jaguar"
+    },
+    {
+      "id": 22,
+      "name": "Toyota",
+      "value": "Toyota"
+    },
+    {
+      "id": 23,
+      "name": "Mazda",
+      "value": "Mazda"
+    },
+    {
+      "id": 24,
+      "name": "GMC",
+      "value": "GMC"
+    }
+  ]
+}

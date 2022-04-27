@@ -1,0 +1,16 @@
+$green: #42b883;
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.col-3 {
+  width: (100 / 12) * 3 * 1%;
+}
