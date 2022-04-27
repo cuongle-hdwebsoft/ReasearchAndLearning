@@ -1,7 +1,7 @@
 <template>
   <div class="header">
     <div class="header__logo">
-      <img class="header__img" src="../assets/logo.png" />
+      <!-- <img class="header__img" src="../assets/logo.png" /> -->
     </div>
     <ul class="header__navbar">
       <li class="header__navbar-item">
