@@ -1,4 +1,4 @@
-import { computed, watch } from "vue";
+import { computed, onBeforeMount, watch } from "vue";
 import { stringify } from "query-string";
 import { useStore } from "vuex";
 
@@ -14,11 +14,23 @@ export const useGetProducts = function (page, limit, filter) {
   let t;
 
   watch(
-    [page, limit, filter],
-    // eslint-disable-next-line no-unused-vars
-    function ([newPage, newLimit, newFilter], oldValue, onCleanup) {
+    [page, limit],
+    function ([newPage, newLimit]) {
+      store.dispatch("handleLoadProducts", {
+        limit: newLimit,
+        page: newPage,
+        filter: filter.value,
+      });
+    },
+    {
+      deep: true,
+    }
+  );
+
+  watch(
+    filter,
+    function (newFilter, oldFilter, onCleanup) {
       onCleanup(function () {
-        console.log("clean");
         if (t) {
           clearTimeout(t);
         }
@@ -26,8 +38,8 @@ export const useGetProducts = function (page, limit, filter) {
 
       t = setTimeout(() => {
         store.dispatch("handleLoadProducts", {
-          limit: newLimit,
-          page: newPage,
+          limit: limit.value,
+          page: 1,
           filter: newFilter,
         });
       }, 1000);
@@ -35,13 +47,22 @@ export const useGetProducts = function (page, limit, filter) {
       window.history.replaceState(
         {},
         null,
-        "#/?" + stringify({ limit: newLimit, page: newPage, ...newFilter })
+        "#/?" +
+          stringify({ limit: limit.value, page: page.value, ...newFilter })
       );
     },
     {
       deep: true,
     }
   );
+
+  onBeforeMount(() => {
+    store.dispatch("handleLoadProducts", {
+      limit: limit.value,
+      page: page.value,
+      filter: filter.value,
+    });
+  });
 
   return {
     products,

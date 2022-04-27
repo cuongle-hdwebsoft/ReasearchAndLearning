@@ -20,12 +20,14 @@ export default class ProductApi {
         isError: null,
         error: "",
       }))
-      .catch(() => ({
-        data: [],
-        total: 0,
-        isError: true,
-        error: "Load products fail",
-      }));
+      .catch(() => {
+        return {
+          data: [],
+          total: 0,
+          isError: true,
+          error: "Load products fail",
+        };
+      });
   }
 
   static getById(id) {

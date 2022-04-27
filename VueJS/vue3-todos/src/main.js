@@ -6,11 +6,15 @@ import * as components from "vuetify/components";
 import * as directives from "vuetify/directives";
 
 import HomePage from "./pages/HomePage.vue";
+import ProductDetailPage from "./pages/ProductDetailPage.vue";
 import store from "./modules/store";
 
 import "vuetify/dist/vuetify.min.css";
 
-const routes = [{ path: "/", component: HomePage }];
+const routes = [
+  { path: "/", component: HomePage },
+  { path: "/product/create", component: ProductDetailPage },
+];
 
 const router = VueRouter.createRouter({
   history: VueRouter.createWebHashHistory(),

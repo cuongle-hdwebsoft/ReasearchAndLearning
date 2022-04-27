@@ -8,7 +8,9 @@
         <router-link class="header__navbar-link" to="/">Trang chủ</router-link>
       </li>
       <li>
-        <router-link class="header__navbar-link" to="/news">News</router-link>
+        <router-link class="header__navbar-link" to="/product/create"
+          >Create products</router-link
+        >
       </li>
       <li>
         <router-link class="header__navbar-link" to="/login">Login</router-link>

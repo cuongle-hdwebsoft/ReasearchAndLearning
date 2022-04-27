@@ -24,13 +24,14 @@ export default {
     handleLoadProducts: async function ({ state }, { limit, page, filter }) {
       state.isLoadingProducts = true;
 
-      const { data, isError, total } = await ProductApi.getAll({
+      const { data, isError, total, error } = await ProductApi.getAll({
         _limit: limit,
         _page: page,
         filter: filter,
       });
 
       if (isError) {
+        state.isLoadingProducts = false;
         return;
       }
 

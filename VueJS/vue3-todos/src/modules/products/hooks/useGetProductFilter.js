@@ -50,18 +50,12 @@ export function useGetProductFilter() {
     }
 
     if (query.q) {
-      console.log(query.q);
       filterQ.value = query.q;
     }
 
     if (query.categoryName) {
       filterCategoryName.value = query.categoryName;
     }
-
-    store.dispatch("handleLoadProducts", {
-      limit: limit.value,
-      page: page.value,
-    });
   });
 
   const handleClearFilter = function () {
