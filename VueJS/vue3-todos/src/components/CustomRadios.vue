@@ -6,10 +6,10 @@
       :key="item.id"
       :label="item[labelTextItem]"
       :value="item[valueItem]"
-      :error="v[name] && v[name].$error ? v[name].$error : null"
+      :error="vName && vName.$error ? vName.$error : null"
       :error-messages="
-        v[name] && v[name].$errors && v[name].$errors.length > 0
-          ? v[name].$errors.map((e) => e.$message)
+        vName && vName.$errors && vName.$errors.length > 0
+          ? vName.$errors.map((e) => e.$message)
           : []
       "
     ></v-radio>
@@ -17,7 +17,8 @@
 </template>
 
 <script setup>
-import { defineProps, ref, watchEffect, getCurrentInstance } from "vue";
+import { nestedKeyValue } from "@/utils/nestedKeyValue";
+import { defineProps, watchEffect, getCurrentInstance, computed } from "vue";
 
 const props = defineProps([
   "label",
@@ -29,13 +30,15 @@ const props = defineProps([
   "modelValue",
 ]);
 
-const value = ref(props.modelValue);
+const value = computed(() => props.modelValue);
 
 const component = getCurrentInstance();
 
 watchEffect(function () {
   component.emit("update:modelValue", value);
 });
+
+const vName = computed(() => nestedKeyValue(props.name, props.v));
 </script>
 
 <style>

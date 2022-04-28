@@ -8,18 +8,19 @@
     :clearable="clearable"
     return-object
     v-model="value"
-    @blur="v[name] && v[name].$touch ? v[name].$touch : null"
-    :error="v[name] && v[name].$error ? v[name].$error : null"
+    @blur="vName && vName.$touch ? vName.$touch : null"
+    :error="vName && vName.$error ? vName.$error : null"
     :error-messages="
-      v[name] && v[name].$errors && v[name].$errors.length > 0
-        ? v[name].$errors.map((e) => e.$message)
+      vName && vName.$errors && vName.$errors.length > 0
+        ? vName.$errors.map((e) => e.$message)
         : []
     "
   ></v-select>
 </template>
 
 <script setup>
-import { defineProps, ref, watch, getCurrentInstance } from "vue";
+import { defineProps, watch, getCurrentInstance, computed } from "vue";
+import { nestedKeyValue } from "@/utils/nestedKeyValue";
 
 const props = defineProps([
   "modelValue",
@@ -32,13 +33,15 @@ const props = defineProps([
   "v",
 ]);
 
-const value = ref(props.modelValue);
+const value = computed(() => props.modelValue);
 
 const component = getCurrentInstance();
 
 watch(value, function (newValue) {
   component.emit("update:modelValue", newValue);
 });
+
+const vName = computed(() => nestedKeyValue(props.name, props.v));
 </script>
 
 <script>
