@@ -14,7 +14,6 @@ const component = getCurrentInstance();
 // https://stackoverflow.com/questions/69488256/vue-3-append-component-to-the-dom-best-practice
 
 onMounted(function () {
-  console.log(document);
   let app = document.getElementById("app");
   let node = document.createElement("div");
   app.appendChild(node);
@@ -35,7 +34,7 @@ onMounted(function () {
     t = setTimeout(() => {
       render(null, node);
       vnode = undefined;
-    }, delay || 3000);
+    }, delay || 500);
   };
 
   window.toast = toast;

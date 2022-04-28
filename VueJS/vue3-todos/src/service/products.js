@@ -68,4 +68,24 @@ export default class ProductApi {
         };
       });
   }
+
+  static edit(data) {
+    return instance({
+      method: "PUT",
+      data,
+      url: "/products/" + data.id,
+    })
+      .then(() => {
+        return {
+          isError: false,
+          error: "",
+        };
+      })
+      .catch(() => {
+        return {
+          isError: true,
+          error: "Edit product fail",
+        };
+      });
+  }
 }

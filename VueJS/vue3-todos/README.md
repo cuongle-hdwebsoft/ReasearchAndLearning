@@ -24,3 +24,7 @@ https://vuejs.org/guide/components/attrs.html#disabling-attribute-inheritance
 https://stackoverflow.com/questions/69488256/vue-3-append-component-to-the-dom-best-practice
 
 # v-bind=$attrs ???
+
+# props cha thay đổi con có thay đổi hay không
+
+# Cái .value của ref nó sẽ mất như thế nào

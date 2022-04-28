@@ -14,6 +14,7 @@ import "vuetify/dist/vuetify.min.css";
 const routes = [
   { path: "/", component: HomePage },
   { path: "/product/create", component: ProductDetailPage },
+  { path: "/product/:id/edit", component: ProductDetailPage },
 ];
 
 const router = VueRouter.createRouter({

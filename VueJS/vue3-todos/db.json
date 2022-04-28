@@ -239,6 +239,29 @@
       "categoryName": "Maserati",
       "isActive": true,
       "id": 48
+    },
+    {
+      "imageUrl": "http://dummyimage.com/140x100.png/5fa2dd/ffffff",
+      "productName": "asdasd",
+      "price": 3167,
+      "inStock": true,
+      "amount": 57,
+      "categoryName": "Chrysler",
+      "isActive": true,
+      "id": 49
+    },
+    {
+      "id": 50
+    },
+    {
+      "imageUrl": "http://dummyimage.com/181x100.png/cc0000/ffffff",
+      "productName": "new test 10h",
+      "price": 20000,
+      "inStock": true,
+      "amount": 4,
+      "categoryName": "Buick",
+      "isActive": true,
+      "id": 51
     }
   ],
   "categories": [

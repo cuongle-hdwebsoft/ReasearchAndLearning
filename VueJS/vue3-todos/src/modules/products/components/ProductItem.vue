@@ -13,8 +13,21 @@
       <div class="product__category">
         <strong>Category: </strong>{{ product.categoryName }}
       </div>
+      <div class="product__category">
+        <strong>Amount: </strong>{{ product.amount }} (items)
+      </div>
       <div class="product__button-group">
-        <button>Add to cart</button>
+        <v-row align="center" justify="space-around">
+          <v-btn @click="handleAddProductToCard(product)" variant="outlined"
+            >Add to cart</v-btn
+          >
+          <v-btn
+            @click="$router.push(`/product/${product.id}/edit`)"
+            variant="outlined"
+            >Edit</v-btn
+          >
+          <v-btn variant="outlined" color="error">Delete</v-btn>
+        </v-row>
       </div>
     </div>
   </div>
@@ -25,16 +38,26 @@ import { defineProps } from "vue";
 defineProps(["product"]);
 </script>
 <script>
-export default {};
+export default {
+  methods: {
+    handleAddProductToCard(p) {
+      window.toast({
+        content: "Add to cart " + p.productName,
+        type: "success",
+      });
+    },
+  },
+};
 </script>
 
 <style lang="scss">
 .product {
   box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
-  margin: 20px;
-  padding: 10px;
+  margin: 10px;
+  padding: 20px;
   cursor: pointer;
   border-radius: 5px;
+  transition: 0.5s;
 
   &__img {
     width: 100%;
@@ -47,21 +70,10 @@ export default {};
   }
 
   &__button-group {
-    margin-top: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
     display: flex;
     justify-content: center;
-
-    & button {
-      outline: none;
-      background-color: $green;
-      color: #fff;
-      border: none;
-      padding: 5px;
-      border-radius: 5px;
-      font-size: 0.9rem;
-
-      cursor: pointer;
-    }
   }
 }
 </style>
