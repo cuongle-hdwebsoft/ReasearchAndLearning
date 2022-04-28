@@ -1,10 +1,12 @@
-
 <template>
-  <v-text-field
-    :suffix="suffix"
-    variant="outlined"
+  <v-select
+    :items="items"
+    :item-text="itemText"
+    :item-value="itemValue"
     :label="label"
-    v-model="valueInput"
+    :clearable="clearable"
+    return-object
+    v-model="value"
     @blur="v[name] && v[name].$touch ? v[name].$touch : null"
     :error="v[name] && v[name].$error ? v[name].$error : null"
     :error-messages="
@@ -12,17 +14,31 @@
         ? v[name].$errors.map((e) => e.$message)
         : []
     "
-  ></v-text-field>
+  ></v-select>
 </template>
 
 <script setup>
 import { defineProps, ref, watch, getCurrentInstance } from "vue";
 
-const props = defineProps(["label", "modelValue", "v", "name", "suffix"]);
-const valueInput = ref(props.modelValue);
+const props = defineProps([
+  "modelValue",
+  "items",
+  "itemText",
+  "itemValue",
+  "label",
+  "clearable",
+  "name",
+  "v",
+]);
+
+const value = ref(props.modelValue);
+
 const component = getCurrentInstance();
 
-watch(valueInput, () => {
-  component.emit("update:modelValue", valueInput.value);
+watch(value, function (newValue) {
+  component.emit("update:modelValue", newValue);
 });
 </script>
+
+<style>
+</style>

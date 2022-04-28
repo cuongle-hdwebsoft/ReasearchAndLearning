@@ -1,7 +1,10 @@
 <template>
   <div class="header">
     <div class="header__logo">
-      <!-- <img class="header__img" src="../assets/logo.png" /> -->
+      <img
+        class="header__img"
+        src="https://miro.medium.com/max/900/1*OrjCKmou1jT4It5so5gvOA.jpeg"
+      />
     </div>
     <ul class="header__navbar">
       <li class="header__navbar-item">
@@ -28,10 +31,17 @@
   display: flex;
   align-items: center;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  position: fixed;
+  width: 100%;
+  z-index: 999;
+  height: 80px;
+  top: 0;
+  background-color: #fff;
 
   &__img {
-    width: 50px;
+    // width: 800px;
     height: 50px;
+    color: $green !important;
   }
 
   &__navbar {
@@ -48,6 +58,6 @@
 
 .container {
   width: 80%;
-  margin: auto;
+  margin: 80px auto 0px auto;
 }
 </style>
