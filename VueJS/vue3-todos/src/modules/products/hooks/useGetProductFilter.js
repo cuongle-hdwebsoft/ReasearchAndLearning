@@ -26,6 +26,7 @@ export function useGetProductFilter() {
     },
     set(newValue) {
       store.dispatch("handleChangeFilterQ", newValue);
+      page.value = 1;
     },
   });
   const filterCategoryName = computed({
@@ -34,6 +35,7 @@ export function useGetProductFilter() {
     },
     set(newValue) {
       store.dispatch("handleChangeFilterCategoryName", newValue);
+      page.value = 1;
     },
   });
   const filter = computed(() => store.state.products.filter);

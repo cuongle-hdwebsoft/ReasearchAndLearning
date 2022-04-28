@@ -21,6 +21,13 @@ export const useGetProducts = function (page, limit, filter) {
         page: newPage,
         filter: filter.value,
       });
+
+      window.history.replaceState(
+        {},
+        null,
+        "#/?" +
+          stringify({ limit: limit.value, page: page.value, ...filter.value })
+      );
     },
     {
       deep: true,
@@ -39,7 +46,7 @@ export const useGetProducts = function (page, limit, filter) {
       t = setTimeout(() => {
         store.dispatch("handleLoadProducts", {
           limit: limit.value,
-          page: 1,
+          page: page.value,
           filter: newFilter,
         });
       }, 1000);

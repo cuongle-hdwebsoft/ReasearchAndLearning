@@ -1,7 +1,7 @@
 <template>
-  <v-radio-group :label="label">
+  <v-radio-group :label="label" v-model="value">
     <v-radio
-      v-model="value"
+      v-bind="component.attrs"
       v-for="item in items"
       :key="item.id"
       :label="item[labelTextItem]"

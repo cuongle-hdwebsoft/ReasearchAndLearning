@@ -23,7 +23,17 @@
   <div class="container">
     <router-view></router-view>
   </div>
+  <snackbar-container></snackbar-container>
 </template>
+
+<script>
+import SnackbarContainer from "../components/SnackbarContainer.vue";
+export default {
+  components: {
+    SnackbarContainer,
+  },
+};
+</script>
 
 <style lang="scss">
 .header {

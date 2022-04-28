@@ -9,6 +9,8 @@
           v-model="imageUrl"
           name="imageUrl"
           label="Image url"
+          :autofocus="true"
+          :rounded="true"
         ></custom-input>
         <custom-input
           :v="v$"
@@ -34,7 +36,7 @@
           name="amount"
           label="Amount"
           type="number"
-          suffix="$"
+          suffix="items"
         ></custom-input>
       </div>
       <div class="form-item">
@@ -49,10 +51,16 @@
         />
       </div>
       <div class="form-item">
-        <custom-switch v-model="isActive" label="Active" :v="v$" />
+        <custom-switch
+          v-model="isActive"
+          name="isActive"
+          label="Active"
+          :v="v$"
+        />
       </div>
       <div class="form-item">
         <custom-radios
+          v-model="inStock"
           name="inStock"
           :v="v$"
           label="Is Product in stock?"
@@ -65,7 +73,9 @@
         ></custom-radios>
       </div>
       <div class="form-item">
-        <v-btn type="submit" variant="outlined">Click</v-btn>
+        <v-btn :loading="loading" type="submit" variant="outlined"
+          >Create</v-btn
+        >
       </div>
     </form>
   </div>
@@ -80,6 +90,8 @@ import CustomRadios from "../components/CustomRadios.vue";
 import { useVuelidate } from "@vuelidate/core";
 import { required, helpers, minValue, numeric } from "@vuelidate/validators";
 import { useGetCategories } from "@/modules/products/hooks/useGetCategories";
+import { useCreateProduct } from "@/modules/products/hooks/useCreateProduct";
+
 export default {
   components: {
     CustomInput,
@@ -89,18 +101,21 @@ export default {
   },
   setup() {
     const { categories } = useGetCategories();
+    const { handleSubmit: submit, isLoading } = useCreateProduct();
 
     return {
       v$: useVuelidate(),
       categories,
+      submit,
+      isLoading,
     };
   },
   data: function () {
     return {
-      imageUrl: "",
+      imageUrl: "http://dummyimage.com/181x100.png/cc0000/ffffff",
       productName: "",
       price: "",
-      inStock: false,
+      inStock: true,
       amount: "",
       categoryName: "",
       isActive: true,
@@ -133,22 +148,34 @@ export default {
     };
   },
   methods: {
-    handleSubmit: async function () {
+    handleSubmit: async function (e) {
+      e.preventDefault();
+
       const isFormCorrect = await this.v$.$validate();
 
       if (!isFormCorrect) return;
 
-      console.log({
-        imageUrl: this.imageUrl,
-        productName: this.productName,
-        price: this.price,
-        inStock: this.inStock,
-        amount: this.amount,
-        categoryName: this.categoryName,
-        isActive: this.isActive,
-      });
+      await this.submit(
+        {
+          imageUrl: this.imageUrl,
+          productName: this.productName,
+          price: this.price,
+          inStock: this.inStock,
+          amount: this.amount,
+          categoryName: this.categoryName,
+          isActive: this.isActive,
+        },
+        function () {
+          this.$router.push("/");
+          window.toast({
+            content: "Create product successfully",
+            type: "success",
+          });
+        }.bind(this)
+      );
     },
   },
+  mounted: function () {},
 };
 </script>
 

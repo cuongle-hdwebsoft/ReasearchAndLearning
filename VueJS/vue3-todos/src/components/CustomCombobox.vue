@@ -1,5 +1,6 @@
 <template>
   <v-select
+    v-bind="component.attrs"
     :items="items"
     :item-text="itemText"
     :item-value="itemValue"
@@ -38,6 +39,12 @@ const component = getCurrentInstance();
 watch(value, function (newValue) {
   component.emit("update:modelValue", newValue);
 });
+</script>
+
+<script>
+export default {
+  inheritAttrs: false,
+};
 </script>
 
 <style>

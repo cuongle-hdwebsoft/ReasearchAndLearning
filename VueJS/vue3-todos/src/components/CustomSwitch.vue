@@ -1,7 +1,8 @@
 <template>
   <v-switch
+    v-bind="component.attrs"
     @blur="v[name] && v[name].$touch ? v[name].$touch : null"
-    :label="label"
+    :label="label + ': ' + value"
     :error="v[name] && v[name].$error ? v[name].$error : null"
     :error-messages="
       v[name] && v[name].$errors && v[name].$errors.length > 0

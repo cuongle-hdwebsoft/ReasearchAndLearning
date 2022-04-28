@@ -1,6 +1,7 @@
 
 <template>
   <v-text-field
+    v-bind="component.attrs"
     :suffix="suffix"
     variant="outlined"
     :label="label"

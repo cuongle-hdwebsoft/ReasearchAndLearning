@@ -48,4 +48,24 @@ export default class ProductApi {
         data: null,
       }));
   }
+
+  static create(data) {
+    return instance({
+      method: "POST",
+      data,
+      url: "/products/",
+    })
+      .then(() => {
+        return {
+          isError: false,
+          error: "",
+        };
+      })
+      .catch(() => {
+        return {
+          isError: true,
+          error: "Create product fail",
+        };
+      });
+  }
 }
