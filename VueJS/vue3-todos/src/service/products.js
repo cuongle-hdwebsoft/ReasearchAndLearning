@@ -88,4 +88,23 @@ export default class ProductApi {
         };
       });
   }
+
+  static delete(id) {
+    return instance({
+      method: "DELETE",
+      url: "/products/" + id,
+    })
+      .then(() => {
+        return {
+          isError: false,
+          error: "",
+        };
+      })
+      .catch(() => {
+        return {
+          isError: true,
+          error: "Delete product fail",
+        };
+      });
+  }
 }

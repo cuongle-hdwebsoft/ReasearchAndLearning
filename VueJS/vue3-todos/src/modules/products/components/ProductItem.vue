@@ -26,7 +26,13 @@
             variant="outlined"
             >Edit</v-btn
           >
-          <v-btn variant="outlined" color="error">Delete</v-btn>
+          <v-btn
+            :loading="isDeleteLoading"
+            @click="handleDelete(product.id)"
+            variant="outlined"
+            color="error"
+            >Delete</v-btn
+          >
         </v-row>
       </div>
     </div>
@@ -35,7 +41,23 @@
 
 <script setup>
 import { defineProps } from "vue";
+import { useDeleteProduct } from "../hooks/useDeleteProduct";
 defineProps(["product"]);
+
+const { handleSubmit: deleteProduct, isLoading: isDeleteLoading } =
+  useDeleteProduct();
+
+const handleDelete = (id) => {
+  deleteProduct(
+    id,
+    function () {
+      window.toast({ content: "Delete successfully", type: "success" });
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    }.bind(this)
+  );
+};
 </script>
 <script>
 export default {

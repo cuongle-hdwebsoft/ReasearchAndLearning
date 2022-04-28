@@ -1,13 +1,13 @@
 import ProductApi from "@/service/products";
 import { ref } from "vue";
 
-export function useCreateProduct() {
-  const isLoading = ref(true);
+export function useDeleteProduct() {
+  const isLoading = ref(false);
 
-  const handleSubmit = async (data, onSuccess, onFail) => {
+  const handleSubmit = async function (id, onSuccess, onFail) {
     isLoading.value = true;
 
-    const { isError } = await ProductApi.create(data);
+    const { isError } = await ProductApi.delete(id);
 
     isLoading.value = false;
 
@@ -15,6 +15,7 @@ export function useCreateProduct() {
       if (onFail) {
         onFail();
       }
+
       return;
     }
 
@@ -24,7 +25,7 @@ export function useCreateProduct() {
   };
 
   return {
-    handleSubmit,
     isLoading,
+    handleSubmit,
   };
 }

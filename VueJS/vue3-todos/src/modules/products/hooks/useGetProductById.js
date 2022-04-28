@@ -7,7 +7,6 @@ export function useGetProductById(id) {
   const isError = ref(null);
 
   onBeforeMount(async function () {
-    console.log("useGetProductById onBeforeMount");
     isLoading.value = true;
     const { data, _isError } = await ProductApi.getById(id);
 
