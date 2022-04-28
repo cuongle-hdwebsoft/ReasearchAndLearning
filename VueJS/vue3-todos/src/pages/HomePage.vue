@@ -1,6 +1,6 @@
 <template>
   <h1>Products</h1>
-  <product-filter v-model:filter="filter"></product-filter>
+  <product-filter></product-filter>
   <div class="row">
     <template v-if="!isLoading">
       <div v-for="product in products" :key="product.id" class="col-3">
