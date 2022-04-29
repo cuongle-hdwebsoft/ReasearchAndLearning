@@ -233,9 +233,9 @@
     {
       "imageUrl": "http://dummyimage.com/181x100.png/cc0000/ffffff",
       "productName": "test",
-      "price": 50,
+      "price": 51,
       "inStock": true,
-      "amount": 15,
+      "amount": 16,
       "categoryName": "Maserati",
       "isActive": true,
       "id": 48

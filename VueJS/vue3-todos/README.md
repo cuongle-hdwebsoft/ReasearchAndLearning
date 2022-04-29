@@ -1,4 +1,4 @@
-# Bugs phải xài ref thay vì reactive ở script setup
+# Bugs phải xài ref thay vì reactive ở script setup (resolved)
 
 - reactive cho object và array
 - ref thì cho mọi thứ

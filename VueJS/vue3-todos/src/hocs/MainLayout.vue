@@ -3,7 +3,7 @@
     <div class="header__logo">
       <img
         class="header__img"
-        src="https://miro.medium.com/max/900/1*OrjCKmou1jT4It5so5gvOA.jpeg"
+        src="http://assets.stickpng.com/images/58482acecef1014c0b5e4a1e.png"
       />
     </div>
     <ul class="header__navbar">
