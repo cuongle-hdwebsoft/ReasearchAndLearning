@@ -7,6 +7,7 @@ import * as directives from "vuetify/directives";
 
 import HomePage from "./pages/HomePage.vue";
 import ProductDetailPage from "./pages/ProductDetailPage.vue";
+import TestPage from "./pages/TestPage.vue";
 import store from "./modules/store";
 
 import "vuetify/dist/vuetify.min.css";
@@ -15,6 +16,7 @@ const routes = [
   { path: "/", component: HomePage },
   { path: "/product/create", component: ProductDetailPage },
   { path: "/product/:id/edit", component: ProductDetailPage },
+  { path: "/test-page", component: TestPage },
 ];
 
 const router = VueRouter.createRouter({
