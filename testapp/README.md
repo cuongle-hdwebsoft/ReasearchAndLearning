@@ -259,3 +259,5 @@ describe('Test all methods', function() {
   })
 })
 </pre>
+
+## Test mount vs shallowMount

@@ -121,8 +121,8 @@ describe('Test all methods', function() {
 
       UserApi.getAll()
 
-      console.log(spy.called, UserApi.getAll.called)
-      console.log(spy.getCall(0).returnValue)
+      // console.log(spy.called, UserApi.getAll.called)
+      // console.log(spy.getCall(0).returnValue)
     })
   })
 })
