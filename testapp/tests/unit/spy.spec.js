@@ -1,77 +1,81 @@
-import { expect } from 'chai'
-import sinon from 'sinon'
+import { expect } from "chai";
+import sinon from "sinon";
 
-const sandbox = sinon.createSandbox()
+const sandbox = sinon.createSandbox();
 
-const students = Array.from({ length: 10 }).map((i, index) => ({ id: index, name: `Name ${i}`, age: 23 }))
+const students = Array.from({ length: 10 }).map((i, index) => ({
+  id: index,
+  name: `Name ${i}`,
+  age: 23,
+}));
 
 const UserApi = {
   getAll() {
-    return students
+    return students;
   },
   getById(id) {
-    return students.find(student => student.id === id)
+    return students.find((student) => student.id === id);
   },
   create(student) {
-    if(!student) {
-      throw new Error('Missing student')
+    if (!student) {
+      throw new Error("Missing student");
     }
 
-    students.push(student)
+    students.push(student);
   },
   edit(student, id) {
-    if(!student || !id) {
-      throw new Error('Missing args')
+    if (!student || !id) {
+      throw new Error("Missing args");
     }
 
-    let tStudent = students.find(student =>  student.id === id)
+    let tStudent = students.find((student) => student.id === id);
 
-    if(!tStudent) {
-      throw new Error('Student not found')
+    if (!tStudent) {
+      throw new Error("Student not found");
     }
 
-    tStudent = student
+    tStudent = student;
   },
-  thisGetAll: function() {
-    return this.getAll()
-  }
-}
+  thisGetAll: function () {
+    return this.getAll();
+  },
+};
 
-const sum = function(a, b) {
-  return a + b
-}
+const sum = function (a, b) {
+  return a + b;
+};
 
-describe('Test spy', function() {
-  afterEach(function() {
-    sandbox.restore()
-  })
+describe("Test spy", function () {
+  afterEach(function () {
+    sandbox.restore();
+  });
 
-  it('should spy function', function() {
-    const spy = sandbox.spy(sum)
+  it("should spy function", function () {
+    const spy = sandbox.spy(sum);
 
-    spy()
+    spy();
 
-    expect(spy.called).to.be.true
-  })
+    expect(spy.called).to.be.true;
+  });
 
-  it('should spy object method getAll', function() {
-    const getAll = sandbox.spy(UserApi, 'getAll')
+  it("should spy object method getAll", function () {
+    const getAll = sandbox.spy(UserApi, "getAll");
 
-    getAll()
-    UserApi.getAll()
+    getAll();
+    UserApi.getAll();
 
-    expect(getAll.called).to.be.true
-    expect(getAll.callCount).to.be.equal(2)
-  })
+    expect(getAll.called).to.be.true;
+    expect(getAll.callCount).to.be.equal(2);
+  });
 
-  it('should spy object method thisGetAll', function() {
-    const spy = sandbox.spy(UserApi, 'thisGetAll')
+  it("should spy object method thisGetAll", function () {
+    const spy = sandbox.spy(UserApi, "thisGetAll");
 
-    UserApi.thisGetAll()
+    UserApi.thisGetAll();
 
     // lost this context
     // spy()
 
-    expect(spy.called).to.be.true
-  })
-})
+    expect(spy.called).to.be.true;
+  });
+});

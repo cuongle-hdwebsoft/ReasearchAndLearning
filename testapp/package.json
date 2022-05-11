@@ -5,7 +5,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "test": "vue-cli-service test:unit \"./tests/unit/app.spec.js\" --coverage",
+    "test": "vue-cli-service test:unit \"./tests/unit/app.spec.js\"",
     "db": "json-server --watch db.json --port 3001 --delay 500"
   },
   "dependencies": {

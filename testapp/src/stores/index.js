@@ -1,41 +1,41 @@
 export const store = {
   state: {
-    name: '',
+    name: "",
     age: 23,
     arr: [],
-    arrObj: []
+    arrObj: [],
   },
   actions: {
     handleChangeName: ({ state }, payload) => {
-      state.name = payload
+      state.name = payload;
     },
     handleChangeAge: ({ state }, payload) => {
-      state.age = payload
+      state.age = payload;
     },
     handleChangeArr: ({ state }, payload) => {
-      state.v = payload
+      state.v = payload;
     },
     handleChangeArrObj: ({ state }, payload) => {
-      state.arrObj = payload
-    }
+      state.arrObj = payload;
+    },
   },
   modules: {
     USER_MODULE: {
       namespaced: true,
-      state: function() {
+      state: function () {
         return {
           isLogin: false,
-          user: null
-        }
+          user: null,
+        };
       },
       actions: {
-        setLogin: function({ state }, payload) {
-          state.isLogin = payload
+        setLogin: function ({ state }, payload) {
+          state.isLogin = payload;
         },
-        setUser: function({ state }, payload) {
-          state.user = payload
-         }
-      }
-    }
-  }
-}
+        setUser: function ({ state }, payload) {
+          state.user = payload;
+        },
+      },
+    },
+  },
+};

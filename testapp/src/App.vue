@@ -4,10 +4,9 @@
     <custom-input></custom-input>
     <button @click="getData" class="load-more hidden">load data</button>
     <ul>
-      <li
-        class="todo-item"
-        v-for="todo in todos" 
-        :key="todo.id">{{ todo.id }} - {{ todo.title }} - {{ todo.description }}</li>
+      <li class="todo-item" v-for="todo in todos" :key="todo.id">
+        {{ todo.id }} - {{ todo.title }} - {{ todo.description }}
+      </li>
     </ul>
     <div>
       <h2>Vuex</h2>
@@ -25,64 +24,58 @@
 </template>
 
 <script>
-import CustomInput from './components/CustomInput.vue'
-import instance from '@/instance'
-import TestMixin from '@/mixins/testMixin'
-import { mapActions, mapState } from 'vuex'
+import CustomInput from "./components/CustomInput.vue";
+import instance from "@/instance";
+import TestMixin from "@/mixins/testMixin";
+import { mapActions, mapState } from "vuex";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    CustomInput
+    CustomInput,
   },
   mixins: [TestMixin],
-  data: function() {
+  data: function () {
     return {
       count: 0,
-      todos: []
-    }
+      todos: [],
+    };
   },
   methods: {
-    getData: async function() {
+    getData: async function () {
       let rs = await instance({
-        method: 'GET',
-        url: '/todos'
-      })
+        method: "GET",
+        url: "/todos",
+      });
 
-      this.todos = rs.data
+      this.todos = rs.data;
     },
-    getDataPromise: function() {
+    getDataPromise: function () {
       return instance({
-        method: 'GET',
-        url: '/todos'
+        method: "GET",
+        url: "/todos",
       }).then((rs) => {
-        this.todos = rs.data
-      })
+        this.todos = rs.data;
+      });
     },
     ...mapActions([
-      'handleChangeName', 
-      'handleChangeAge', 
-      'handleChangeArr', 
-      'handleChangeArrObj'
+      "handleChangeName",
+      "handleChangeAge",
+      "handleChangeArr",
+      "handleChangeArrObj",
     ]),
-    ...mapActions('user', [
-      'setLogin',
-      'setUser'
-    ])
+    ...mapActions("user", ["setLogin", "setUser"]),
   },
   computed: {
-    ...mapState(['name', 'age', 'arr', 'arrObj']),
-    // ...mapState('USER_MODULE', [
-    //   'user',
-    //   'isLogin'
-    // ])
+    ...mapState(["name", "age", "arr", "arrObj"]),
+    ...mapState("USER_MODULE", ["user", "isLogin"]),
   },
-  mounted: function() {
-    this.getData()
-    this.handleChangeName('Lê Minh Cường')
-    this.handleChangeAge(23)
-  }
-}
+  mounted: function () {
+    this.getData();
+    this.handleChangeName("Lê Minh Cường");
+    this.handleChangeAge(23);
+  },
+};
 </script>
 
 <style>
