@@ -4,8 +4,10 @@
       [
         "@babel/preset-react", 
         {
-          "runtime": "automatic",
-          "importSource": "react"
+          "runtime": "classic",
+          "pragma": "dom",
+          "pragmaFrag": "DomFrag",
+          "useSpread": true
         }
       ]
   ]

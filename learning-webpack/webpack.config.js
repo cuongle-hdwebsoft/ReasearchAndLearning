@@ -1,5 +1,6 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { ProvidePlugin, ProgressPlugin } = require('webpack')
 
 module.exports = {
   entry: "./src/index.js",
@@ -15,14 +16,35 @@ module.exports = {
         use: ["babel-loader"]
       },
       {
+        test: /\.jsx$/,
+        exclude: /node_modules/,
+        use: ["babel-loader"]
+      },
+      {
         test: /\.css$/,
-        use: ["style-loader", "css-loader"]
+        use: 
+        [ 
+          {
+            loader: "style-loader",
+            options: {
+              injectType: "styleTag",
+              insert: 'body'
+            }
+          }, 
+          "css-loader"
+        ]
       }
     ]
   },
   plugins: [
     new HtmlWebpackPlugin({
       template: "./public/index.html"
+    }),
+    new ProvidePlugin({
+      React: 'react',
+      dom: ['react', 'createElement'],
+      DomFrag: ['react', 'Fragment']
     })
-  ]
+  ],
+  stats: 'errors-warnings'
 };
