@@ -1,0 +1,24 @@
+{
+  "name": "vite-vue",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "vite --port 8888",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "author": "Ram4GB",
+  "license": "ISC",
+  "dependencies": {
+    "vite": "^2.9.9",
+    "vue": "^3.2.33",
+    "vue-router": "^4.0.15"
+  },
+  "devDependencies": {
+    "unplugin-auto-import": "^0.7.1",
+    "@vitejs/plugin-vue": "^2.3.3",
+    "vite-plugin-pages": "^0.23.0"
+  }
+}
