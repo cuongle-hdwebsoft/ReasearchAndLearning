@@ -2,6 +2,7 @@
   <div class="wrapper-root">
     <header>
       <nav class="navbar">
+        <img class="logo" src="/favicon.ico" alt="" />
         <ul class="navbar__nav">
           <li class="navbar__item">
             <router-link to="/">Home</router-link>
@@ -28,18 +29,6 @@ export default {
 </script>
 
 <style lang='scss'>
-@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap");
-
-* {
-  box-sizing: border-box;
-  font-family: "Source Code Pro", monospace;
-}
-
-body {
-  padding: 0;
-  margin: 0;
-}
-
 header {
   margin: 0;
 }
@@ -50,16 +39,23 @@ header {
 }
 
 .navbar {
-  padding: 0;
+  padding: 0 12px;
   margin: 0;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  display: flex;
+  align-items: center;
+
+  & .logo {
+    width: 40px;
+  }
 
   &__nav {
     display: flex;
     list-style: none;
     padding: 12px;
     margin: 2px;
+    flex: 1;
   }
 
   &__item {
@@ -67,7 +63,7 @@ header {
     cursor: pointer;
 
     & a {
-      color: #111;
+      color: $primaryColor;
       text-decoration: none;
 
       &:hover {

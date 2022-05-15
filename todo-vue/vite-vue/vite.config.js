@@ -8,6 +8,13 @@ import Inspect from "vite-plugin-inspect";
 export default defineConfig({
   publicDir: "public",
   cacheDir: ".vite",
+  css: {
+    preprocessorOptions: {
+      scss: {
+        additionalData: '@import "src/assets/scss/global.scss";',
+      },
+    },
+  },
   plugins: [
     Vue({
       include: [/\.vue$/],

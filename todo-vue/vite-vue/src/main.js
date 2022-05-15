@@ -3,7 +3,6 @@ import { createStore } from "vuex";
 import App from "./App.vue";
 import routes from "~custom-route-pages";
 import store from "./stores/index";
-import "./assets/scss/_variables.scss";
 
 const router = createRouter({
   routes,
