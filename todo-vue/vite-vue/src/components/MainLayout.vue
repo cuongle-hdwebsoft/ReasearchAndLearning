@@ -10,17 +10,16 @@
       </nav>
     </header>
     <div class="container">
-      <slot name="default"></slot>
+      <slot name="default" />
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'MainLayout'
-}
+  name: "MainLayout",
+};
 </script>
 
 <style>
-
 </style>

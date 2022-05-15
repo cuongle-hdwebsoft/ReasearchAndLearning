@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite --port 8888 --force",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint \"src/**/*{vue, js, html, scss, json}\" --output-file ./lintReport.html --format stylish --no-color --fix"
   },
   "author": "Ram4GB",
   "license": "ISC",
@@ -18,8 +19,12 @@
     "vuex": "^4.0.2"
   },
   "devDependencies": {
-    "unplugin-auto-import": "^0.7.1",
     "@vitejs/plugin-vue": "^2.3.3",
+    "eslint": "^8.15.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-vue": "^8.7.1",
+    "prettier": "2.6.2",
+    "unplugin-auto-import": "^0.7.1",
     "vite-plugin-pages": "^0.23.0"
   }
 }
