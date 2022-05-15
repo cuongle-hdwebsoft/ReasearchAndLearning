@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "vite --port 8888",
+    "dev": "vite --port 8888 --force",
     "build": "vite build",
     "preview": "vite preview"
   },
@@ -14,7 +14,8 @@
   "dependencies": {
     "vite": "^2.9.9",
     "vue": "^3.2.33",
-    "vue-router": "^4.0.15"
+    "vue-router": "^4.0.15",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "unplugin-auto-import": "^0.7.1",

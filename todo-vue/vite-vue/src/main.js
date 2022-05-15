@@ -1,8 +1,8 @@
 import { createApp } from 'vue'
+import { createStore } from 'vuex'
 import App from './App.vue'
 import routes from '~custom-route-pages'
-
-console.log(routes)
+import store from './stores/index'
 
 const router = createRouter({
   routes,
@@ -12,5 +12,7 @@ const router = createRouter({
 const app = createApp(App)
 
 app.use(router)
+app.use(createStore(store))
+app.config.performance = true
 
 app.mount('#root')

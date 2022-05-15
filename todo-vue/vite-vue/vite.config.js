@@ -4,6 +4,8 @@ import Pages from 'vite-plugin-pages'
 import AutoImport from 'unplugin-auto-import/vite'
 
 export default defineConfig({
+  publicDir: 'public',
+  cacheDir: '.vite',
   plugins: [
     Vue(
       {
@@ -13,6 +15,7 @@ export default defineConfig({
     Pages(
       {
         dirs: 'src/pages',
+        resolver: 'vue',
         extensions: ['vue'],
         moduleId: '~custom-route-pages'
       }
