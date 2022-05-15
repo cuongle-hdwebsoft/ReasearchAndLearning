@@ -8,10 +8,8 @@
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint \"src/**/*{vue, js, html, scss, json}\" --output-file ./lintReport.html --format stylish --no-color --fix",
-    "test": "vitest watch --open --coverage --ui --silent --isolate --dom",
-    "test-once": "vitest run",
-    "test-dev": "vitest dev",
-    "coverage": "vitest run --coverage"
+    "test": "vitest dev --coverage --silent --isolate --dom",
+    "test-ui": "vitest dev --open --coverage --ui --silent --isolate --dom"
   },
   "author": "Ram4GB",
   "license": "ISC",
