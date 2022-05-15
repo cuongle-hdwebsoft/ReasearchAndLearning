@@ -6,12 +6,9 @@
 </template>
 
 <script setup>
-import MainLayout from "./components/MainLayout.vue";
 </script>
 <script>
-export default {
-  components: { MainLayout },
-};
+export default {};
 </script>
 
 <style>
