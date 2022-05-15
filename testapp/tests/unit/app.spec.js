@@ -126,7 +126,7 @@ describe("App", function () {
       let todo = todos[i];
 
       expect(domItem.element.innerHTML).to.be.equal(
-        `${todo.id} - ${todo.title} - ${todo.description}`
+        ` ${todo.id} - ${todo.title} - ${todo.description} `
       );
     }
   });
@@ -219,5 +219,18 @@ describe("App", function () {
     );
   });
 
-  it("should change age when dispatch handleChangeAge on mounted", function () {});
+  it("should change age when dispatch handleChangeAge on mounted", function () {
+    actions = {
+      handleChangeAge: sandbox.stub(),
+    };
+    state = {
+      name: "",
+    };
+    const wrapper = shallowMount(App, withProps());
+    const word = faker.word.adjective();
+
+    wrapper.vm.handleChangeAge(word);
+
+    console.log(actions.handleChangeAge.getCall(1).args);
+  });
 });
