@@ -4,15 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "vite --port 8888 --force",
     "build": "vite build",
     "preview": "vite preview",
-    "lint": "eslint \"src/**/*{vue, js, html, scss, json}\" --output-file ./lintReport.html --format stylish --no-color --fix"
+    "lint": "eslint \"src/**/*{vue, js, html, scss, json}\" --output-file ./lintReport.html --format stylish --no-color --fix",
+    "test": "vitest watch --open --coverage --ui --silent --isolate --dom",
+    "test-once": "vitest run",
+    "test-dev": "vitest dev",
+    "coverage": "vitest run --coverage"
   },
   "author": "Ram4GB",
   "license": "ISC",
   "dependencies": {
+    "@vue/test-utils": "^2.0.0-rc.21",
     "vite": "^2.9.9",
     "vue": "^3.2.33",
     "vue-router": "^4.0.15",
@@ -20,12 +24,17 @@
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^2.3.3",
+    "@vitest/ui": "^0.12.6",
+    "c8": "^7.11.2",
     "eslint": "^8.15.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-vue": "^8.7.1",
+    "happy-dom": "^3.2.0",
     "prettier": "2.6.2",
     "unplugin-auto-import": "^0.7.1",
     "unplugin-vue-components": "^0.19.5",
-    "vite-plugin-pages": "^0.23.0"
+    "vite-plugin-inspect": "^0.5.0",
+    "vite-plugin-pages": "^0.23.0",
+    "vitest": "^0.12.6"
   }
 }
