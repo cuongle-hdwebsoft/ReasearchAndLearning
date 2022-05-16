@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "vite --port 8888 --force",
+    "dev": "vite --force --mode dev",
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint \"src/**/*{vue, js, html, scss, json}\" --output-file ./lintErrors/lintReport.html --format stylish --no-color --fix",
