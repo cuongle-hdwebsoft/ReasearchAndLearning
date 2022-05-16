@@ -39,7 +39,7 @@ export default defineConfig(({ command, mode }) => {
         imports: [
           "vue",
           {
-            "vue-router": ["createRouter", "createWebHistory"],
+            "vue-router": ["createRouter", "createWebHistory", "useRouter"],
           },
         ],
       }),
