@@ -15,7 +15,7 @@
   \**********************/
 /***/ (() => {
 
-eval("const sum = function() {\n  console.log(4)\n}\n\nsum()\n\n//# sourceURL=webpack://my-webpack/./src/index.js?");
+eval("var sum = function sum() {\n  console.log(4);\n};\n\nsum();\n\n//# sourceURL=webpack://my-webpack/./src/index.js?");
 
 /***/ })
 
@@ -80,7 +80,7 @@ eval("const sum = function() {\n  console.log(4)\n}\n\nsum()\n\n//# sourceURL=we
 /******/ 	
 /******/ 	/* webpack/runtime/getFullHash */
 /******/ 	(() => {
-/******/ 		__webpack_require__.h = () => ("c9dc4e91252c32a144bd")
+/******/ 		__webpack_require__.h = () => ("34bdb19d61b0ef789125")
 /******/ 	})();
 /******/ 	
 /******/ 	/* webpack/runtime/global */
