@@ -1,4 +1,3 @@
-import { clearLocalStorage, getLocalStorage, getPort } from './utils.js';
-const { setLocalStorage } = require('./utils.js')
+import { getPort } from './utils.js'
 
-console.log(getPort())
+console.log('Server open port ' + getPort());
