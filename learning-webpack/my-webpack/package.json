@@ -10,16 +10,20 @@
   "license": "ISC",
   "devDependencies": {
     "@babel/preset-env": "^7.18.0",
+    "@vue/compiler-sfc": "^3.2.34",
     "babel-loader": "^8.2.5",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.1",
+    "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
     "style-loader": "^3.3.1",
+    "vue-loader": "^17.0.0",
     "webpack": "^5.72.1"
   },
   "dependencies": {
     "@babel/core": "^7.18.0",
     "core-js": "^3.22.5",
+    "vue": "^3.2.34",
     "webpack-cli": "^4.9.2"
   }
 }
