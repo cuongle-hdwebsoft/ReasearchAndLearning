@@ -1,5 +1,9 @@
-import { getPort } from './utils.js'
+import './assets/style.css';
 
-const arr = Array.from({ length: 10 }).map((_, index) => index); 
-
-console.log('Server open port ' + getPort());
+const element = document.createElement('div');
+element.innerHTML = "Hello webpack";
+const body = document.querySelector('body');
+const img = document.createElement('img');
+img.className = 'qr';
+body.appendChild(img);
+body.appendChild(element);

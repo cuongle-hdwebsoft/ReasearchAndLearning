@@ -25,3 +25,11 @@ When no targets are specified: Babel will assume you are targeting the oldest br
 
 ECMAScript 2015 is also known as ES6 and ECMAScript 6.
 
+## css-loader
+
+The css-loader interprets @import and url() like import/require() and will resolve them.
+
+## style-loader
+
+Inject CSS into the DOM.
+

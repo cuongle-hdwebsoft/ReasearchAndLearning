@@ -1,0 +1,11 @@
+* {
+  font-size: 16px;
+  font-family: consolas;
+  box-sizing: border-box;
+}
+
+.qr {
+  background-image: url('./images/qr.png');
+  height: 300px;
+  width: 300px;
+}
