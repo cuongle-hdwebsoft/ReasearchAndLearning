@@ -3,9 +3,11 @@
     ["@babel/preset-env", 
       {
         "targets": {
-          "esmodules": true
+          "esmodules": true,
+          "chrome": 60,
+          "ie": 11
         },
-        "modules": "commonjs"
+        "modules": "cjs"
       }
     ]
   ]

@@ -13,9 +13,9 @@ self["webpackHotUpdatemy_webpack"]("main",{
 /*!**********************!*\
   !*** ./src/index.js ***!
   \**********************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils.js */ \"./src/utils.js\");\n\nconsole.log('Server open port ' + (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.getPort)());\n\n//# sourceURL=webpack://my-webpack/./src/index.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utils.js */ \"./src/utils.js\");\n\nvar arr = Array.from({\n  length: 10\n}).map(function (_, index) {\n  return index;\n});\nconsole.log('Server open port ' + (0,_utils_js__WEBPACK_IMPORTED_MODULE_0__.getPort)());\n\n//# sourceURL=webpack://my-webpack/./src/index.js?");
 
 /***/ }),
 
@@ -23,7 +23,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _uti
 /*!**********************!*\
   !*** ./src/utils.js ***!
   \**********************/
-/***/ ((__unused_webpack___webpack_module__, __webpack_exports__, __webpack_require__) => {
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"clearLocalStorage\": () => (/* binding */ clearLocalStorage),\n/* harmony export */   \"getCurrentLocation\": () => (/* binding */ getCurrentLocation),\n/* harmony export */   \"getLocalStorage\": () => (/* binding */ getLocalStorage),\n/* harmony export */   \"getPort\": () => (/* binding */ getPort),\n/* harmony export */   \"setLocalStorage\": () => (/* binding */ setLocalStorage)\n/* harmony export */ });\nfunction getCurrentLocation() {\n  return window.location;\n}\nfunction getPort() {\n  return window.location.port;\n}\nfunction setLocalStorage(key, value) {\n  localStorage.setItem(key, value);\n}\nfunction getLocalStorage(key) {\n  localStorage.getItem(key);\n}\nfunction clearLocalStorage() {\n  localStorage.clear();\n}\n\n//# sourceURL=webpack://my-webpack/./src/utils.js?");
 
@@ -45,7 +45,18 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 
 /******/ /* webpack/runtime/getFullHash */
 /******/ (() => {
-/******/ 	__webpack_require__.h = () => ("9f2410decd1e04da45a9")
+/******/ 	__webpack_require__.h = () => ("14360156102215562b0f")
+/******/ })();
+/******/ 
+/******/ /* webpack/runtime/make namespace object */
+/******/ (() => {
+/******/ 	// define __esModule on exports
+/******/ 	__webpack_require__.r = (exports) => {
+/******/ 		if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 			Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 		}
+/******/ 		Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 	};
 /******/ })();
 /******/ 
 /******/ }
