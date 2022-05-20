@@ -1,5 +1,4 @@
-const sum = function() {
-  console.log(4)
-}
+import { clearLocalStorage, getLocalStorage, getPort } from './utils.js';
+const { setLocalStorage } = require('./utils.js')
 
-sum()
+console.log(getPort())

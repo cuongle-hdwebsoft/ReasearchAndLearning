@@ -17,4 +17,11 @@ is a smart preset that allows you to use the latest JavaScript without needing t
 
 It will read config babel.config.json above
 
+When no targets are specified: Babel will assume you are targeting the oldest browsers possible. For example, @babel/preset-env will transform all ES2015-ES2020 code to be ES5 compatible.
+
 [Documentation](https://babeljs.io/docs/en/babel-preset-env)
+
+## ES6
+
+ECMAScript 2015 is also known as ES6 and ECMAScript 6.
+
