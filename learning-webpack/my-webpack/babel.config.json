@@ -7,7 +7,7 @@
           "chrome": 60,
           "ie": 11
         },
-        "modules": "cjs"
+        "modules": "auto"
       }
     ]
   ]
