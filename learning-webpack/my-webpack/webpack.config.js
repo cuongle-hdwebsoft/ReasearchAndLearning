@@ -34,7 +34,8 @@ module.exports = {
             loader: 'file-loader',
             options: {
               name: '[contenthash].[ext]',
-              outputPath: 'assets'
+              outputPath: 'assets',
+              esModule: true
             }
           },
         ],

@@ -1,7 +1,6 @@
 <template>
   <header-component>
-    <custom-button></custom-button>
-    <img :src="qrImage" />
+    <router-view></router-view>
   </header-component>
 </template>
 
