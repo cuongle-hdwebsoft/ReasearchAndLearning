@@ -1,17 +1,20 @@
 <template>
-  <div>App</div>
-  <custom-button></custom-button>
-  <img :src="qrImage" />
+  <header-component>
+    <custom-button></custom-button>
+    <img :src="qrImage" />
+  </header-component>
 </template>
 
 <script>
+import qrImage from './assets/images/hello-kitty.png';
+import HeaderComponent from './components/Header.vue'
 import CustomButton from './components/CustomButton.vue';
-import qrImage from './assets/images/qr.png';
 
 export default {
   name: 'App',
   components: {
-    CustomButton
+    CustomButton,
+    HeaderComponent
   },
   setup: function() {
     console.log(qrImage);

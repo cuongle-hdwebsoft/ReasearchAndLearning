@@ -1,8 +1,46 @@
-@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
 
 * {
   font-size: 16px;
-  font-family: 'Source Code Pro', monospace;
+  font-family: 'Space Mono', monospace;
   box-sizing: border-box;
 }
 
+body, html {
+  padding: 0;
+  margin: 0;
+}
+
+.header {
+  background-color: #fff;
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+  padding: 15px;
+}
+
+.navbar {
+  padding: 10px;
+  margin: 0;
+  display: flex;
+  list-style: none;
+}
+
+.navbar .navbar__item {
+
+}
+
+.navbar li .navbar__link {
+  text-decoration: none;
+  padding: 5px 10px;
+  color: #111;
+}
+
+.navbar li .navbar__link:hover {
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.container {
+  width: 80%;
+  margin: auto;
+  padding: 5px 10px;
+}
