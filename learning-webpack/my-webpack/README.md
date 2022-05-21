@@ -1,7 +1,4 @@
-// Plugins run before Presets.
-// Plugin ordering is first to last.
-// Preset ordering is reversed (last to first).
-
+Currently, I stucked in using image in css. You can contribute to this source. Thanks
 
 ## Babel-loader
 
