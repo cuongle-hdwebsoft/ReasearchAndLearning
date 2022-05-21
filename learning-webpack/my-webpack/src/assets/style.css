@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+@import url('./css/variables.css');
 
 * {
   font-size: 16px;
@@ -24,14 +25,10 @@ body, html {
   list-style: none;
 }
 
-.navbar .navbar__item {
-
-}
-
 .navbar li .navbar__link {
   text-decoration: none;
   padding: 5px 10px;
-  color: #111;
+  color: var(--black);
 }
 
 .navbar li .navbar__link:hover {

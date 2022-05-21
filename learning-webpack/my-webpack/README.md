@@ -29,6 +29,8 @@ ECMAScript 2015 is also known as ES6 and ECMAScript 6.
 
 The css-loader interprets @import and url() like import/require() and will resolve them.
 
+Example: @import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap');
+
 ## style-loader
 
 Inject CSS into the DOM.

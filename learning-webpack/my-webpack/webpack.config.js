@@ -13,15 +13,23 @@ module.exports = {
   module: {
     rules: [
       { test: /\.js$/, use: 'babel-loader' },
-      { test: /\.css$/, use: [ 
-        { 
-          loader: 'style-loader',
-          options: {
-            injectType: 'singletonStyleTag',
-            insert: 'body'
+      { test: /\.css$/, use: [
+          { 
+            loader: 'style-loader',
+            options: {
+              injectType: 'singletonStyleTag',
+              insert: 'body'
+            }
           }
-        }
-        ,'css-loader'] 
+          ,
+          {
+            loader: 'css-loader',
+            options: {
+              sourceMap: true,
+              url: true
+            }
+          }
+        ] 
       },
       {
         test: /\.vue$/,
@@ -33,8 +41,10 @@ module.exports = {
           {
             loader: 'file-loader',
             options: {
-              name: '[contenthash].[ext]',
-              outputPath: 'assets',
+              name: (resourcePath, resourceQuery) => {
+                console.log('resourcePath', resourcePath);
+                return '[path][name].[ext]'
+              },
               esModule: true
             }
           },
@@ -53,5 +63,5 @@ module.exports = {
       __VUE_PROD_DEVTOOLS__: false
     })
   ],
-  stats: 'summary'
+  stats: 'normal'
 }
