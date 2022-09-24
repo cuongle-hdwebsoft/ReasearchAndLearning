@@ -123,7 +123,8 @@ Server: getServerSideProps(trả về pageProps) -> App(có thể dùng pageProp
 Client: App(có thể dùng pageProps) -> Components -> dùng pageProps + HTML từ server về + gắn sự kiện js vào các input + data json từ getServerSideProps được gắn vào kèm html.
 
 ### client request lần đầu lên browser và page là getStaticProps
-Client: Components -> HTML từ server build trước đó về + gắn sự kiện js vào các input + data json từ getStaticProps được gắn vào kèm html.
+Server: không chạy gì cả
+Client: App -> Components -> HTML từ server build trước đó về + gắn sự kiện js vào các input + data json từ getStaticProps được gắn vào kèm html.
 
 Những lần sau khi nhấn vào thẻ next/link thì server GỌI VÀO HÀM `getServerSideProps` trả về json 
 
