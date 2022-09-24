@@ -142,3 +142,121 @@ Những lần sau khi nhấn vào thẻ next/link thì server GỌI VÀO HÀM `g
   "__N_SSP": true
 }
 </pre>
+
+<pre>
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width"/><meta name="next-head-count" content="2"/><link rel="preload" href="/_next/static/css/3c31647432f50e37.css" as="style"/><link rel="stylesheet" href="/_next/static/css/3c31647432f50e37.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/_next/static/chunks/webpack-cc9c69bc14c8e1bc.js" defer=""></script><script src="/_next/static/chunks/framework-09a2284fdc01dc36.js" defer=""></script><script src="/_next/static/chunks/main-e87ac43734682f7d.js" defer=""></script><script src="/_next/static/chunks/pages/_app-51e1b0de380907a4.js" defer=""></script><script src="/_next/static/chunks/pages/contact-7206021b20e2e3b4.js" defer=""></script><script src="/_next/static/VHZOYhnE4jbly-3dabzS3/_buildManifest.js" defer=""></script><script src="/_next/static/VHZOYhnE4jbly-3dabzS3/_ssgManifest.js" defer=""></script></head><body><div id="__next"><div><a href="/">home</a><a href="/about">about</a><a href="/contact">contact</a><div>Contact <!-- -->1<!-- --> <!-- -->11</div></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"count":1},"__N_SSG":true},"page":"/contact","query":{},"buildId":"VHZOYhnE4jbly-3dabzS3","isFallback":false,"gsp":true,"scriptLoader":[]}</script></body></html>
+</pre>
+
+html
+<pre>
+<!DOCTYPE html><html><head><meta charSet="utf-8"/><meta name="viewport" content="width=device-width"/><meta name="next-head-count" content="2"/><link rel="preload" href="/_next/static/css/3c31647432f50e37.css" as="style"/><link rel="stylesheet" href="/_next/static/css/3c31647432f50e37.css" data-n-g=""/><noscript data-n-css=""></noscript><script defer="" nomodule="" src="/_next/static/chunks/polyfills-c67a75d1b6f99dc8.js"></script><script src="/_next/static/chunks/webpack-cc9c69bc14c8e1bc.js" defer=""></script><script src="/_next/static/chunks/framework-09a2284fdc01dc36.js" defer=""></script><script src="/_next/static/chunks/main-e87ac43734682f7d.js" defer=""></script><script src="/_next/static/chunks/pages/_app-51e1b0de380907a4.js" defer=""></script><script src="/_next/static/chunks/pages/index-9545c0373f6575d4.js" defer=""></script><script src="/_next/static/VHZOYhnE4jbly-3dabzS3/_buildManifest.js" defer=""></script><script src="/_next/static/VHZOYhnE4jbly-3dabzS3/_ssgManifest.js" defer=""></script></head><body><div id="__next"><div><a href="/">home</a><a href="/about">about</a><a href="/contact">contact</a><div><h1>Homepage <!-- -->11</h1><div>1</div><button>prev</button><button>next</button></div></div></div><script id="__NEXT_DATA__" type="application/json">{"props":{"pageProps":{"count":1},"__N_SSP":true},"page":"/","query":{},"buildId":"VHZOYhnE4jbly-3dabzS3","isFallback":false,"gssp":true,"scriptLoader":[]}</script></body></html>
+</pre>
+js
+<pre>
+(self.webpackChunk_N_E = self.webpackChunk_N_E || []).push([[405], {
+    5557: function(n, t, u) {
+        (window.__NEXT_P = window.__NEXT_P || []).push(["/", function() {
+            return u(3678)
+        }
+        ])
+    },
+    3678: function(n, t, u) {
+        "use strict";
+        u.r(t),
+        u.d(t, {
+            __N_SSP: function() {
+                return i
+            },
+            default: function() {
+                return r
+            }
+        });
+        var c = u(5893)
+          , e = u(7294)
+          , i = !0;
+        function r(n) {
+            var t = n.count
+              , u = (0,
+            e.useState)(11)
+              , i = u[0]
+              , r = u[1];
+            (0,
+            e.useEffect)(function() {
+                r(100)
+            }, []);
+            var o = function() {
+                pageIndex - 1 >= 0 && setPageIndex(pageIndex - 1)
+            }
+              , f = function() {
+                setPageIndex(pageIndex + 1)
+            };
+            return (0,
+            c.jsxs)("div", {
+                children: [(0,
+                c.jsxs)("h1", {
+                    children: ["Homepage ", i]
+                }), (0,
+                c.jsx)("div", {
+                    children: t
+                }), (0,
+                c.jsx)("button", {
+                    onClick: o,
+                    children: "prev"
+                }), (0,
+                c.jsx)("button", {
+                    onClick: f,
+                    children: "next"
+                })]
+            })
+        }
+    }
+}, function(n) {
+    n.O(0, [774, 888, 179], function() {
+        return n(n.s = 5557)
+    }),
+    _N_E = n.O()
+}
+]);
+
+actual code
+<pre>
+import { useEffect, useState } from "react";
+
+export const getServerSideProps = async () => {
+  console.log("getServerSideProps index.js");
+
+  return {
+    props: {
+      count: 1,
+    },
+  };
+};
+
+export default function Home({ count }) {
+  const [state, setState] = useState(11);
+
+  useEffect(() => {
+    setState(100);
+  }, []);
+
+  const handlePrev = () => {
+    if (pageIndex - 1 >= 0) {
+      setPageIndex(pageIndex - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    setPageIndex(pageIndex + 1);
+  };
+
+  return (
+    <div>
+      <h1>Homepage {state}</h1>
+      <div>{count}</div>
+      <button onClick={handlePrev}>prev</button>
+      <button onClick={handleNextPage}>next</button>
+    </div>
+  );
+}
+</pre>
+</pre>
