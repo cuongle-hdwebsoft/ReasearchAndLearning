@@ -218,6 +218,7 @@ js
     _N_E = n.O()
 }
 ]);
+</pre>
 
 actual code
 <pre>
@@ -259,5 +260,4 @@ export default function Home({ count }) {
     </div>
   );
 }
-</pre>
 </pre>
