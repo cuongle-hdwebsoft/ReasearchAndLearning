@@ -113,3 +113,32 @@ My App -> My Document
 ## References
 
 https://github.com/vercel/next.js/discussions/10925
+
+
+## Render flow trong NextJs
+
+### client request lần đầu lên browser và page là getServerSideProps
+
+Server: getServerSideProps(trả về pageProps) -> App(có thể dùng pageProps) -> Components -> dùng init useState để render ra HTML
+Client: App(có thể dùng pageProps) -> Components -> dùng pageProps + HTML từ server về + gắn sự kiện js vào các input + data json từ getServerSideProps được gắn vào kèm html.
+
+### client request lần đầu lên browser và page là getStaticProps
+Client: Components -> HTML từ server build trước đó về + gắn sự kiện js vào các input + data json từ getStaticProps được gắn vào kèm html.
+
+Những lần sau khi nhấn vào thẻ next/link thì server GỌI VÀO HÀM `getServerSideProps` trả về json 
+
+<pre>
+{
+  "pageProps": {
+    "count": 1
+  },
+  "__N_SSG": true
+}
+
+{
+  "pageProps": {
+    "count": 1
+  },
+  "__N_SSP": true
+}
+</pre>
