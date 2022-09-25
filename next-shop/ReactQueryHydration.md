@@ -1,6 +1,6 @@
 # Example 1
 
-<pre>
+```
 import {
   dehydrate,
   QueryClient,
@@ -102,4 +102,4 @@ function MyApp({ Component, pageProps }) {
 }
 
 export default MyApp;
-</pre>
+```
